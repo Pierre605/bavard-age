@@ -1,2 +1,5 @@
-_node_modules/
-virt-env/
+blablapp-back/database/
+blablapp-back/__pycache__/
+blablapp-back/virt-env/
+blablapp-front/_node_modules/
+blablapp-front/virt-env/
