@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block name %}show.html{% endblock %}
+{% block content %}
+
+<div class="col-lg-7 offset-lg-1 my-4">
+  <div class="card mt-4">
+    <a href="/pictures/{{ picture['id'] }}"><img class="card-img-top img-fluid" src="/{{ config['UPLOAD_FOLDER'] }}/{{ picture['id'] }}-{{ picture['path'] }}" alt=""></a>
+    <div class="card-body">
+      <h3 class="card-title"><a class='text-dark' href="/pictures/{{ picture['id'] }}">{{ picture['title'] }}</a></h3>
+      <h4><span class="badge badge-primary">{{ picture['cat_name'] }}</span></h4>
+      <p class="card-text">{{ picture['comment']|safe }}</p>
+      <div class='d-flex justify-content-between'>
+        <div>
+          {% if picture['vote'] %}
+            <span class="text-warning">
+              {% for _ in range(picture['vote']|int) %}
+              &#9733;
+              {% endfor %}
+              {% for _ in range(5 - picture['vote']|int) %}
+              &#9734;
+              {% endfor %}
+            </span>
+            {{ picture['vote'] }} stars
+            <span class='d-none small font-italic' data-vote>({{ picture['total_vote'] }} votes)</span>
+          {% endif %}
+        </div>
+        <form class='d-inline-block' action="/pictures/{{ picture['id'] }}/votes" method="POST">
+          <select name="value">
+            <option value=0>0</option>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option selected value=5>5</option>
+          </select>
+          <input type="submit" name="" value="Vote !" class='btn btn-sm btn-success'>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-outline-secondary my-4">
+    <div class="card-header">
+      Add a comment
+    </div>
+    <div class="card-body">
+      {% for comment in comments %}
+        <p>{{ comment['content'] }}</p>
+        <small class="text-muted">Posted by {{ comment['author'] }} on {{ comment['created_at']|strftime }}</small>
+        <hr>
+      {% endfor %}
+
+      {% if comment_form %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Warning!</strong> The form is not complete !
+        </div>
+      {% endif %}
+
+
+      <form action="/pictures/{{ picture['id'] }}/comments" method="POST">
+        <div class="form-group row">
+          <label for="author" class="col-sm-3 col-form-label">Username</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="author" id="author" value="{{ comment_form['author'] if comment_form }}">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="content" class="col-sm-3 col-form-label">Comment</label>
+          <div class='col-sm-9'>
+            <textarea id='content' class="form-control" name="content">{{ comment_form['content'] if comment_form }}</textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-9 offset-sm-3">
+            <button type="submit" class="btn btn-success">Leave a comment</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+
