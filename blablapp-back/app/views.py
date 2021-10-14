@@ -96,6 +96,7 @@ def register():
 def hello():
     return ("hello world!")
 
+session = {}
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -116,7 +117,7 @@ def login():
         else:
             return "{logged_in : false}"
 
-# curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt
+# curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login
 
     
 
@@ -127,14 +128,54 @@ def logout(): # déconnecte l'utilisateur
     # print(session['user'])
     # return (session['user'])
     if session.get('user'):
-        print(session['user'])
         for key in list(session.keys()):
             session.pop(key)
         return '{"disconnected" : true}'
     else:
         return '{"disconnected" : false}'
 
-# curl http://127.0.0.1:5000/logout -b cookies.txt
+# curl http://127.0.0.1:5000/logout
+
+@app.route("/conversation-list", methods=['GET'])
+def chatroom_select(): # renvoie la liste des conversations à laquelle un user participe
+# si l'utilisateur a des conversations : renvoie une liste des conversations au format [id, nom, participants]
+# si l'utilisateur n'a pas de conversations : renvoie une liste vide []
+    L = []
+    if session.get('user'):
+        print("session_user:    ", session['user'])
+        user = session.get('user')
+        listes_conversations = query_db(""" SELECT
+        conversation.id, conversation.name,
+        GROUP_CONCAT(user.username) AS participants
+        FROM
+        user
+        LEFT JOIN
+        user_conversation
+        ON
+        user_conversation.user_id = user.id
+        LEFT JOIN
+        conversation
+        ON
+        conversation.id = user_conversation.conversation_id
+        WHERE
+        conversation.id
+        IN (
+        SELECT
+        conversation.id
+        FROM
+        user, conversation, user_conversation
+        WHERE
+        user.id = user_conversation.user_id
+        AND
+        conversation.id = user_conversation.conversation_id
+        AND user_id = (?))
+        GROUP BY
+        conversation.name""", [user])
+        for liste in listes_conversations:
+            L.append(dict(liste))
+        return jsonify(L)
+    else:
+        return ("no user session")
 
 
 # @app.route('/pictures')
