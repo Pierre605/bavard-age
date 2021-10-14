@@ -92,6 +92,51 @@ def register():
 # curl -d "username=Pierre&password=Pierre&email=Pierre@blablapp.com" -X POST http://127.0.0.1:5000/register
 # {"registered":"True"}
 
+@app.route("/")
+def hello():
+    return ("hello world!")
+
+
+@app.route("/login", methods=['POST'])
+def login():
+    postdata = request.form
+    if postdata.get('username') and postdata.get('password'):
+        username = postdata.get('username')
+        password = hashlib.sha256(postdata.get('password').encode()).hexdigest()
+
+        # db = get_db()
+        # cursor = db.cursor()
+        existing_user = query_db("""SELECT id FROM user WHERE username = (?) and password = (?)""", (username, password))
+        for user in existing_user:
+            existing_user_id = user[0]
+        # res = cursor.fetchone()
+        if existing_user_id:
+            session['user'] = existing_user_id
+            return "{logged_in : true}"
+        else:
+            return "{logged_in : false}"
+
+# curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt
+
+    
+
+@app.route("/logout")
+def logout(): # déconnecte l'utilisateur
+# en cas de succès, renvoie un dictionnaire {disconnected : true}
+# en cas d'échec, renvoie un dictionnaire {disconnected : false}
+    # print(session['user'])
+    # return (session['user'])
+    if session.get('user'):
+        print(session['user'])
+        for key in list(session.keys()):
+            session.pop(key)
+        return '{"disconnected" : true}'
+    else:
+        return '{"disconnected" : false}'
+
+# curl http://127.0.0.1:5000/logout -b cookies.txt
+
+
 # @app.route('/pictures')
 # def index():
 #     if 'category' in request.args:
