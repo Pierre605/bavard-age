@@ -28,6 +28,13 @@ def execute_db(query, args=()):
     return cur.lastrowid
 
 
+def fetchone_db(query, args=()):
+    cur = get_db().execute(query, args)
+    rv = cur.fetchone()
+    cur.close()
+    return rv[0]
+
+
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
