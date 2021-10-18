@@ -26,6 +26,8 @@ Activation de virt-env :
 ```export FLASK_ENV=development```
 Installation de CORS :
 ```pip3 install -U flask-cors```
+Installation de SocketIO
+```pip3 install flask-socketio```
 
 ## Initialiser la base de données du projet et à chaque màj de la db:
 ```flask init_db```
