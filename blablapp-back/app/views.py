@@ -11,9 +11,11 @@ cors = CORS(app)
 CORS(app)
 app.config.from_object('config')
 
-from .models import query_db, execute_db, fetchone_db
+from .models import query_db, execute_db
 
 from io import BytesIO
+
+session = {'user': '', 'room': ''}
 
 def allowed_file(filename):
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
@@ -27,7 +29,7 @@ def connected_user():
 def send_file(filename):
     return send_from_directory('../' + app.config['UPLOAD_FOLDER'], filename)
 
-session = {}
+
 
 # @app.context_processor
 # def inject_categories_for_all_templates():
@@ -56,18 +58,30 @@ def login():
     if postdata.get('username') and postdata.get('password'):
         username = postdata.get('username')
         password = hashlib.sha256(postdata.get('password').encode()).hexdigest()
-        existing_user = query_db("""SELECT id FROM user WHERE username = (?) and password = (?)""", (username, password), True)
+        existing_user = query_db("""SELECT id 
+                                    FROM user 
+                                    WHERE username = (?) and password = (?);""", (username, password), one=True)
         print('existing_user', existing_user)
         if existing_user:
             session['user'] = existing_user[0]
-            print("session[user]", session['user'])
+            print("route/login/session[user]", session['user'])
             return "{logged_in : true}"
         else:
             return "{logged_in : false}"
-
+# Test Flask:  
+# en mode déconnecté :
+# curl http://127.0.0.1:5000/logout -b cookies.txt
+# {"disconnected" : true}% 
 # curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt
+# {logged_in : true}%
+# curl http://127.0.0.1:5000/logout -b cookies.txt
+# {"disconnected" : true}% 
 # curl -d "username=Juan&password=Toto" -X POST http://127.0.0.1:5000/login -c cookies.txt
+# {logged_in : true}%
+# curl http://127.0.0.1:5000/logout -b cookies.txt
+# {"disconnected" : true}% 
 # curl -d "username=Juan&password=Juan" -X POST http://127.0.0.1:5000/login -c cookies.txt
+# {logged_in : true}%
     
 
 @app.route("/logout")
@@ -78,14 +92,19 @@ def logout():
     # print(session['user'])
     # return (session['user'])
     if session.get('user'):
-        print("session[user]", session['user'])
+        print("route/logout/session[user]", session['user'])
         for key in list(session.keys()):
             session.pop(key)
         return '{"disconnected" : true}'
     else:
         return '{"disconnected" : false}'
-
+# Test Flask:  
+# en mode connecté :
+# curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt
+# {logged_in : true}%
 # curl http://127.0.0.1:5000/logout -b cookies.txt
+# {"disconnected" : true}% 
+
 
 @app.route('/register', methods=['POST'])
 def register():  
@@ -95,19 +114,16 @@ def register():
 # renvoyer (json) {registered : true} 
 # sinon : renvoyer (json) {registered : false}
     postdata = request.form.to_dict()
-    result = dict(registered='')
+    result = dict(registered = False)
     if not session.get('user') and postdata:
         if postdata.get('username') and postdata.get('password') and postdata.get('email'):
             username = postdata['username']
             email = postdata['email']
             password = postdata['password']
-            existing_user = query_db("""SELECT id FROM user WHERE username = (?) or email = (?)""", (username, email))
-            if existing_user:
-                # si le nom d'utilisateur ou le mot de passe existe déjà on renvoie un message ?
-                print("route/register/existing_user")
-                result = dict(registered='existing_user')
-                print('route/register/existing_user/result', result)
-            else:
+            print('postdata', username, email, password)
+            existing_user = query_db("""SELECT count(id) FROM user WHERE username = (?) or email = (?);""", (username, email), one=True)
+            print ('existing_user', existing_user[0])
+            if existing_user[0] == 0:
                 # sinon : enregistrer le nouvel utilisateur
                 # si l'enregistrement marche : connecter l’utilisateur
                 session['user'] = execute_db("insert into user (username, email, password) \
@@ -115,25 +131,26 @@ def register():
                                    (username, email, hashlib.sha256(password.encode()).hexdigest()))
                 if session['user']:    
                     result = dict(registered = True)
-                    print('route/register/new_user/result/registered/True', result)
-                else:
-                    result = dict(registered = False)
-                    print('route/register/new_user/result/registered/False', result)
             # renvoyer (json)
-            return jsonify(result)
-# Test Flask:                       
+    return jsonify(result)
+# Test Flask:  
+# en mode déconnecté :
+# curl http://127.0.0.1:5000/logout -b cookies.txt 
+# {"disconnected" : true}%                    
 # curl -d "username=Michel&password=Michel&email=Michel@blablapp.com" -X POST http://127.0.0.1:5000/register
-# {"registered":"existing_user"}
+# {"registered":false}
 # curl -d "username=Michel&password=Michel&email=TOto@blablapp.com" -X POST http://127.0.0.1:5000/register
-# {"registered":"existing_user"}
+# {"registered":false}
 # curl -d "username=TOto&password=Michel&email=Michel@blablapp.com" -X POST http://127.0.0.1:5000/register
-# {"registered":"existing_user"}
+# {"registered":false}
 # curl -d "username=TOto&password=TOto&email=TOto@blablapp.com" -X POST http://127.0.0.1:5000/register
-# {"registered":"True"}
+# {"registered":true}
+# curl http://127.0.0.1:5000/logout -b cookies.txt 
+# {"disconnected" : true}%    
 # curl -d "username=TOto&password=TOto&email=Pierre@blablapp.com" -X POST http://127.0.0.1:5000/register
-# {"registered":"existing_user"}
-# curl -d "username=Pierre&password=Pierre&email=Pierre@blablapp.com" -X POST http://127.0.0.1:5000/register
-# {"registered":"True"}
+# {"registered":false}
+# curl -d "username=Michel&password=Pierre&email=Pierre@blablapp.com" -X POST http://127.0.0.1:5000/register
+# {"registered":false}
 
 
 @app.route('/create_conversation', methods=['POST'])
@@ -145,91 +162,61 @@ def create_conversation():
 # si aucun email des emails fournis ne correspond à un utilisateur,
 # renvoyer le dico json {created_conversation : false }
     postdata = request.form
-    
-    result = dict(conversation_created = '')
+    L = []
+    user_list = []    
+    result = dict(conversation_created = False)
     # if session.get('user') and postdata.get('email') and postdata.getlist('email'):
-    if postdata.get('email') and postdata.getlist('email'):
+    if session['user'] != '' and postdata.get('email') and postdata.getlist('email'):
         print("post_data", postdata.get('email'), postdata.get('name'))
-        user_list = []
-        print('user_list', user_list)
         if postdata.get('name'):
             conversation_name = postdata.get('name')
         else:
             conversation_name = "NULL"
-        conversation_name = postdata.get('name')
+        # conversation_name = postdata.get('name')
         print('conversation_name', conversation_name)
         print("postdata.getlist('email')", postdata.getlist('email'))
+
         for email in postdata.getlist('email'):
             print('email', email)
-            user_id = fetchone_db(""" SELECT id
+            user_id = query_db(""" SELECT id
                                     FROM user
                                     WHERE email = (?)""", [email])
-            print("user_id", user_id)
-            if not user_id is None and user_id != 'None':
-                print("user_id", user_id)
-                user_list.append(user_id)
-            if len(user_list) > 0:
-                print('user_list', user_list)
-                # result = fetchone_db(""" SELECT id
-                #                             FROM conversation
-                #                             WHERE name = (?)""", [conversation_name])  
-                # print('existing_conversation_id', conversation_id[0]) 
-                # if str(result) == 'None' :   
-                    # print("No existing conversation : create new conversation") 
+            if user_id:
+                L.append(user_id)
 
-                if session.get('user') not in user_list:
-                    user_list.append(session.get('user'))                
-                result = execute_db(""" INSERT INTO conversation (name)
-                                                VALUES (?)""", [conversation_name])
-                conversation_id = result
-                print("new_conversation_id", conversation_id)
-                # else:
-                    # conversation_id = result
-                    # print('existing_conversation_id', conversation_id) 
-                print('user_list, conversation_id', user_list, conversation_id)
-            print("user_id", user_id)
-            for user_id in user_list:
-                print('user_id, conversation_id', user_id, conversation_id)
-                # result = fetchone_db(""" SELECT user_id, conversation_id
-                #                             FROM user_conversation
-                #                             WHERE user_id = (?)
-                #                                 AND conversation_id = (?) """, [user_id, conversation_id])  
-                # print('existing_conversation_id', conversation_id[0]) 
-                # if str(result) == 'None': 
-                #     print("No existing user_conversation : create new user_conversation")    
+        for id in L:
+            user_list.append(id[0][0])
+        print('liste participants:  ', user_list)
 
-                #     # if session.get('user') not in user_list:
-                #     #     user_list.append(session.get('user'))
-                result = execute_db(""" INSERT INTO user_conversation 
-                                        (user_id, conversation_id) VALUES
-                                        (?, ?)""", [user_id, conversation_id])
-                print('new_user_conversation_ids', result)           
-                user_conversation_ids = result
-                print("user_conversation_ids", user_conversation_ids)
-                # else:
-                #     user_conversation_ids = result
-                #     print('existing_user_conversation_ids', user_conversation_ids) 
-                
-                # if session['user']:    
-                #     result = dict(created_conversation = str(user_conversation_ids))
-                #     print('route/create_conversation/new_conversation/result/user_conversation_ids/True', result)
-                # else:
-                #     result = dict(registered = False)
-                #     print('route/create_conversation/new_conversation/result/user_conversation_ids/False', result)
-        result = dict(conversation_name = conversation_name, user_list = user_list, user_conversation_ids = user_conversation_ids)
-        return jsonify(result)
-            # renvoyer (json)
-            # return jsonify(result)
+    if len(user_list) > 0:
+        if session.get('user') not in user_list:
+            user_list.append(session.get('user'))
+        new_conversation_id = execute_db(""" INSERT INTO conversation (name) VALUES (?)""", [conversation_name])
+        
+        print('final user_list, conversation_id', user_list, new_conversation_id)
+        
+        for user_id in user_list:        
+            id_participants = execute_db(""" INSERT INTO user_conversation 
+                                    (user_id, conversation_id) VALUES
+                                    (?, ?)""", [user_id, new_conversation_id])
+            print('user_id, conversation_id, id_participants', user_id, new_conversation_id, id_participants)
+      
+        result = dict(conversation_id = new_conversation_id)
+
+    return jsonify(result)
             
-# Test Flask:                       
+# Test Flask:            
+# en mode connecté :
+# curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt
+# {logged_in : true}%           
 # curl -d "name=Conv-poto&email=Juan@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation
-# {"conversation_name":"Conv-poto","user_list":[1]}
+# {"conversation_id":4}
 # curl -d "name=NouvelleConversation&email=Juan@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation
-# {"conversation_name":"NouvelleConversation","user_list":[1]}
+# {"conversation_id":5}
 # curl -d "name=NewChat&email=Juan@blablapp.com&email=Damien@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation
-# {"conversation_name":"NewChat","user_conversation_ids":3,"user_list":[1,3]}
+# {"conversation_id":6}
 # curl -d "name=NouveauChat&email=Juan@blablapp.com&email=Damien@blablapp.com&email=TOto@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation
-# {"conversation_name":"NouveauChat","user_conversation_ids":12,"user_list":[1,3,4]}
+# {"conversation_id":7}
 
 @app.route("/conversation-list", methods=['GET'])
 def chatroom_select(): # renvoie la liste des conversations à laquelle un user participe
