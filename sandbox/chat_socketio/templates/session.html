@@ -21,28 +21,33 @@
     console.log('http://' + document.domain + ':' + location.port)
     var socket = io.connect('http://' + document.domain + ':' + location.port);
       console.log('socket', socket)
-      socket.on( 'connect', function() {
-        socket.emit( 'my event', {
-          data: 'User Connected'
-        } )
-        var form = $( 'form' ).on( 'submit', function( e ) {
-          e.preventDefault()
-          let user_name = $( 'input.username' ).val()
-          let user_input = $( 'input.message' ).val()
-          socket.emit( 'my event', {
-            user_name : user_name,
-            message : user_input
+  
+  socket.on( 'connect', function() {  // envoie un message à la fonction FLASK  
+      socket.emit( 'message sent', {
+          data: 'User Connected'} ) // renvoie la connexion d'un utilisateur
+          var form = $( 'form' ).on( 'submit', function( e ) { // empêcher l'envoi du formulaire afin de récupérer la valeur des champs
+              e.preventDefault()
+              let message = $( 'input.message' ).val()
+              if (message != ''){
+                  socket.emit( 'message sent', {
+                      username : username,
+                      message : message,
+                      chatroom : chatroom
+                      } )}
+              $( 'input.message' ).val( '' )
           } )
-          $( 'input.message' ).val( '' ).focus()
-        } )
-      } )
-      socket.on( 'my response', function( msg ) {
-        console.log( msg )
-        if( typeof msg.user_name !== 'undefined' ) {
-          $( 'h3' ).remove()
-          $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
-        }
-      })
+  } )
+  
+  socket.on( 'my response', function( msg ) {  // envoyer un message à toutes les sessions actives
+  console.log( msg )
+  if( typeof msg.username !== 'undefined' ) {
+      $( 'h3' ).remove()
+      // la ligne ci-dessous est à adapter selon l'affichage de vos messages
+      $( 'div.message_holder' ).append( 
+        '<div class="message"><b style="color:#000">'+msg.username+'</b> '+msg.message+'</div>'
+        );
+  }
+  })
     </script>
 
   </body>
