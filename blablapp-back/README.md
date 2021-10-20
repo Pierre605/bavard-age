@@ -18,7 +18,7 @@ Mise à jour de l'environnement virtuel env (suite à installation):
 ```pip3 install -r requirements.txt```
 ```pip3 freeze > requirements.txt```
 
-Activation de virt-env :
+Activation de virt-env-back :
 ```source virt-env-back/bin/activate```
 
  Initier les variables Flask
@@ -52,8 +52,8 @@ Mise à jour de l'environnement virtuel env (suite à installation):
 ```pip3 install -r requirements.txt```
 ```pip3 freeze > requirements.txt```
 
-Activation de virt-env :
-```source virt-env/bin/activate```
+Activation de virt-env-back :
+```source virt-env-back/bin/activate```
 
 
 
@@ -73,10 +73,10 @@ Installation des dépendances avec:
  et sous Mac :
 ```pip3 install -r requirements.txt```
 
-Activation de virt-env :
-```source virt-env/bin/activate```
+Activation de virt-env-back :
+```source virt-env-back/bin/activate```
 
-###(Désactivation de virt-env :)
+###(Désactivation de virt-env-back :)
 ```deactivate```
 
 Lancer le projet :
@@ -88,7 +88,7 @@ Lancer le projet :
 ### liste des fichiers à ignorer pour Git
 ```database/```
 ```__pycache__/```
-```virt-env/```
+```virt-env-back/```
 
 ### (Désactivation de virt-env :)
 ```deactivate```
