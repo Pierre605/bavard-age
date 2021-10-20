@@ -9,7 +9,7 @@ Installation de virtualenv :
 ```pip3 install virtualenv```
 
 Création de l'environnement virtuel env :
-```virtualenv -p python3 virt-env```
+```virtualenv -p python3 virt-env-front```
 
 Mise à jour de l'environnement virtuel env (suite à installation):
 ```pip install -r requirements.txt```
@@ -19,18 +19,20 @@ Mise à jour de l'environnement virtuel env (suite à installation):
 ```pip3 freeze > requirements.txt```
 
 Activation de virt-env :
-```source virt-env/bin/activate```
+```source virt-env-front/bin/activate```
 
 
 Fichier pour ignorer les fichiers de virt-env à ne pas ajouter dans le Git :
 ```.gitignore```
 liste des fichiers à ignorer pour Git
 ```_node_modules/```
-```virt-env/```
+```virt-env-front/```
 
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation de npm :
+```npm install```
 
 ## Installation de React Router :
 ```npm install react-router-dom```
@@ -39,18 +41,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ```npm install @material-ui/core```
 ```npm install @material-ui/icons```
 
-## Installation Material-UI's Cooper font source files :
-```npm install @fontsource/cooper-hewitt```
+## Installation de la police ? de Material-UI's :
+```npm install @fontsource/?```
 
-## Available Scripts
-
-In the project directory, you can run:
-
+## Démarrage du projet avec npm
 ### `npm start`
 
 
 ## Après une màj du back, suite à Git pull dans ./blablapp-front/
 ```git pull```
+
+Activation de virt-env :
+```source virt-env-front/bin/activate```
 
 ### `npm start`
 
