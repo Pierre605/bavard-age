@@ -9,7 +9,7 @@ Installation de virtualenv :
 ```pip3 install virtualenv```
 
 Création de l'environnement virtuel env :
-```virtualenv -p python3 virt-env```
+```virtualenv -p python3 virt-env-back```
 
 Mise à jour de l'environnement virtuel env (suite à installation):
 ```pip install -r requirements.txt```
@@ -19,7 +19,7 @@ Mise à jour de l'environnement virtuel env (suite à installation):
 ```pip3 freeze > requirements.txt```
 
 Activation de virt-env :
-```source virt-env/bin/activate```
+```source virt-env-back/bin/activate```
 
  Initier les variables Flask
 ```export FLASK_APP=app.py```
@@ -39,13 +39,17 @@ Lancer le projet :
 ## Après une màj du back, suite à Git pull dans ./blablapp-back/
 ```git pull```
 
+Activation de virt-env :
+```source virt-env/bin/activate```
+
 Installation des dépendances avec:
 ```pip install -r requirements.txt```
  et sous Mac :
 ```pip3 install -r requirements.txt```
 
-Activation de virt-env :
-```source virt-env/bin/activate```
+ Initier les variables Flask
+```export FLASK_APP=app.py```
+```export FLASK_ENV=development```
 
 ###(Désactivation de virt-env :)
 ```deactivate```
