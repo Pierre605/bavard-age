@@ -1,0 +1,8 @@
+.conversations-rows {
+    height: 100px;
+    width: 100%;
+    font-size: larger;
+    margin-bottom: 1px;;
+    border: 2px solid black;
+
+}

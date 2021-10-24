@@ -1,0 +1,39 @@
+.messages {
+    border: 1px solid black;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    width:fit-content;
+    height:fit-content;
+    padding: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.user-messages {
+    background-color: rgb(130, 248, 130);
+    border: 1px solid black;
+    border-radius: 15px;
+    border-top-right-radius: 0px;
+    width:fit-content;
+    height:fit-content;
+    padding: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-left: 5em;
+}
+
+.content {
+    font-size: larger;
+}
+
+.author {
+    color: grey;
+    font-size: small;
+}
+
+.sent-date {
+    color: grey;
+    font-size: smaller;
+}
