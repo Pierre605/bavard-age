@@ -1,7 +1,7 @@
 # BLAblaPp project Back-end side with Flask, Python, SQLite3, SQL
 
 ## Première installation, suite à Git clone
-```git clone https://gitlab.matrice.io/blablapp-react-426/tkiener-blablapp-react):```
+```git clone https://gitlab.matrice.io/blablapp-react-426/tkiener-blablapp-react```
 
 Activation de virtualenv :
 > Le pompt change, et l'env virtuel apparaît (virt-env)
