@@ -1,7 +1,7 @@
 # BLAblaPp est un projet Web Full-stack
 
 ## Première installation, suite à Git clone
-```git clone https://gitlab.matrice.io/blablapp-react-426/tkiener-blablapp-react):```
+```git clone https://gitlab.matrice.io/blablapp-react-426/tkiener-blablapp-react```
 
 # Petits rappels d'installation pour Flask
 
