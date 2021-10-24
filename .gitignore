@@ -7,4 +7,3 @@ product/virt-env/
 product/back/database/
 product/back/__pycache__/
 product/front/node_modules/
-product/front/virt-env/
