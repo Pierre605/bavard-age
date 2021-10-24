@@ -3,3 +3,8 @@ blablapp-back/__pycache__/
 blablapp-back/virt-env/
 blablapp-front/node_modules/
 blablapp-front/virt-env/
+product/virt-env/
+product/back/database/
+product/back/__pycache__/
+product/front/node_modules/
+product/front/virt-env/
