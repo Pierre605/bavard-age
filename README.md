@@ -2,7 +2,7 @@
 
 ## Première installation, suite à Git clone
 ```git clone https://gitlab.matrice.io/blablapp-react-426/tkiener-blablapp-react```
-```cd tkiener-blablapp-react```
+```cd tkiener-blablapp-react/product```
 # Petits rappels d'installation pour Flask
 
 L'étape suivante est optionnelle, mais il est fortement recommendé d'utiliser un env virtuel pour flask.
