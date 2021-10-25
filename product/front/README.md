@@ -11,9 +11,10 @@
 ## Installation de Socket.io :
 ```npm install socket.io-client```
 ## Installation Material-UI's source files :
-```npm install @material-ui/core```
-(à faire si on utilise des icones)
-```npm install @material-ui/icons```
+```
+npm install @material-ui/core
+npm install @material-ui/icons
+```
 ## Installation de la police ? de Material-UI's :
 (à faire lorsque l'on aura choisi la police de caractères)
 ```npm install @fontsource/?```
