@@ -114,12 +114,14 @@ pip3 uninstall -r requirements.txt python-engineio
 pip3 uninstall -r requirements.txt Flask-SocketIO
 ```
 ### Installation de SocketIO
-```pip install --upgrade python-socketio==4.6.0
+```
+pip install --upgrade python-socketio==4.6.0
 pip install --upgrade python-engineio==3.13.2
 pip install --upgrade Flask-SocketIO==4.3.1
 ```
  et sous Mac :
-```pip3 install --upgrade python-socketio==4.6.0
+```
+pip3 install --upgrade python-socketio==4.6.0
 pip3 install --upgrade python-engineio==3.13.2
 pip3 install --upgrade Flask-SocketIO==4.3.1
 ```
