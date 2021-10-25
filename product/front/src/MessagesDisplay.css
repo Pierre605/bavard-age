@@ -1,4 +1,18 @@
+.contain-messages-user {
+    width: 70vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contain-messages {
+    width: 70vw;
+    display: flex;
+    justify-content: flex-start;
+}
+
+
 .messages {
+    background-color: white;
     border: 1px solid black;
     border-radius: 15px;
     border-top-left-radius: 0px;
@@ -18,10 +32,9 @@
     width:fit-content;
     height:fit-content;
     padding: 10px;
-    margin-left: 10px;
+    margin-right: 10px;
     margin-bottom: 10px;
     margin-top: 5px;
-    margin-left: 5em;
 }
 
 .content {

@@ -329,8 +329,26 @@ def conversation(conversation_id):
                         , [conversation_id])
                     for message in res_messages:
                         list_convers_messages.append(list(message))
+                    liste_particip = query_db(""" SELECT 
+                    GROUP_CONCAT(user.username) AS participants
+                    FROM
+                    user
+                    LEFT JOIN
+                    user_conversation
+                    ON
+                    user_conversation.user_id = user.id
+                    LEFT JOIN
+                    conversation
+                    ON
+                    conversation.id = user_conversation.conversation_id
+                    WHERE
+                    conversation.id = (?)""", [conversation_id])
+                    participants = liste_particip[0][0]
+                    liste_participants = (participants).split(',')
+
                     session['room'] = conversation_id
-                    return jsonify(list_convers_messages, str(session['username']))
+                    print(list_convers_messages, str(session['username']))
+                    return jsonify(list_convers_messages, str(session['username']), liste_participants)
                 else:
                     print("user not in this conversation")
                     return jsonify("user not in this conversation")
@@ -389,7 +407,7 @@ def message_sent(jsonresponse):
         if id_user:
             socketio.emit('my response'
                           , jsonresponse
-                          , callback=message_received
+                          , callback=messageReceived
                           , room=session['room'])
 
         message = execute_db(
@@ -539,4 +557,5 @@ def _jinja2_filter_datetime(date, fmt='%d/%m/%Y at %H:%M:%S'):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
+    socketio.run(app, debug=True)
     print("run views.py")

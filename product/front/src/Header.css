@@ -1,0 +1,12 @@
+.inline-blocks {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+}
+
+a, button {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}

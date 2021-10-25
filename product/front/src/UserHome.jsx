@@ -14,6 +14,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import Logout from './Logout';
 import ConversationsByRows from './ConversationsByRows';
+import Header from './Header'
 
 
 class UserHome extends React.Component {
@@ -56,6 +57,7 @@ class UserHome extends React.Component {
 
     return (
         <>
+        <Header />
         <section>
           <div>Conversations:</div>
             {this.state.conversations.map((conv) => {
