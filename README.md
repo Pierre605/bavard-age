@@ -44,8 +44,8 @@ depuis le répertoire racine :
 ```subl .gitignore```
 liste des fichiers à ignorer pour Git
 ```
-virt-env/
-product/backdatabase/
+product/virt-env/
+product/back/database/
 product/back/__pycache__/
 product/back/app/__pycache__/
 product/front/node_modules/
@@ -54,7 +54,8 @@ product/front/node_modules/
 ```subl product/.gitignore```
 liste des fichiers à ignorer pour Git
 ```
-backdatabase/
+virt-env/
+back/database/
 back/__pycache__/
 back/app/__pycache__/
 front/node_modules/
