@@ -28,8 +28,7 @@ export FLASK_ENV=development
 > Le pompt change, et l'env virtuel apparaît en premier : ```(virt-env)```
 ### Lancer le projet :
 ```flask run```
-
-### CTL+C pour stopper le Front-end
-
+## Pour stopper le back-end :
+`Ctrl + C`
 ### (Désactivation de virt-env :)
 ```deactivate```
