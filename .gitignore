@@ -1,4 +1,5 @@
 product/virt-env/
 product/back/database/
 product/back/__pycache__/
+product/back/app/__pycache__/
 product/front/node_modules/
