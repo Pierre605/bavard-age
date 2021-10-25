@@ -149,7 +149,8 @@ export FLASK_ENV=development
 `Ctrl + c` puis 
 
 ## Installation de la partie Front-end
-```cd front/```
+### Dans le répertoire front-end du product
+```cd ../front/```
 
 ## Installer l'environnement du projet front-end (1ère fois):
 ```subl README.md```
