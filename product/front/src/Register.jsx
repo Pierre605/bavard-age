@@ -1,6 +1,5 @@
 import React from 'react';
 // import './Modal.css';
-import { Redirect } from 'react-router';
 import {withRouter} from 'react-router-dom';
 import './Register.css'
 

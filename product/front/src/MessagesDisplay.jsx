@@ -5,7 +5,7 @@ import './MessagesDisplay.css'
 
 export default function MessagesDisplay(props) {
 
-    if (props.username == props.author) {
+    if (props.username === props.author) {
         return (
             <div className="contain-messages-user">
                 <div className="user-messages">

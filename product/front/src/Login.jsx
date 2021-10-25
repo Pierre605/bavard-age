@@ -1,6 +1,5 @@
 import React from 'react';
 import './Login.css';
-import { Redirect } from 'react-router';
 import {withRouter} from 'react-router-dom';
 
 class Login extends React.Component {

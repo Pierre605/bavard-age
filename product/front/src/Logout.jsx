@@ -1,6 +1,5 @@
 import React from 'react';
 import './Logout.css';
-import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 
 class Logout extends React.Component {
