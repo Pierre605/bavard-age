@@ -127,7 +127,7 @@ pip3 install --upgrade Flask-SocketIO==4.3.1
 ```
 
 ## Installation de la partie Back-end
-```cd product/back/```
+```cd back/```
 ### Première installation (une seule fois) du projet back-end :
 ```subl README.md```
 Suivre le contenu du README.md
@@ -149,7 +149,7 @@ export FLASK_ENV=development
 `Ctrl + c` puis 
 
 ## Installation de la partie Front-end
-```cd product/front/```
+```cd front/```
 
 ## Installer l'environnement du projet front-end (1ère fois):
 ```subl README.md```
