@@ -2,6 +2,8 @@ import React from 'react'
 import Logout from './Logout';
 import MessagesDisplay from './MessagesDisplay';
 import UserContext from './UserContext';
+import Header from './Header'
+import './InConversation.css'
 
 
 class InConversation extends React.Component {
@@ -9,6 +11,7 @@ class InConversation extends React.Component {
       super(props);
       this.state = ({ messages: [],
                      username: '',
+                     participants: [],
                     }
       );
       this.handleRegister = this.handleRegister.bind(this)
@@ -33,7 +36,8 @@ class InConversation extends React.Component {
           }
           else {
             this.setState({messages: messages[0],
-                           username: messages[1]})
+                           username: messages[1],
+                           participants: messages[2]})
           }
         })
         }
@@ -42,15 +46,23 @@ class InConversation extends React.Component {
     render() {
       return (
         <>
-          <a href="/conversation-list">
-            <img src="/logo2.png" width="100px" alt="logo-provisoire"/>
-          </a>
-          {this.state.messages.map((message, i) => {
-              return (
-                      <MessagesDisplay username={this.state.username} id={i} author={message[0]} content={message[1]} sent={message[2]}/>
-              )
-          })}
-          <Logout />
+           <Header />
+          <div id="flex-aside">
+            <div className="side-bar"><b>Participants: </b>
+                {this.state.participants.map((member, i) => {
+                    return (
+                        <div className="members" id={i}>{member}</div>
+                    )
+                })}
+            </div>
+            <div className="background">
+            {this.state.messages.map((message, i) => {
+                return (
+                        <MessagesDisplay username={this.state.username} id={i} author={message[0]} content={message[1]} sent={message[2]}/>
+                )
+            })}
+            </div>
+        </div>
         </>
       );
     }

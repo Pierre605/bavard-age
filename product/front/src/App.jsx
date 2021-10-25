@@ -36,7 +36,6 @@ class App extends React.Component {
         </Route>
         <Route path="/conversation-list" exact>
           <UserHome/>
-          <Logout />
         </Route>
         <Route path="/conversation/:id" exact component={InConversation}/> 
       </Router>      
