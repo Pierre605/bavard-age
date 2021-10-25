@@ -64,6 +64,7 @@ front/node_modules/
 ```subl product/back/.gitignore```
 liste des fichiers à ignorer pour Git
 ```
+database/
 __pycache__/
 app/__pycache__/
 ```
