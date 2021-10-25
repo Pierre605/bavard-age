@@ -8,6 +8,10 @@
 L'étape suivante est optionnelle, mais il est fortement recommendé d'utiliser un env virtuel pour flask.
 
 ## Créer un environnement virtuel
+Installation de virtualenv :
+```pip install virtualenv```
+ et sous Mac :
+```pip3 install virtualenv```
 Création de l'environnement virtuel env :
 ```virtualenv -p python3 virt-env```
 Activation de virt-env-back :
