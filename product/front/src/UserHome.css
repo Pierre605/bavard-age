@@ -74,3 +74,15 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+#create-conv {
+  width: 90px;
+}
+
+#create-conv-container {
+  text-align: right;
+  margin-right: 2em;
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+}

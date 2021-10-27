@@ -13,3 +13,7 @@
 #flex-aside {
     display: flex;
 }
+
+.background {
+    background-color: rgb(221, 217, 217);
+}

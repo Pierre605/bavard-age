@@ -4,6 +4,7 @@ import MessagesDisplay from './MessagesDisplay';
 import UserContext from './UserContext';
 import Header from './Header'
 import './InConversation.css'
+import ParticipantsDisplay from './ParticipantsDisplay';
 
 
 class InConversation extends React.Component {
@@ -47,22 +48,22 @@ class InConversation extends React.Component {
       return (
         <>
            <Header />
-          <div id="flex-aside">
-            <div className="side-bar"><b>Participants: </b>
-                {this.state.participants.map((member, i) => {
+            <div id="flex-aside">
+              <div className="side-bar">
+              {this.state.participants.map((member) => {
+                return (
+                  <ParticipantsDisplay name={member} user={this.state.username} />
+                )
+              })}
+              </div>
+                <div className="background">
+                {this.state.messages.map((message, i) => {
                     return (
-                        <div className="members" id={i}>{member}</div>
+                            <MessagesDisplay username={this.state.username} id={i} author={message[0]} content={message[1]} sent={message[2]}/>
                     )
                 })}
+                </div>
             </div>
-            <div className="background">
-            {this.state.messages.map((message, i) => {
-                return (
-                        <MessagesDisplay username={this.state.username} id={i} author={message[0]} content={message[1]} sent={message[2]}/>
-                )
-            })}
-            </div>
-        </div>
         </>
       );
     }
