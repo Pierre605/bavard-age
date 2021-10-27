@@ -2,8 +2,9 @@
 
 ## Première installation de la version product du front
 ### Prérequis : 
-> se positionner dans le répertoire local du front-end du product : product/front/
-> virtual env activé, le pompt affiche (virt-env)
+> se positionner dans le répertoire local du front-end du product : 
+# product/front/
+
 ## Installation de npm :
 ```npm install```
 ## Installation de React Router :
