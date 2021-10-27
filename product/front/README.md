@@ -5,21 +5,12 @@
 > se positionner dans le répertoire local du front-end du product : 
 # product/front/
 
-## Installation de npm :
-```npm install```
-## Installation de React Router :
-```npm install react-router-dom```
-
-## Désinstallation de SocketIO
+## Installation de npm, React Router, SocketIO client, Material-UI's:
 ```
+npm install
+npm install react-router-dom
 npm uninstall socket.io-client
-```
-## Installation de SocketIO
-```
 npm i socket.io-client@2.3.1
-```
-## Installation Material-UI's source files :
-```
 npm install @material-ui/core @material-ui/icons @material-ui/icons-material @emotion/react @emotion/styled @fontsource/Roboto
 ```
 ## Démarrage du projet avec npm
