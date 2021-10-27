@@ -8,8 +8,15 @@
 ```npm install```
 ## Installation de React Router :
 ```npm install react-router-dom```
-## Installation de Socket.io :
-```npm install socket.io-client```
+
+## Désinstallation de SocketIO
+```
+npm uninstall socket.io-client
+```
+## Installation de SocketIO
+```
+npm i socket.io-client@2.3.1
+```
 ## Installation Material-UI's source files :
 ```
 npm install @material-ui/core @material-ui/icons @material-ui/icons-material @emotion/react @emotion/styled @fontsource/Roboto
