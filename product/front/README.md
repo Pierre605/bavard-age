@@ -12,12 +12,8 @@
 ```npm install socket.io-client```
 ## Installation Material-UI's source files :
 ```
-npm install @material-ui/core
-npm install @material-ui/icons
+npm install @material-ui/core @material-ui/icons @material-ui/icons-material @emotion/react @emotion/styled @fontsource/Roboto
 ```
-## Installation de la police ? de Material-UI's :
-(à faire lorsque l'on aura choisi la police de caractères)
-```npm install @fontsource/?```
 ## Démarrage du projet avec npm
 `npm start`
 ## Après une màj du front, suite à Git pull dans product/front
