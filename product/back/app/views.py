@@ -257,7 +257,9 @@ def create_conversation():
         print('conversation_name', conversation_name)
         print("postdata.getlist('email')", postdata.getlist('email'))
 
-        for email in postdata.getlist('email'):
+        emails = postdata.get('email').split(", ")
+
+        for email in emails:
             print('email', email)
             user_id = query_db(""" SELECT id
                                     FROM user

@@ -12,7 +12,6 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
-import Logout from './Logout';
 import ConversationsByRows from './ConversationsByRows';
 import Header from './Header'
 
@@ -66,7 +65,7 @@ class UserHome extends React.Component {
                 )
               })
             }
-            
+          <button><a href='http://localhost:3000/create-conversation'>Créer une conversation</a></button> 
         </section>
         </>
       );
