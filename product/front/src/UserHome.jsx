@@ -14,6 +14,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import ConversationsByRows from './ConversationsByRows';
 import Header from './Header'
+import ContactsDisplay from './ContactsDisplay';
 
 
 class UserHome extends React.Component {
@@ -23,6 +24,8 @@ class UserHome extends React.Component {
     this.state = {
       // liste des conversations de l'utilisateur connecté
       conversations: [],
+      // liste des contacts de l'utilisateur connecté
+      contacts: [],
     }
   }
 
@@ -41,7 +44,8 @@ class UserHome extends React.Component {
       console.log('UserHome/getConversations/convers_list', convers_list)
       // Sauvegarde de l'état du composant avec le résultat de la réponse parsée de la DB
       this.setState({
-        conversations : convers_list.conversations
+        conversations : convers_list.conversations,
+        contacts : convers_list.contacts
       });
           }, (error) => {
             this.setState({
@@ -71,19 +75,28 @@ class UserHome extends React.Component {
     return (
         <>
         <Header />
-        <section>
-          <div>Conversations:</div>
-            {this.state.conversations.map((conv) => {
+          <div id="flex-aside">
+            <div className="side-bar">
+            {this.state.contacts.map((member) => {
               return (
-                <ConversationsByRows id={conv.id} name={conv.name} />
-                )
-              })
-            }
-          <div id="create-conv-container">
-            <a href='http://localhost:3000/create-conversation'><img id="create-conv" src="/convers-icon.png"/></a>
-            <div id="create-mssg"></div>
-          </div>
-        </section>
+                <ContactsDisplay id={member.id} username={member.username} email={member.email} />
+              )
+            })}
+            </div>        
+          <section>
+            <div>Conversations:</div>
+              {this.state.conversations.map((conv) => {
+                return (
+                  <ConversationsByRows id={conv.id} name={conv.name} />
+                  )
+                })
+              }
+            <div id="create-conv-container">
+              <a href='http://localhost:3000/create-conversation'><img id="create-conv" src="/convers-icon.png"/></a>
+              <div id="create-mssg"></div>
+            </div>
+          </section>
+        </div>
         </>
       );
     

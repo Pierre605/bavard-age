@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './InConversation.css'
+import './ParticipantsDisplay.css'
 
 
 
