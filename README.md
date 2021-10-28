@@ -48,6 +48,8 @@ product/virt-env/
 product/back/database/
 product/back/__pycache__/
 product/back/app/__pycache__/
+node_modules/
+product/node_modules/
 product/front/node_modules/
 ```
 ... aussi, dans le répertoire produit :
