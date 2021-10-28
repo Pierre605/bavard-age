@@ -60,19 +60,43 @@ Route de liste des convesations (conversation-list -> UserHome.jsx)
 en mode connecté :
 `curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt`
 > {logged_in : true}%           
-`curl http://127.0.0.1:5000/conversation-list`
-> [
+` `
+> {
+  "contacts": [
+    {
+      "contact_id": 1, 
+      "email": "Juan@blablapp.com", 
+      "username": "Juan"
+    }, 
+    {
+      "contact_id": 3, 
+      "email": "Damien@blablapp.com", 
+      "username": "Damien"
+    }
+  ], 
+  "conversations": [
+    {
+      "id": 5, 
+      "name": "1-to-1 Michel", 
+      "participants": "Juan,Michel"
+    }, 
     {
       "id": 2, 
       "name": "Conv-poto", 
-      "participants": "Damien,Juan,Michel"
+      "participants": "Damien,Juan,Juan,Michel,Michel"
     }, 
     {
       "id": 1, 
       "name": "La famille", 
       "participants": "Damien,Michel"
+    }, 
+    {
+      "id": 4, 
+      "name": "NewChat", 
+      "participants": "Damien,Juan,Michel"
     }
   ]
+}
 _____________________________________________________
 
 @app.route('/create_contact', methods=['POST'])
@@ -95,6 +119,83 @@ en mode connecté :
     "result": true
   }
 }
+_____________________________________________________
+
+@app.route('/create_conversation', methods=['POST'])
+en mode connecté :
+`curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt`
+> {logged_in : true}%           
+`curl -d "name=Conv-poto&email=Juan@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation`
+> {"conversation_id":4}
+`curl http://127.0.0.1:5000/conversation-list`
+> [
+  {
+    "id": 4, 
+    "name": "Conv-poto", 
+    "participants": "Juan,TOto"
+  }
+]
+`curl -d "name=NouvelleConversation&email=Juan@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation`
+> {"conversation_id":5}
+`curl http://127.0.0.1:5000/conversation-list`
+> [
+ {
+   "id": 4, 
+   "name": "Conv-poto", 
+   "participants": "Juan,TOto"
+ }
+, 
+  {
+    "id": 5, 
+    "name": "NouvelleConversation", 
+    "participants": "Juan,TOto"
+  }
+]
+`curl -d "name=NewChat&email=Juan@blablapp.com&email=Damien@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation`
+> {"conversation_id":6}
+`curl http://127.0.0.1:5000/conversation-list`
+> [
+  {
+    "id": 4, 
+    "name": "Conv-poto", 
+    "participants": "Juan,TOto"
+  }, 
+  {
+    "id": 6, 
+    "name": "NewChat", 
+    "participants": "Damien,Juan,TOto"
+  }, 
+  {
+    "id": 5, 
+    "name": "NouvelleConversation", 
+    "participants": "Juan,TOto"
+  }
+]
+`curl -d "name=NouveauChat&email=Juan@blablapp.com&email=Damien@blablapp.com&email=TOto@blablapp.com" -X POST http://127.0.0.1:5000/create_conversation`
+> {"conversation_id":7}
+`curl http://127.0.0.1:5000/conversation-list`
+> [
+  {
+    "id": 4, 
+    "name": "Conv-poto", 
+    "participants": "Juan,TOto"
+  }, 
+  {
+    "id": 6, 
+    "name": "NewChat", 
+    "participants": "Damien,Juan,TOto"
+  }, 
+  {
+    "id": 7, 
+    "name": "NouveauChat", 
+    "participants": "Damien,Juan,TOto"
+  }, 
+  {
+    "id": 5, 
+    "name": "NouvelleConversation", 
+    "participants": "Juan,TOto"
+  }
+]
 _____________________________________________________________________________
 
 ## @app.route('/conversation/<int:conversation_id>', methods=['GET', 'POST'])

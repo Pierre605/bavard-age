@@ -180,6 +180,7 @@ def register():
 # (conversation-list -> UserHome.jsx)
 # renvoie la liste des conversations
 # à laquelle un user participe
+# renvoioe la liste des contacts du user
 # renvoie un dictionnaire des messages
 # pour une chatroom donnée
 # si la chatroom a des messages :
@@ -222,10 +223,15 @@ def chatroom_select():
             GROUP BY
             conversation.name"""
             , [session['user']])
-        # for liste in listes_conversations:
-        #     result_list.append(dict(liste))
-        # return jsonify(result_list)
-        return jsonify({'conversations': [dict(row) for row in conversations],})
+        contacts = query_db(""" 
+                    SELECT contact_id, u.username, u.email
+                    FROM user_contact uc
+                    INNER JOIN user as u
+                    ON uc.contact_id=u.id
+                    WHERE user_id = (?)"""
+                    , [session['user']])
+        return jsonify({'conversations': [dict(row) for row in conversations]
+            , 'contacts': [dict(row) for row in contacts]})
     else:
         return ("no user session")
 
