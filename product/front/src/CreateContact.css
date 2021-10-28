@@ -1,0 +1,20 @@
+.flex {
+    margin-top: 10px;
+    margin-bottom: 15px;;
+}
+
+.input-style {
+    width: 300px;
+    margin-bottom: 10px;
+    margin-left: 10px;;
+}
+
+#emails-syntaxe-requirement {
+    color: grey;
+    font-size: 0.8em;
+}
+
+button {
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -86,3 +86,15 @@
   right: 2em;
   bottom: 2em;
 }
+
+#create-contact {
+  width: 90px;
+}
+
+#create-contact-container {
+  text-align: right;
+  margin-right: 2em;
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+}

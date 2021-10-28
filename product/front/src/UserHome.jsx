@@ -1,5 +1,9 @@
 import './UserHome.css';
+
 import reactDom from 'react-dom';
+import {
+  Link
+} from "react-router-dom";
 // import * as React from 'react';
 import React, { useState } from 'react'
 import { 
@@ -32,6 +36,7 @@ class UserHome extends React.Component {
   componentDidMount() {
     this.getConversations()
     this.createConvMouseOver()
+    this.createContactMouseOver()
   }
 
   getConversations = () => {
@@ -55,6 +60,18 @@ class UserHome extends React.Component {
       )
   };
   
+  createContactMouseOver() {
+    let createContactIcon = document.getElementById("create-contact");
+    createContactIcon.addEventListener("mouseover", function( event ) {
+      // on met l'accent sur la cible de mouseover
+      let div = document.getElementById("create-contact-msg").textContent = "Créer un contact"
+
+      createContactIcon.addEventListener("mouseleave", function(e) {
+        let div = document.getElementById("create-contact-msg").textContent = ""
+      })
+    }, false);
+  }
+
   createConvMouseOver() {
     let createIcon = document.getElementById("create-conv");
     createIcon.addEventListener("mouseover", function( event ) {
@@ -76,12 +93,20 @@ class UserHome extends React.Component {
         <>
         <Header />
           <div id="flex-aside">
+
             <div className="side-bar">
-            {this.state.contacts.map((member) => {
-              return (
-                <ContactsDisplay id={member.id} username={member.username} email={member.email} />
-              )
-            })}
+              <section>
+                <div>Contacts:</div>             
+                  {this.state.contacts.map((member) => {
+                    return (
+                      <ContactsDisplay id={member.id} username={member.username} email={member.email} />
+                    )
+                  })}
+                <div id="create-contact-container">
+                  <a href='http://localhost:3000/create-contact'><img id="create-contact" src="/convers-icon.png"/></a>
+                  <div id="create-contact-msg"></div>
+                </div> 
+              </section>                         
             </div>        
           <section>
             <div>Conversations:</div>
