@@ -8,9 +8,9 @@ export default function MessagesDisplay(props) {
     if (props.username === props.author) {
         return (
             <div className="contain-messages-user">
+                <div className="author-user">Moi</div>
                 <div className="user-messages">
                     <div className="content">{props.content}</div>
-                    <div className="author">{props.author}</div>
                     <div className="sent-date">{props.sent}</div>
                 </div>
             </div>
@@ -19,9 +19,9 @@ export default function MessagesDisplay(props) {
     else {
         return (
             <div className="contain-messages">
+                <div className="author">{props.author}</div>
                 <div className="messages">
                     <div className="content">{props.content}</div>
-                    <div className="author">{props.author}</div>
                     <div className="sent-date">{props.sent}</div>
                 </div>
             </div>

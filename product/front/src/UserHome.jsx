@@ -28,6 +28,7 @@ class UserHome extends React.Component {
 
   componentDidMount() {
     this.getConversations()
+    this.createConvMouseOver()
   }
 
   getConversations = () => {
@@ -49,6 +50,19 @@ class UserHome extends React.Component {
           }
       )
   };
+  
+  createConvMouseOver() {
+    let createIcon = document.getElementById("create-conv");
+    createIcon.addEventListener("mouseover", function( event ) {
+      // on met l'accent sur la cible de mouseover
+      let div = document.getElementById("create-mssg").textContent = "Créer une conversation"
+
+      createIcon.addEventListener("mouseleave", function(e) {
+        let div = document.getElementById("create-mssg").textContent = ""
+      })
+    }, false);
+  }
+
 
 
   // Rendu React du composant
@@ -65,7 +79,10 @@ class UserHome extends React.Component {
                 )
               })
             }
-          <button><a href='http://localhost:3000/create-conversation'>Créer une conversation</a></button> 
+          <div id="create-conv-container">
+            <a href='http://localhost:3000/create-conversation'><img id="create-conv" src="/convers-icon.png"/></a>
+            <div id="create-mssg"></div>
+          </div>
         </section>
         </>
       );
