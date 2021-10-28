@@ -384,6 +384,50 @@ def conversation(conversation_id):
     except IndexError:
         abort(404)
 
+# Route de création de contact
+# (create_convtact -> CreateContact.jsx)
+# créer un contact à partir de l'email (email) du contact
+# et de l'identifiant de l'utilisateur connecté (id)
+# renvoyer le contact créé, 
+# sous forme de dictionnaire json {created_contact : id }
+# si l'email fourni ne correspond à aucun utilisateur (User),
+# renvoyer le dico json {created_contact : false }
+@app.route('/create_contact', methods=['POST'])
+def create_contact(): 
+    postdata = request.form   
+    result = dict(contact_created = dict(result = False, contact_id = 'NULL'))
+    if session['user'] != '' \
+        and session['username'] != '' \
+        and postdata['email']:
+        print("post_data", postdata['email'])
+        if postdata['email']:
+            contact_email = postdata['email']
+        else:
+            contact_email = "NULL"
+        print('contact_email', contact_email)
+        contact_id = query_db(""" SELECT id
+                                FROM user
+                                WHERE email = (?)"""
+                                , [contact_email], one=True)[0]
+        if contact_id:
+            print('liste contact_id:  ', contact_id)
+            not_existing_contact_id = query_db(""" SELECT count(*)
+                        FROM user_contact
+                        WHERE user_id = (?)
+                        AND contact_id = (?)"""
+                        , [session['user'], contact_id], one=True)[0]
+        if not_existing_contact_id ==0:
+            print('not_existing_contact_id:  ', not_existing_contact_id)
+            new_user_contact_id = execute_db("""
+                                INSERT INTO user_contact 
+                                (user_id, contact_id) VALUES
+                                (?, ?)""", [session['user'], contact_id])
+            print('user_id, new_user_contact_id', session['user'], new_user_contact_id)
+            result = dict(contact_created = dict(result = True, contact_id = contact_id))
+
+    return jsonify(result)
+
+
 
 def sessions():
     print('routesessionhtml')
