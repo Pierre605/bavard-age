@@ -44,15 +44,34 @@ depuis le répertoire racine :
 ```subl .gitignore```
 liste des fichiers à ignorer pour Git
 ```
-product/virt-env/
-product/back/database/
-product/back/__pycache__/
-product/back/app/__pycache__/
-node_modules/
-product/node_modules/
-product/front/node_modules/
+/node_modules
+/.pnp
+.pnp.js
+
+# database
+/database
+
+# virtual environment
+/virt-env
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+/__pycache__
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 ```
-... aussi, dans le répertoire produit :
+... aussi bien qu'inutlie (à supprimer), dans le répertoire produit :
 ```subl product/.gitignore```
 liste des fichiers à ignorer pour Git
 ```
@@ -105,8 +124,6 @@ Si les versions de socket.io sont différentes de celle-ci, alors il faut les d�
 
 ### Désinstallation de SocketIO
 ```
-npm uninstall socket.io-client
-
 pip uninstall -r requirements.txt python-socketio
 pip uninstall -r requirements.txt python-engineio
 pip uninstall -r requirements.txt Flask-SocketIO
@@ -119,8 +136,6 @@ pip3 uninstall -r requirements.txt Flask-SocketIO
 ```
 ### Installation de SocketIO
 ```
-npm i socket.io-client@2.3.1
-
 pip install --upgrade python-socketio==4.6.0
 pip install --upgrade python-engineio==3.13.2
 pip install --upgrade Flask-SocketIO==4.3.1
