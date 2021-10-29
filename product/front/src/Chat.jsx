@@ -10,7 +10,7 @@ class Chat extends React.Component {
     super(props);
     // Etat du composant
     this.state = ({ 
-      conversation: {'user_id' : 2, 'conversation_id' : 2},  // dico des infos de la conversation cliquée
+      // conversation: {'user_id' : 2, 'conversation_id' : 2},  // dico des infos de la conversation cliquée
       messages: []  // liste des messages de la conversation cliquée
     })
     this.handleRegister = this.handleRegister.bind(this);
@@ -45,72 +45,72 @@ class Chat extends React.Component {
   componentDidUpdate() {
   }
   
-  // handleRegister(ev) {
-  //   // socket.on( 'connection', (client) => {  // envoie un message à la fonction FLASK  
-  //   //   client.on('subscribeToChat', function() {
-  //   //     console.log('client is subscribing to chat');
-  //   //     socket.emit( 'sentMessage', {
-  //   //       data: 'connectedUser'}  // renvoie la connexion d'un utilisateur
-  //   //       // var form = $( 'form' ).on( 'submit', function( e ) { // empêcher l'envoi du formulaire afin de récupérer la valeur des champs
-  //   //       //socket.on( 'submit', function( e ) { // empêcher l'envoi du formulaire afin de récupérer la valeur des champs
-  //   //         e.preventDefault()
-  //   //         let message = $( 'input.message' ).val()
-  //   //         if (message != ''){
-  //   //             socket.emit( 'message sent', {
-  //   //                 username : username,
-  //   //                 message : message,
-  //   //                 chatroom : chatroom
-  //   //                 } )}
-  //   //         $( 'input.message' ).val( '' )
-  //   //       })    
-  //   //   })
-  //   // }
+  handleRegister(ev) {
+    // socket.on( 'connection', (client) => {  // envoie un message à la fonction FLASK  
+    //   client.on('subscribeToChat', function() {
+    //     console.log('client is subscribing to chat');
+    //     socket.emit( 'sentMessage', {
+    //       data: 'connectedUser'}  // renvoie la connexion d'un utilisateur
+    //       // var form = $( 'form' ).on( 'submit', function( e ) { // empêcher l'envoi du formulaire afin de récupérer la valeur des champs
+    //       //socket.on( 'submit', function( e ) { // empêcher l'envoi du formulaire afin de récupérer la valeur des champs
+    //         e.preventDefault()
+    //         let message = $( 'input.message' ).val()
+    //         if (message != ''){
+    //             socket.emit( 'message sent', {
+    //                 username : username,
+    //                 message : message,
+    //                 chatroom : chatroom
+    //                 } )}
+    //         $( 'input.message' ).val( '' )
+    //       })    
+    //   })
+    // }
 
-  //     ev.preventDefault();
-  //     console.log('Chat-handleRegister')
+      ev.preventDefault();
+      console.log('Chat-handleRegister')
     
-  //     const data = new FormData();
-  //     data.append('username', this.username.value);
-  //     data.append('message', this.message.value);
-  //     console.log('data', data);
-  //     socket.emit( 'message sent', {
-  //       username : data.username,
-  //       message : data.message,
-  //       chatroom : this.state.conversation
-  //     });
-  //     // $( 'input.message' ).val( '' )
+      const data = new FormData();
+      data.append('username', this.username.value);
+      data.append('message', this.message.value);
+      console.log('data', data);
+      socket.emit( 'message sent', {
+        username : data.username,
+        message : data.message,
+        chatroom : this.state.conversation
+      });
+      // $( 'input.message' ).val( '' )
     
     
-  //   // socket.on( 'my response', function( msg ) {
-  //   //   // envoyer un message à toutes les sessions actives
-  //   //   console.log( msg )
-  //   //   // if( typeof msg.username !== 'undefined' ) {
-  //   //     // $( 'h3' ).remove()
-  //   //     // la ligne ci-dessous est à adapter selon l'affichage de vos messages
-  //   //     // $( 'div.message_holder' ).append( 
-  //   //     //   '<div class="message"><b style="color:#000">'+msg.username+'</b> '+msg.message+'</div>'
-  //   //     //   )}
+    // socket.on( 'my response', function( msg ) {
+    //   // envoyer un message à toutes les sessions actives
+    //   console.log( msg )
+    //   // if( typeof msg.username !== 'undefined' ) {
+    //     // $( 'h3' ).remove()
+    //     // la ligne ci-dessous est à adapter selon l'affichage de vos messages
+    //     // $( 'div.message_holder' ).append( 
+    //     //   '<div class="message"><b style="color:#000">'+msg.username+'</b> '+msg.message+'</div>'
+    //     //   )}
 
-  //   //   fetch('http://localhost:5000/chat', {
-  //   //     method: 'POST',
-  //   //     body: data,
-  //   //   })
-  //   //   .then((response) => {
-  //   //     console.log(response.text());
-  //   //     {this.props.close()};
-  //   //     return response.text()
-  //   //   })
-  //   //   .then((data) => {
-  //   //     console.log(data)
-  //   //     if (data.includes('true')) {
-  //   //       this.props.history.push('/conversations')
-  //   //     }
-  //   //     else {
-  //   //       alert('Registration failed')
-  //   //     }
-  //   //   // window.location.reload(false);
-  //   // })
-  // }
+    //   fetch('http://localhost:5000/chat', {
+    //     method: 'POST',
+    //     body: data,
+    //   })
+    //   .then((response) => {
+    //     console.log(response.text());
+    //     {this.props.close()};
+    //     return response.text()
+    //   })
+    //   .then((data) => {
+    //     console.log(data)
+    //     if (data.includes('true')) {
+    //       this.props.history.push('/conversations')
+    //     }
+    //     else {
+    //       alert('Registration failed')
+    //     }
+    //   // window.location.reload(false);
+    // })
+  }
 
   render() {
     

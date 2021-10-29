@@ -403,7 +403,6 @@ def create_contact():
     postdata = request.form   
     result = dict(contact_created = dict(result = False, contact_id = 'NULL'))
     if session['user'] != '' \
-        and session['username'] != '' \
         and postdata['email']:
         print("post_data", postdata['email'])
         if postdata['email']:
