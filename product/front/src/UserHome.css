@@ -74,3 +74,27 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+#create-conv {
+  width: 90px;
+}
+
+#create-conv-container {
+  text-align: right;
+  margin-right: 3em;
+  position: fixed;
+  right: 3em;
+  bottom: 2em;
+}
+
+#create-contact {
+  width: 90px;
+}
+
+#create-contact-container {
+  text-align: right;
+  margin-left: 3em;
+  position: fixed;
+  left: 3em;
+  bottom: 2em;
+}

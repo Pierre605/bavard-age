@@ -1,13 +1,14 @@
 .contain-messages-user {
     width: 70vw;
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
 }
 
 .contain-messages {
     width: 70vw;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
 }
 
 
@@ -42,9 +43,29 @@
 }
 
 .author {
-    color: grey;
-    font-size: small;
+    color:white;
+    background-color: rgb(54, 54, 54);
+    font-size: large;
+    border: 1px solid black;
+    width:fit-content;
+    height:fit-content;
+    margin-left: 10px;
+    padding: 5px;
+    margin-bottom: -5px;
 }
+
+.author-user {
+    color:rgb(3, 3, 3);
+    background-color: rgb(224, 240, 82);
+    font-size: large;
+    border: 1px solid black;
+    width:fit-content;
+    height:fit-content;
+    margin-right: 10px;
+    padding: 5px;
+    margin-bottom: -5px;
+}
+
 
 .sent-date {
     color: grey;

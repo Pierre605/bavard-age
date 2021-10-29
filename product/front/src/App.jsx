@@ -21,6 +21,8 @@ import UserHome from './UserHome.jsx'
 import Logout from './Logout';
 import InConversation from './InConversation'
 import Chat from './Chat'
+import CreateConversation from './CreateConversation';
+import CreateContact from './CreateContact';
 
 
 // Composant de classe App, principal de l'App React BLAblaPp
@@ -32,12 +34,18 @@ class App extends React.Component {
     return (
       <Router>
         <Route path="/" exact>
-          <HomePage/>
+          <HomePage />
         </Route>
         <Route path="/conversation-list" exact>
-          <UserHome/>
+          <UserHome />
         </Route>
-        <Route path="/conversation/:id" exact component={InConversation}/> 
+        <Route path="/create-conversation" exact>
+            <CreateConversation />
+        </Route>
+        <Route path="/create-contact" exact>
+            <CreateContact />
+        </Route>        
+        <Route path="/conversation/:id" exact component={ InConversation }/> 
       </Router>      
     );
   }              

@@ -59,20 +59,66 @@ _______________________________________________
 Route de liste des convesations (conversation-list -> UserHome.jsx)
 en mode connecté :
 `curl -d "username=Michel&password=Michel" -X POST http://127.0.0.1:5000/login -c cookies.txt`
-> {logged_in : true}
-`curl http://127.0.0.1:5000/conversation-list`
-> [
+> {logged_in : true}%           
+` `
+> {
+  "contacts": [
+    {
+      "contact_id": 1, 
+      "email": "Juan@blablapp.com", 
+      "username": "Juan"
+    }, 
+    {
+      "contact_id": 3, 
+      "email": "Damien@blablapp.com", 
+      "username": "Damien"
+    }
+  ], 
+  "conversations": [
+    {
+      "id": 5, 
+      "name": "1-to-1 Michel", 
+      "participants": "Juan,Michel"
+    }, 
     {
       "id": 2, 
       "name": "Conv-poto", 
-      "participants": "Damien,Juan,Michel"
+      "participants": "Damien,Juan,Juan,Michel,Michel"
     }, 
     {
       "id": 1, 
       "name": "La famille", 
       "participants": "Damien,Michel"
+    }, 
+    {
+      "id": 4, 
+      "name": "NewChat", 
+      "participants": "Damien,Juan,Michel"
     }
   ]
+}
+_____________________________________________________
+
+@app.route('/create_contact', methods=['POST'])
+en mode déconnecté :
+`curl -d "username=TOto&password=TOto&email=TOto@blablapp.com&gdpr=True" -X POST http://127.0.0.1:5000/register`
+en mode connecté :
+`curl -d "username=TOto&password=TOto" -X POST http://127.0.0.1:5000/login -c cookies.txt`
+> {logged_in : true}%           
+`curl -d "email=Juan@blablapp.com" -X POST http://127.0.0.1:5000/create_contact`
+> {
+  "contact_created": {
+    "contact_id": 1, 
+    "result": true
+  }
+}
+`curl -d "email=Michel@blablapp.com" -X POST http://127.0.0.1:5000/create_contact`
+> {
+  "contact_created": {
+    "contact_id": 2, 
+    "result": true
+  }
+}
 _____________________________________________________
 
 @app.route('/create_conversation', methods=['POST'])
