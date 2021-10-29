@@ -71,7 +71,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 ```
-... aussi, bien qu'inutlie (à supprimer), dans le répertoire produit :
+... aussi, bien qu'inutile (à supprimer), dans le répertoire produit :
 ```subl product/.gitignore```
 liste des fichiers à ignorer pour Git
 ```
