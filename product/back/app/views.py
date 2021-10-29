@@ -413,23 +413,23 @@ def create_contact():
         contact_id = query_db(""" SELECT id
                                 FROM user
                                 WHERE email = (?)"""
-                                , [contact_email], one=True)[0]
-        if contact_id:
-            print('liste contact_id:  ', contact_id)
-            not_existing_contact_id = query_db(""" SELECT count(*)
-                        FROM user_contact
-                        WHERE user_id = (?)
-                        AND contact_id = (?)"""
-                        , [session['user'], contact_id], one=True)[0]
-        if not_existing_contact_id ==0:
-            print('not_existing_contact_id:  ', not_existing_contact_id)
-            new_user_contact_id = execute_db("""
-                                INSERT INTO user_contact 
-                                (user_id, contact_id) VALUES
-                                (?, ?)""", [session['user'], contact_id])
-            print('user_id, new_user_contact_id', session['user'], new_user_contact_id)
-            result = dict(contact_created = dict(result = True, contact_id = contact_id))
-
+                                , [contact_email], one=True)
+        if not contact_id is None:
+            if contact_id[0] != session['user']:
+                print('contact_id:  ', contact_id[0])
+                not_existing_contact_id = query_db(""" SELECT count(*)
+                            FROM user_contact
+                            WHERE user_id = (?)
+                            AND contact_id = (?)"""
+                            , [session['user'], contact_id[0]], one=True)[0]
+                if not_existing_contact_id ==0:
+                    print('not_existing_contact_id:  ', not_existing_contact_id)
+                    new_user_contact_id = execute_db("""
+                                    INSERT INTO user_contact 
+                                    (user_id, contact_id) VALUES
+                                    (?, ?)""", [session['user'], contact_id[0]])
+                    print('user_id, new_user_contact_id', session['user'], new_user_contact_id)
+                    result = dict(contact_created = dict(result = True, contact_id = contact_id[0]))
     return jsonify(result)
 
 
