@@ -1,1 +1,4 @@
-node_modules/
+virt-env/
+back/database/
+back/__pycache__/
+front/node_modules/

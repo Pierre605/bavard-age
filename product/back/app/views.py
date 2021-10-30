@@ -163,6 +163,7 @@ def register():
                         , hashlib \
                         .sha256(password.encode()).hexdigest()))
                 session['user'] = new_user_id
+                session['username'] = username
                 print("session_user", session['user'])
                 gdpr_res = execute_db(
                     """INSERT INTO gdpr 
@@ -297,7 +298,9 @@ def create_conversation():
       
         result = dict(conversation_id = new_conversation_id)
 
-    return jsonify(result)
+        return jsonify(result)
+    else:
+        return ("Adresse email non reconnue")
 
 
 # Route de salle de conversation (conversation -> InConversation.jsx)
