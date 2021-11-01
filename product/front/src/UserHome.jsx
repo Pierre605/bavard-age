@@ -99,7 +99,7 @@ class UserHome extends React.Component {
                 <div>Contacts:</div>             
                   {this.state.contacts.map((member) => {
                     return (
-                      <ContactsDisplay id={member.id} username={member.username} email={member.email} />
+                      <ContactsDisplay id={member.contact_id} username={member.username} email={member.email} />
                     )
                   })}
                 <div id="create-contact-container">
