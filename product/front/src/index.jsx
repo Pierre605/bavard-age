@@ -1,12 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App'
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import CssBaseline from "@mui/material/CssBaseline";
+// provides our theme
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./styles/theme.js";
+import "./index.css";
+import App from "./App";
+// import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-  )
+  </ThemeProvider>,
+  document.getElementById("root")
+);

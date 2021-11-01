@@ -1,54 +1,55 @@
-import React from 'react'
-import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import { 
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+// import { AppBar, Typography, Toolbar } from "@mui/material";
 // Composants enfants
-import HomePage from './HomePage.jsx';
-import UserHome from './UserHome.jsx'
-import Logout from './Logout';
-import InConversation from './InConversation'
-import Chat from './Chat'
-import CreateConversation from './CreateConversation';
-import CreateContact from './CreateContact';
-
+// import NavBar from "./components/navBar/NavBar.js";
+import Header from "./components/header/Header";
+import HomePage from "./pages/homePage/HomePage";
+import UserHomePage from "./pages/userHomePage/UserHomePage";
+import ConversationDisplay from "./pages/conversationDisplay/ConversationDisplay";
+import CreateConversation from "./pages/createConversation/CreateConversation";
+import CreateContact from "./pages/createContact/CreateContact";
 
 // Composant de classe App, principal de l'App React BLAblaPp
 class App extends React.Component {
-
-  // Rendu React du composant avec un Router et un switch
+  // Rendu React du composant avec un Router
   render() {
-
     return (
-      <Router>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route path="/conversation-list" exact>
-          <UserHome />
-        </Route>
-        <Route path="/create-conversation" exact>
+      <>
+        {/* <AppBar position='static'>
+          <Toolbar>
+            <Typography variant='title'>
+              <a href='/'>
+                <img src='/logo2.png' width='100px' alt='logo-provisoire' />
+              </a>
+            </Typography>
+            <NavBar />
+          </Toolbar>
+        </AppBar> */}
+        <Header />
+        <Router>
+          <Route path='/' exact>
+            <HomePage />
+          </Route>
+          <Route path='/conversation-list' exact>
+            <UserHomePage />
+          </Route>
+          <Route path='/create-conversation' exact>
             <CreateConversation />
-        </Route>
-        <Route path="/create-contact" exact>
+          </Route>
+          <Route path='/create-contact' exact>
             <CreateContact />
-        </Route>        
-        <Route path="/conversation/:id" exact component={ InConversation }/> 
-      </Router>      
+          </Route>
+          <Route
+            path='/conversation/:id'
+            exact
+            component={ConversationDisplay}
+          />
+        </Router>
+      </>
     );
-  }              
+  }
 }
 
 export default App;

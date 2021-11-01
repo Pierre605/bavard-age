@@ -1,0 +1,19 @@
+.side-bar {
+  font-size: x-large;
+  width: 15em;
+  height: 100vh;
+  background-color: #259185;
+  color: white;
+}
+
+.members {
+  margin: 20px;
+}
+
+.flex-aside {
+  display: flex;
+}
+
+.background {
+  background-color: rgb(221, 217, 217);
+}
