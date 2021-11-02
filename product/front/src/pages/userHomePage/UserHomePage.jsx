@@ -102,11 +102,11 @@ class UserHomePage extends React.Component {
                 <a href='http://localhost:3000/create-contact'>
                   <img
                     id='create-contact'
-                    src='/convers-icon.png'
+                    src='/addcontact.png'
                     alt='Cliquer pour créer un contact'
                   />
                 </a>
-                <div id='create-contact-msg'>À REMPLIR ??</div>
+                <div id='create-contact-msg'>Ajouter un contact</div>
               </div>
             </section>
           </div>
@@ -125,7 +125,7 @@ class UserHomePage extends React.Component {
                   alt='Cliquer pour créer une conversation'
                 />
               </a>
-              <div id='create-mssg'>À REMPLIR ??</div>
+              <div id='create-mssg'>Créer conversation</div>
             </div>
           </section>
         </div>

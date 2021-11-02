@@ -102,7 +102,7 @@ class CreateConversation extends React.Component {
     return (
       <>
         <HeaderLogout />
-        <div id="flex-aside">
+        <div id="div-aside">
           <div className="side-bar">
             <section>
               <div>Contacts:</div>             

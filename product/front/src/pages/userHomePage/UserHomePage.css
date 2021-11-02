@@ -91,10 +91,13 @@
   width: 90px;
 }
 
+#create-contact-msg {
+  color: black;
+}
+
 #create-contact-container {
-  text-align: right;
-  margin-left: 3em;
+  text-align: left;
   position: fixed;
-  left: 3em;
+  left: 4em;
   bottom: 2em;
 }

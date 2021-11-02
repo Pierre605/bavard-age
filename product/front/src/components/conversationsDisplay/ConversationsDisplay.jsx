@@ -17,7 +17,7 @@ export default function ConversationsDisplay(props) {
             <ListItem disablePadding>
               <ListItemButton>
                 <Typography variant='h5' gutterBottom component='div'>
-                  {props.name} {props.id}
+                  {props.name}
                 </Typography>
               </ListItemButton>
             </ListItem>

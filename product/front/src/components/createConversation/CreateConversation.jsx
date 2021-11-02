@@ -1,7 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import Header from './Header';
-import './CreateConversation.css'
+// import './CreateConversation.css'
 import ContactsSelect from './ContactsSelect';
 
 class CreateConversation extends React.Component {
@@ -108,7 +108,7 @@ class CreateConversation extends React.Component {
       return (
       <> 
       <Header />
-      <div id="flex-aside">
+      <div id="div-aside">
             <div className="side-bar">
               <section>
                 <div>Contacts:</div>             

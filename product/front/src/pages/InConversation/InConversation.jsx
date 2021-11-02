@@ -1,10 +1,10 @@
 import React from "react";
 import MessagesDisplay from "../../components/messagesDisplay/MessagesDisplay";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
-import "./ConversationsDisplay.css";
+import "./InConversation.css";
 import ParticipantsDisplay from "../../components/participantsDisplay/ParticipantsDisplay";
 
-class ConversationsDisplay extends React.Component {
+class InConversation extends React.Component {
   constructor(props) {
     super(props);
     this.state = { messages: [], username: "", participants: [] };
@@ -70,4 +70,4 @@ class ConversationsDisplay extends React.Component {
   }
 }
 
-export default ConversationsDisplay;
+export default InConversation;

@@ -3,11 +3,9 @@ import "./ContactsDisplay.css";
 
 export default function ContactsDisplay(props) {
   return (
-    <ul className='members'>
-      {props.id}
-      <li style={{ listStyle: "none" }}>
-        {props.username} : {props.email}
-      </li>
-    </ul>
+  <div className="members">
+    <div className="username">{props.username}</div>
+    <div className="email">{props.email}</div>
+  </div>
   );
 }

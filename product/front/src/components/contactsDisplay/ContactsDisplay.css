@@ -10,9 +10,16 @@
   margin: 20px;
 }
 
+.email {
+  font-style: italic;
+  font-size: medium;
+  margin-top: -0.5em;
+}
+
 .flex-aside {
   display: flex;
 }
+
 
 .background {
   background-color: rgb(221, 217, 217);

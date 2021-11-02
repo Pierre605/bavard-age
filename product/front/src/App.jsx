@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/header/Header";
 import HomePage from "./pages/homePage/HomePage";
 import UserHomePage from "./pages/userHomePage/UserHomePage";
-import ConversationsDisplay from "./pages/conversationsDisplay/ConversationsDisplay";
+import InConversation from "./pages/InConversation/InConversation";
 import CreateConversation from "./pages/createConversation/CreateConversation";
 import CreateContact from "./pages/createContact/CreateContact";
 
@@ -27,7 +27,6 @@ class App extends React.Component {
             <NavBar />
           </Toolbar>
         </AppBar> */}
-        <Header />
         <Router>
           <Route path='/' exact>
             <HomePage />
@@ -44,7 +43,7 @@ class App extends React.Component {
           <Route
             path='/conversation/:id'
             exact
-            component={ConversationsDisplay}
+            component={InConversation}
           />
         </Router>
       </>
