@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./CreateConversation.css";
 import ContactsSelect from "../../components/contactsSelect/ContactsSelect";
+import NavBar from "../../components/navBar/NavBar.js";
+
 
 class CreateConversation extends React.Component {
   constructor(props) {
@@ -101,6 +103,7 @@ class CreateConversation extends React.Component {
   render() {
     return (
       <>
+        <NavBar />      
         <HeaderLogout />
         <div id="div-aside">
           <div className="side-bar">

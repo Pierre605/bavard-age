@@ -2,6 +2,8 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./CreateContact.css";
+import NavBar from "../../components/navBar/NavBar.js";
+
 
 class CreateContact extends React.Component {
   constructor(props) {
@@ -47,6 +49,7 @@ class CreateContact extends React.Component {
   render() {
     return (
       <>
+        <NavBar />      
         <HeaderLogout />
         <form onSubmit={this.createContact}>
           <div className='flex'>
