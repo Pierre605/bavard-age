@@ -27,7 +27,6 @@ class App extends React.Component {
             <NavBar />
           </Toolbar>
         </AppBar> */}
-        <Header />
         <Router>
           <Route path='/' exact>
             <HomePage />

@@ -3,6 +3,9 @@ import MessagesDisplay from "../../components/messagesDisplay/MessagesDisplay";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./ConversationsDisplay.css";
 import ParticipantsDisplay from "../../components/participantsDisplay/ParticipantsDisplay";
+import InstantChat from "../../components/instantChat/InstantChat";
+import NavBar from "../../components/navBar/NavBar.js";
+
 
 class ConversationsDisplay extends React.Component {
   constructor(props) {
@@ -41,6 +44,7 @@ class ConversationsDisplay extends React.Component {
   render() {
     return (
       <>
+        <NavBar />      
         <HeaderLogout />
         <div className='flex-aside'>
           <div className='side-bar'>
@@ -63,6 +67,7 @@ class ConversationsDisplay extends React.Component {
                 />
               );
             })}
+            <instantChat />
           </div>
         </div>
       </>

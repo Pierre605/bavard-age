@@ -3,6 +3,8 @@ import React from "react";
 import ConversationsDisplay from "../../components/conversationsDisplay/ConversationsDisplay";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import ContactsDisplay from "../../components/contactsDisplay/ContactsDisplay";
+import NavBar from "../../components/navBar/NavBar.js";
+
 
 class UserHomePage extends React.Component {
   constructor(props) {
@@ -83,6 +85,7 @@ class UserHomePage extends React.Component {
   render() {
     return (
       <>
+        <NavBar />
         <HeaderLogout />
         <div className='flex-aside'>
           <div className='side-bar'>
