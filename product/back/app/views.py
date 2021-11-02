@@ -610,6 +610,6 @@ def _jinja2_filter_datetime(date, fmt='%d/%m/%Y at %H:%M:%S'):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    # app.run(host='0.0.0.0', debug=True)
     socketio.run(app, debug=True)
     print("run views.py")
