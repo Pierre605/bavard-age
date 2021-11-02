@@ -193,7 +193,7 @@ def register():
 def chatroom_select(): 
     if session['user']:
         result_list = []
-        print("session_user:    ", session['user'])
+        print("conversation-list/session_user ", session['user'])
         # on vérifie que user fait bien partie de conversation
         conversations = query_db(""" 
             SELECT
