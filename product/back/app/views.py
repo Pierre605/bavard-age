@@ -311,7 +311,7 @@ def create_conversation():
 # si l'utilisateur n'a pas de conversations : renvoie une liste vide []
 # POST
 # envoi un message pour une chatroom donnée
-@app.route('/conversation/<int:conversation_id>', methods=['GET', 'POST'])
+@app.route('/conversation/<int:conversation_id>', methods=['GET', 'POST', 'PUT'])
 def conversation(conversation_id):
     try:
         if request.method == "GET":
@@ -332,7 +332,7 @@ def conversation(conversation_id):
                     , one=True)[0]
                 if user_ok != None:
                     res_messages = query_db("""
-                        SELECT username, content, sent_date 
+                        SELECT message.id, username, content, sent_date 
                         FROM message, user, conversation
                         WHERE user.id = message.user_id 
                         AND conversation.id = message.conversation_id 
@@ -390,6 +390,17 @@ def conversation(conversation_id):
                 result = dict(conversation_id = new_message_id)
 
             return jsonify(result)
+        
+        if request.method == "PUT":
+             postdata = request.form
+             print(postdata.get('id'))
+             if postdata.get('id'):
+                 message_id = postdata.get('id')
+                 cursor2 = execute_db("UPDATE message SET content = ? WHERE id = ?",["message supprimé", message_id])
+             return postdata
+                
+
+
     except IndexError:
         abort(404)
 
