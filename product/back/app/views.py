@@ -9,6 +9,36 @@ from flask_socketio import SocketIO, emit
 from io import BytesIO
 from werkzeug.utils import secure_filename
 
+from flask import g
+
+import sqlite3
+import hashlib
+from datetime import datetime
+import os
+
+
+# def get_db():
+#     db = getattr(g, '_database', None)
+#     if db is None:
+#         db = g._database = sqlite3.connect(app.config['DATABASE'])
+#         db.row_factory = sqlite3.Row
+#     return db
+
+
+# def query_db(query, args=(), one=False):
+#     cur = get_db().execute(query, args)
+#     rv = cur.fetchall()
+#     cur.close()
+#     return (rv[0] if rv else None) if one else rv
+
+
+# def execute_db(query, args=()):
+#     cur = get_db().cursor()
+#     cur.execute(query, args)
+#     cur.close()
+#     return cur.lastrowid
+
+
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -21,7 +51,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 from .models import query_db, execute_db
 
 # variable globale de contexte utilisateur
-session = {'user': '', 'room': '', 'username': ''}
+session = {'user': '', 'chatroom': ''}
 
 # fonctions
 def get_user_connected():
@@ -34,9 +64,9 @@ def get_user_name():
         return session['username']
 
 
-def get_user_room():
-    if session['room']:
-        return session['room']
+def get_user_chatroom():
+    if session['chatroom']:
+        return session['chatroom']
 
 
 # def str_to_bool(s):
@@ -447,28 +477,40 @@ def messageReceived(methods=['GET', 'POST']):
 @socketio.on('message sent', namespace='/chat')
 def message_sent(jsonresponse):
     result = dict(sent_message = False)
-    session['room']=1;
-    print('session-room', session['room'])
-    if session.get('user') and session.get('room'):
-        if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chat_room'] and jsonresponse['chat_room'] == session.get('room'):
-            id_user = dbquery(
-                """SELECT id_user 
-                FROM user, user_conversation 
-                WHERE user.id=(?) 
-                AND
-                user_conversation.id_conversation = (?);
-                """, [session['user'], jsonresponse['chat_room']], one=True)[0]
-        if id_user:
-            socketio.emit('my response'
-                          , jsonresponse
-                          , callback=messageReceived
-                          , room=session['room'])
+    print('jsonresponse', jsonresponse)
+    session['chatroom']=jsonresponse['chatroom'];
+    print('session-room', session['chatroom'])
+    if session.get('user') and session.get('chatroom'):
+        # if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chatroom'] and jsonresponse['chatroom'] == session.get('room'):
+        db = getattr(g, '_database', None)
+        if db is None:
+            db = g._database = sqlite3.connect(app.config['DATABASE'])
+            db.row_factory = sqlite3.Row
+        cur = db.cursor()
+        print("session['user'], session['chatroom']", session['user'], session['chatroom'])
+        # cur.execute(
+        #     """SELECT user.id 
+        #     FROM user, user_conversation 
+        #     WHERE user.id = user_conversation.user_id
+        #     user_conversation.user_id=(?) 
+        #     AND
+        #     user_conversation.conversation_id = (?);
+        #     """, [session['user'], session['chatroom']])
+        # rv = cur.fetchall()
+        # id_user = rv[0] if rv else None
+        # if id_user:
+        socketio.emit('my response'
+                      , jsonresponse
+                      , callback=messageReceived
+                      , chatroom=session['chatroom'])
 
-        message = execute_db(
+        cur.execute(
             """INSERT INTO message
             (user_id, conversation_id, content) 
             VALUES (?, ?, ?)
-            """, (id_user, jsonresponse['chat_room'], jsonresponse['message']))
+            """, (session['user'], session['chatroom'], jsonresponse['message']))
+        cur.close()
+        message = cur.lastrowid
         if message:    
             result = dict(sent_message=True)
             # renvoyer (json)

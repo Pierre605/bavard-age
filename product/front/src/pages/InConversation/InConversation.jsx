@@ -67,7 +67,10 @@ class InConversation extends React.Component {
                 />
               );
             })}
-            <instantChat />
+            {this.props.match.params.id}
+            <InstantChat
+              id={this.props.match.params.id}
+            />
           </div>
         </div>
       </>
