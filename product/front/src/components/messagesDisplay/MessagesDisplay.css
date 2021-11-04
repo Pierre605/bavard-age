@@ -38,8 +38,19 @@
     margin-top: 5px;
 }
 
+
+.checkbox {
+    display: none;
+    margin-right: 1em; 
+}
+
 .content {
     font-size: larger;
+}
+
+.content-erased {
+    font-size: medium;
+    color: grey;
 }
 
 .author {
@@ -70,4 +81,8 @@
 .sent-date {
     color: grey;
     font-size: smaller;
+}
+
+.aside {
+    display: flex;
 }

@@ -109,7 +109,7 @@ class UserHomePage extends React.Component {
                     alt='Cliquer pour créer un contact'
                   />
                 </a>
-                <div id='create-contact-msg'>Ajouter un contact</div>
+                <div id='create-contact-msg'></div>
               </div>
             </section>
           </div>
@@ -128,7 +128,7 @@ class UserHomePage extends React.Component {
                   alt='Cliquer pour créer une conversation'
                 />
               </a>
-              <div id='create-mssg'>Créer conversation</div>
+              <div id='create-mssg'></div>
             </div>
           </section>
         </div>

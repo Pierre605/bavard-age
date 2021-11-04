@@ -1,0 +1,8 @@
+.rm-button {
+    text-align: right;
+}
+
+#delete {
+    float: right;
+    display: none;
+}

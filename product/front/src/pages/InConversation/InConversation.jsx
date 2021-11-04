@@ -5,12 +5,13 @@ import "./InConversation.css";
 import ParticipantsDisplay from "../../components/participantsDisplay/ParticipantsDisplay";
 import InstantChat from "../../components/instantChat/InstantChat";
 import NavBar from "../../components/navBar/NavBar.js";
+import DeleteMessage from "../../components/messagesRemove/DeleteMessage";
 
 
 class InConversation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [], username: "", participants: [] };
+    this.state = { messages: [], username: "", participants: [], conv_id: "", };
     // this.handleRegister = this.handleRegister.bind(this)
   }
   componentDidMount() {
@@ -35,6 +36,7 @@ class InConversation extends React.Component {
             messages: messages[0],
             username: messages[1],
             participants: messages[2],
+            conv_id: this.props.match.params.id,
           });
         }
       });
@@ -46,6 +48,7 @@ class InConversation extends React.Component {
       <>
         <NavBar />      
         <HeaderLogout />
+        <DeleteMessage conversation={this.state.conv_id}/>
         <div className='flex-aside'>
           <div className='side-bar'>
             {this.state.participants.map((member) => {
@@ -59,11 +62,11 @@ class InConversation extends React.Component {
               return (
                 <MessagesDisplay
                   username={this.state.username}
-                  id={i}
+                  id={message[0]}
                   key={i}
-                  author={message[0]}
-                  content={message[1]}
-                  sent={message[2]}
+                  author={message[1]}
+                  content={message[2]}
+                  sent={message[3]}
                 />
               );
             })}
