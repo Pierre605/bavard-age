@@ -10,40 +10,19 @@ class InstantChat extends React.Component {
     super(props);
     // Etat du composant
     this.state = ({ 
-      chatroom : this.props.id,  // dico des infos de la conversation cliquée
-      messages: []  // liste des messages de la conversation cliquée
+      chatroom : this.props.id,  // conversation ouverte
+      messages: []  // liste des messages envoyés et reçus via Socket.IO
     })
     this.handleRegister = this.handleRegister.bind(this);
   }
 
-// fonction qui récupère les informations de la DB des messages de la conversation cliquée (qui matche avec l'id demandé)
-  getMessages() {
-    fetch("http://127.0.0.1:5000/conversation/" + this.props.id)
-      .then(response => response.json())
-      .then(
-        (result) => {
-          console.log('App/Chat/getMessages', result, result[1], result[0][1])
-          // Sauvegarde de l'état du composant avec le résultat de la réponse parsée de la DB
-          this.setState({
-            messages: result,
-            chatroom:  this.props.id
-          });
-          }, (error) => {
-            this.setState({
-              error
-            });
-          }
-        )
-  };
-
   // Le composant a été chargé
   componentDidMount() {
     console.log('App/Chat/getMessages/params-chatroom', this.props.id)
-    // this.getMessages(this.props.id)
+    // màj de l'état du composant : conversation -> chatroom
     this.setState({
             chatroom:  this.props.id
           });
-
   }
 
   // Le composant a été mis à jour
@@ -74,15 +53,15 @@ class InstantChat extends React.Component {
       ev.preventDefault();
       console.log('Chat-handleRegister')
     
-      const data = new FormData();
-      if (this.message.value) {
-        data.append('message', this.message.value);
-        console.log('message envoyé socket front', data.message);
+      // const data = new FormData();
+      // if (this.message.value) {
+      //   data.append('message', this.message.value);
+      //   console.log('message envoyé socket front', data.message);
       
-        }
-      console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value, data.message);
+      //   }
+      console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
       socket.emit( 'message sent', {
-        message : data.message,
+        message : this.message.value,
         chatroom : this.state.chatroom
       });
       // $( 'input.message' ).val( '' )
