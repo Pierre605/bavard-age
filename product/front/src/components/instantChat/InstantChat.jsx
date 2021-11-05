@@ -20,9 +20,33 @@ class InstantChat extends React.Component {
   componentDidMount() {
     console.log('App/Chat/getMessages/params-chatroom', this.props.id)
     // màj de l'état du composant : conversation -> chatroom
-    this.setState({
-            chatroom:  this.props.id
-          });
+      console.log('Chat-handleRegister')
+    
+      // const data = new FormData();
+      // if (this.message.value) {
+      //   data.append('message', this.message.value);
+      //   console.log('message envoyé socket front', data.message);
+      
+      //   }
+      console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
+      socket.emit( 'message sent', {
+        message : this.message.value,
+        chatroom : this.state.chatroom
+      });
+      // $( 'input.message' ).val( '' )
+    let newMessages = [...this.state.messages]
+      newMessages.push(this.message.value)
+      console.log('newMessages', newMessages)
+      this.setState({messages: newMessages}) 
+    
+    socket.on( 'my response', function( msg ) {
+      // envoyer un message à toutes les sessions actives
+      console.log( msg )
+      let newMessages = [...this.state.messages]
+      newMessages.push(this.message.value)
+      console.log('newMessages', newMessages)
+      this.setState({messages: newMessages}) 
+        })
   }
 
   // Le composant a été mis à jour
@@ -65,17 +89,25 @@ class InstantChat extends React.Component {
         chatroom : this.state.chatroom
       });
       // $( 'input.message' ).val( '' )
+    let newMessages = [...this.state.messages]
+      newMessages.push(this.message.value)
+      console.log('newMessages', newMessages)
+      this.setState({messages: newMessages}) 
     
-    
-    // socket.on( 'my response', function( msg ) {
-    //   // envoyer un message à toutes les sessions actives
-    //   console.log( msg )
-    //   // if( typeof msg.username !== 'undefined' ) {
-    //     // $( 'h3' ).remove()
-    //     // la ligne ci-dessous est à adapter selon l'affichage de vos messages
-    //     // $( 'div.message_holder' ).append( 
-    //     //   '<div class="message"><b style="color:#000">'+msg.username+'</b> '+msg.message+'</div>'
-    //     //   )}
+    socket.on( 'my response', function( msg ) {
+      // envoyer un message à toutes les sessions actives
+      console.log( msg )
+      let newMessages = [...this.state.messages]
+      newMessages.push(this.message.value)
+      console.log('newMessages', newMessages)
+      this.setState({messages: newMessages}) 
+        })
+      // if( typeof msg.username !== 'undefined' ) {
+        // $( 'h3' ).remove()
+        // la ligne ci-dessous est à adapter selon l'affichage de vos messages
+        // $( 'div.message_holder' ).append( 
+        //   '<div class="message"><b style="color:#000">'+msg.username+'</b> '+msg.message+'</div>'
+          // )}
 
     //   fetch('http://localhost:5000/chat', {
     //     method: 'POST',
@@ -104,13 +136,10 @@ class InstantChat extends React.Component {
       <> 
         <h1 id="simple-modal-title">CHATROOM</h1>
         <div className="messages"> 
-           {this.state.chatroom}
-           {this.state.user_id}
           <ul>  
             {this.state.messages.map(item => (
                 <li>
-                  Message: {item[1]}
-                  Posted by: {item[0]} on: {item[2]}
+                  Message: {item}
                 </li>    
                 ))}             
           </ul> 
