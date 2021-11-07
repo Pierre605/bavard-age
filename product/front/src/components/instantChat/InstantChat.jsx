@@ -28,16 +28,16 @@ class InstantChat extends React.Component {
       //   console.log('message envoyé socket front', data.message);
       
       //   }
-      console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
-      socket.emit( 'message sent', {
-        message : this.message.value,
-        chatroom : this.state.chatroom
-      });
+      // console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
+      // socket.emit( 'message sent', {
+      //   message : this.message.value,
+      //   chatroom : this.state.chatroom
+      // });
       // $( 'input.message' ).val( '' )
-    let newMessages = [...this.state.messages]
-      newMessages.push(this.message.value)
-      console.log('newMessages', newMessages)
-      this.setState({messages: newMessages}) 
+    // let newMessages = [...this.state.messages]
+    //   newMessages.push(this.message.value)
+    //   console.log('newMessages', newMessages)
+    //   this.setState({messages: newMessages}) 
     
     socket.on( 'my response', function( msg ) {
       // envoyer un message à toutes les sessions actives
