@@ -1,6 +1,7 @@
 import os
-import datetime
+from datetime import datetime
 import hashlib
+import sqlite3
 
 from flask import jsonify, Flask, render_template, request, redirect, url_for
 from flask import send_from_directory, session, abort, Markup, make_response
@@ -10,35 +11,6 @@ from io import BytesIO
 from werkzeug.utils import secure_filename
 
 from flask import g
-
-import sqlite3
-import hashlib
-from datetime import datetime
-import os
-
-
-# def get_db():
-#     db = getattr(g, '_database', None)
-#     if db is None:
-#         db = g._database = sqlite3.connect(app.config['DATABASE'])
-#         db.row_factory = sqlite3.Row
-#     return db
-
-
-# def query_db(query, args=(), one=False):
-#     cur = get_db().execute(query, args)
-#     rv = cur.fetchall()
-#     cur.close()
-#     return (rv[0] if rv else None) if one else rv
-
-
-# def execute_db(query, args=()):
-#     cur = get_db().cursor()
-#     cur.execute(query, args)
-#     cur.close()
-#     return cur.lastrowid
-
-
 
 app = Flask(__name__)
 cors = CORS(app)
