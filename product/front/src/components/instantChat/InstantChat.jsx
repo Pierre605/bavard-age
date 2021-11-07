@@ -1,5 +1,6 @@
 import React from 'react';
 import "./InstantChat.css";
+import "../messagesDisplay/MessagesDisplay.css"
 import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import io from 'socket.io-client/dist/socket.io';
@@ -11,43 +12,44 @@ class InstantChat extends React.Component {
     // Etat du composant
     this.state = ({ 
       chatroom : this.props.id,  // conversation ouverte
-      messages: []  // liste des messages envoyés et reçus via Socket.IO
+      messages: [],  // liste des messages envoyés et reçus via Socket.IO
+      username: this.props.username,
     })
     this.handleRegister = this.handleRegister.bind(this);
   }
 
   // Le composant a été chargé
-  componentDidMount() {
-    console.log('App/Chat/getMessages/params-chatroom', this.props.id)
-    // màj de l'état du composant : conversation -> chatroom
-      console.log('Chat-handleRegister')
+  // componentDidMount() {
+  //   console.log('App/Chat/getMessages/params-chatroom', this.props.id)
+  //   // màj de l'état du composant : conversation -> chatroom
+  //     console.log('Chat-handleRegister')
     
-      // const data = new FormData();
-      // if (this.message.value) {
-      //   data.append('message', this.message.value);
-      //   console.log('message envoyé socket front', data.message);
+  //     // const data = new FormData();
+  //     // if (this.message.value) {
+  //     //   data.append('message', this.message.value);
+  //     //   console.log('message envoyé socket front', data.message);
       
-      //   }
-      console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
-      socket.emit( 'message sent', {
-        message : this.message.value,
-        chatroom : this.state.chatroom
-      });
-      // $( 'input.message' ).val( '' )
-    let newMessages = [...this.state.messages]
-      newMessages.push(this.message.value)
-      console.log('newMessages', newMessages)
-      this.setState({messages: newMessages}) 
+  //     //   }
+  //     console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
+  //     socket.emit( 'message sent', {
+  //       message : this.message.value,
+  //       chatroom : this.state.chatroom
+  //     });
+  //     // $( 'input.message' ).val( '' )
+  //   let newMessages = [...this.state.messages]
+  //     newMessages.push(this.message.value)
+  //     console.log('newMessages', newMessages)
+  //     this.setState({messages: newMessages}) 
     
-    socket.on( 'my response', function( msg ) {
-      // envoyer un message à toutes les sessions actives
-      console.log( msg )
-      let newMessages = [...this.state.messages]
-      newMessages.push(this.message.value)
-      console.log('newMessages', newMessages)
-      this.setState({messages: newMessages}) 
-        })
-  }
+  //   socket.on( 'my response', function( msg ) {
+  //     // envoyer un message à toutes les sessions actives
+  //     console.log( msg )
+  //     let newMessages = [...this.state.messages]
+  //     newMessages.push(this.message.value)
+  //     console.log('newMessages', newMessages)
+  //     this.setState({messages: newMessages}) 
+  //       })
+  // }
 
   // Le composant a été mis à jour
   componentDidUpdate() {
@@ -135,22 +137,23 @@ class InstantChat extends React.Component {
       return (
       <> 
         <h1 id="simple-modal-title">CHATROOM</h1>
-        <div className="messages"> 
-          <ul>  
-            {this.state.messages.map(item => (
-                <li>
-                  Message: {item}
-                </li>    
-                ))}             
-          </ul> 
-        </div>       
+        {this.state.messages.map((message) => {
+          return (
+            <div className="contain-messages-user">
+                <div className="author-user">{this.state.username}</div>
+                <div className="aside">
+                    <div className="user-messages">
+                        <div className="content">{message}</div>
+                    </div>
+                </div>
+            </div>
+          )
+        })}     
         <form onSubmit={this.handleRegister}>
           <div className="box" id={this.props.id}>
             <label for="">Message: </label>
             <input ref={(ref) => { this.message = ref; }} type="text"name="" id="" cols="30" rows="10" required/>
-          </div>
-          <div className="button">
-          <button>Envoyer</button>
+            <button className="button">Envoyer</button>
           </div>
         </form>
       </>

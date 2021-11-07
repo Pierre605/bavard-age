@@ -2,10 +2,12 @@ import os
 import datetime
 import hashlib
 
-from flask import jsonify, Flask, render_template, request, redirect, url_for
+from flask import jsonify, Flask, render_template, request, redirect, url_for, current_app
 from flask import send_from_directory, session, abort, Markup, make_response
 from flask_cors import CORS
+from flask_login.utils import login_user, logout_user
 from flask_socketio import SocketIO, emit
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from io import BytesIO
 from werkzeug.utils import secure_filename
 
@@ -44,14 +46,37 @@ app = Flask(__name__)
 cors = CORS(app)
 CORS(app)
 app.config.from_object('config')
+app.config['CORS_HEDAERS'] = 'Content-Type'
+app.config['DEBUG'] = True
+
 
 socketio = SocketIO(app, cors_allowed_origins="*")
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
 
 # import du modèle
 from .models import query_db, execute_db
 
 # variable globale de contexte utilisateur
-session = {'user': '', 'chatroom': ''}
+
+with app.app_context():
+    session = {'user': '', 'chatroom': ''}
+    current_app.name
+
+class User(UserMixin):
+
+    def __init__(self, id):
+        self.id = id
+        
+    def __repr__(self):
+        return ({"id": self.id, "is_authenticated": "", "is_active": ""})
+
+@login_manager.user_loader
+def load_user(user_id):
+    print(User.get(user_id))
+    return User.get(user_id)
 
 # fonctions
 def get_user_connected():
@@ -126,8 +151,11 @@ def login():
             session['user'] = existing_user[0]
             session['username'] = username
             print("login/session_user", session['user'])
-            print('login/session_username', session['username'])             
-            return "{logged_in : true}"
+            print('login/session_username', session['username'])
+            # user = User(existing_user[0])
+            # print("User.id: ", user.id)
+            # login_user(user)     
+            return jsonify("{logged_in : true}")
         else:
             return "{logged_in : false}"
 
@@ -137,10 +165,13 @@ def login():
 # en cas de succès, renvoie un dictionnaire {disconnected : true}
 # en cas d'échec, renvoie un dictionnaire {disconnected : false}
 @app.route("/logout")
+@login_required
 def logout():
+    # logout_user()
     if session['user']:
-        for key in list(session.keys()):
-            session.pop(key)
+        # for key in list(session.keys()):
+        #     session.pop(key)
+        session.pop('user')
         return '{"disconnected" : true}'
     else:
         return '{"disconnected" : false}'
@@ -194,6 +225,7 @@ def register():
                         .sha256(password.encode()).hexdigest()))
                 session['user'] = new_user_id
                 session['username'] = username
+                # login_user(new_user_id)
                 print("session_user", session['user'])
                 gdpr_res = execute_db(
                     """INSERT INTO gdpr 
@@ -220,10 +252,10 @@ def register():
 # si l'utilisateur n'a pas de conversations :
 # renvoie une liste vide []
 @app.route("/conversation-list", methods=['GET'])
-def chatroom_select(): 
+def chatroom_select():
     if session['user']:
         result_list = []
-        print("conversation-list/session_user ", session['user'])
+        print("current_user ", current_user)
         # on vérifie que user fait bien partie de conversation
         conversations = query_db(""" 
             SELECT
@@ -261,6 +293,7 @@ def chatroom_select():
                     ON uc.contact_id=u.id
                     WHERE user_id = (?)"""
                     , [session['user']])
+        print("SUCESS !!")
         return jsonify({'conversations': [dict(row) for row in conversations]
             , 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts]})
     else:
@@ -484,6 +517,8 @@ def sessions():
 
 def messageReceived(methods=['GET', 'POST']):
     print('message was received!!!')
+
+
 
 @socketio.on('message sent', namespace='/chat')
 def message_sent(jsonresponse):

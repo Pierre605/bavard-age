@@ -1,9 +1,9 @@
 import "./UserHomePage.css";
+import "../../components/participantsDisplay/ParticipantsDisplay.css";
 import React from "react";
 import ConversationsDisplay from "../../components/conversationsDisplay/ConversationsDisplay";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import ContactsDisplay from "../../components/contactsDisplay/ContactsDisplay";
-import NavBar from "../../components/navBar/NavBar.js";
 
 
 class UserHomePage extends React.Component {
@@ -85,11 +85,11 @@ class UserHomePage extends React.Component {
   render() {
     return (
       <>
-        <NavBar />
+      <div id="myHeader">
         <HeaderLogout />
+      </div>
         <div className='flex-aside'>
           <div className='side-bar'>
-            <section>
               <div>Contacts :</div>
               {this.state.contacts.map((member, i) => {
                 return (
@@ -111,9 +111,8 @@ class UserHomePage extends React.Component {
                 </a>
                 <div id='create-contact-msg'></div>
               </div>
-            </section>
           </div>
-          <section>
+          <div className="conversation-list">
             <div>Conversations :</div>
             {this.state.conversations.map((conv, i) => {
               return (
@@ -130,7 +129,7 @@ class UserHomePage extends React.Component {
               </a>
               <div id='create-mssg'></div>
             </div>
-          </section>
+          </div>
         </div>
       </>
     );

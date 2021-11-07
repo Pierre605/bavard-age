@@ -1,9 +1,11 @@
 .side-bar {
   font-size: x-large;
-  width: 15em;
+  width: 28%;
   height: 100vh;
   background-color: #259185;
   color: white;
+  position: fixed;
+  top: 2.76em;
 }
 
 .members {
@@ -14,6 +16,17 @@
   display: flex;
 }
 
-.background {
+#background {
   background-color: rgb(221, 217, 217);
+  flex: 1;
+  margin-top: 4em;
+  margin-left: 28%;
 }
+
+#myHeader {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  top:0;
+}
+

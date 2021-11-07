@@ -2,6 +2,7 @@ import React from "react";
 import MessagesDisplay from "../../components/messagesDisplay/MessagesDisplay";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./InConversation.css";
+import "../../components/participantsDisplay/ParticipantsDisplay.css"
 import ParticipantsDisplay from "../../components/participantsDisplay/ParticipantsDisplay";
 import InstantChat from "../../components/instantChat/InstantChat";
 import NavBar from "../../components/navBar/NavBar.js";
@@ -42,22 +43,45 @@ class InConversation extends React.Component {
       });
   };
 
+  scrollBottom = (event) => {
+    window.scrollTo(0,document.getElementById("background").scrollHeight)
+  }
+ 
+  // myFunction = () => {
+  //   window.addEventListener("scroll", function(event) {
+  //     let header = document.getElementById("myHeader");
+  //     var sticky = header.offsetTop;
+  //     console.log(header.offsetTop)
+  //     if (window.pageYOffset > sticky) {
+  //       console.log("add sticky")
+  //       header.classList.add("sticky");
+  //     } else {
+  //       console.log("remove sticky")
+  //       header.classList.remove("sticky");
+  //     }
+  //   }
+  //   )}
+   
+
   // Rendu React du composant
   render() {
     return (
       <>
-        <NavBar />      
-        <HeaderLogout />
-        <DeleteMessage conversation={this.state.conv_id}/>
+        <div id="myHeader">
+          <HeaderLogout />
+          <button onClick={this.scrollBottom}>⬇️</button>
+          <DeleteMessage conversation={this.state.conv_id}/>
+        </div>
         <div className='flex-aside'>
           <div className='side-bar'>
+            <span>Participants:</span>
             {this.state.participants.map((member) => {
               return (
                 <ParticipantsDisplay name={member} user={this.state.username} />
               );
             })}
           </div>
-          <div className='background'>
+          <div id='background'>
             {this.state.messages.map((message, i) => {
               return (
                 <MessagesDisplay
@@ -70,9 +94,9 @@ class InConversation extends React.Component {
                 />
               );
             })}
-            {this.props.match.params.id}
             <InstantChat
               id={this.props.match.params.id}
+              username={this.state.username}
             />
           </div>
         </div>

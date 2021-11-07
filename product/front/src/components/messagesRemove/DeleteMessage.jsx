@@ -34,6 +34,7 @@ export default class DeleteMessage extends React.Component  {
 
         let del_button = document.getElementById("delete")
         del_button.style.display = "block"
+        document.getElementById('open').textContent = "Annuler"
         this.setState({expanded: true})
         }
 
@@ -49,6 +50,7 @@ export default class DeleteMessage extends React.Component  {
 
         let del_button = document.getElementById("delete")
         del_button.style.display = "none"
+        document.getElementById('open').textContent = "Supprimer un message"
         this.setState({expanded: false})
         }
     }
@@ -79,8 +81,8 @@ export default class DeleteMessage extends React.Component  {
 
     return (
         <div className="rm-button">
-            <button onClick={this.openSelect}>Supprimer</button>
-            <button onClick={this.handleDelete} id="delete">Envoyer</button>
+            <button onClick={this.handleDelete} id="delete">Supprimer</button>
+            <button id="open" onClick={this.openSelect}>Supprimer un message</button>
         </div>
     )
 }}

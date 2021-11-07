@@ -1,6 +1,7 @@
 import * as React from 'react';
 import '../../components/contactsDisplay/ContactsDisplay.css'
 import '../../components/contactsSelect/ContactsSelect.css'
+import "../../components/participantsDisplay/ParticipantsDisplay.css"
 
 
 
