@@ -16,6 +16,8 @@ app = Flask(__name__)
 cors = CORS(app)
 CORS(app)
 app.config.from_object('config')
+# host à localhost
+app.host = 'localhost'
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -457,6 +459,11 @@ def sessions():
 def messageReceived(methods=['GET', 'POST']):
     print('message was received!!!')
 
+
+# Socket IO
+# Quand un Client émet un événemet utilisant une réponse json,
+# contenant un message,
+# la fonction message_sent renvoie ce message à tous les clients
 @socketio.on('message sent', namespace='/chat')
 def message_sent(jsonresponse):
     result = dict(sent_message = False)
@@ -486,7 +493,7 @@ def message_sent(jsonresponse):
                       , jsonresponse
                       , callback=messageReceived
                       , chatroom=session['chatroom'])
-
+        # send(jsonresponse['message'], broadcast=True)
         cur.execute(
             """INSERT INTO message
             (user_id, conversation_id, content) 
