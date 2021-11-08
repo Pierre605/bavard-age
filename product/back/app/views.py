@@ -18,14 +18,10 @@ app = Flask(__name__)
 cors = CORS(app)
 CORS(app)
 app.config.from_object('config')
-<<<<<<< HEAD
-app.config['CORS_HEDAERS'] = 'Content-Type'
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['DEBUG'] = True
-
-=======
 # host à localhost
 app.host = 'localhost'
->>>>>>> 4b1105cb587afff5ca1ca28d53170cc8461c7719
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -493,14 +489,10 @@ def messageReceived(methods=['GET', 'POST']):
     print('message was received!!!')
 
 
-<<<<<<< HEAD
-
-=======
 # Socket IO
 # Quand un Client émet un événemet utilisant une réponse json,
 # contenant un message,
 # la fonction message_sent renvoie ce message à tous les clients
->>>>>>> 4b1105cb587afff5ca1ca28d53170cc8461c7719
 @socketio.on('message sent', namespace='/chat')
 def message_sent(jsonresponse):
     result = dict(sent_message = False)
