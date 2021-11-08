@@ -29,6 +29,7 @@ class InstantChat extends React.Component {
   //     //   data.append('message', this.message.value);
   //     //   console.log('message envoyé socket front', data.message);
       
+<<<<<<< HEAD
   //     //   }
   //     console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
   //     socket.emit( 'message sent', {
@@ -40,6 +41,19 @@ class InstantChat extends React.Component {
   //     newMessages.push(this.message.value)
   //     console.log('newMessages', newMessages)
   //     this.setState({messages: newMessages}) 
+=======
+      //   }
+      // console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
+      // socket.emit( 'message sent', {
+      //   message : this.message.value,
+      //   chatroom : this.state.chatroom
+      // });
+      // $( 'input.message' ).val( '' )
+        // let newMessages = [...this.state.messages]
+        //   newMessages.push(this.message.value)
+        //   console.log('newMessages', newMessages)
+        //   this.setState({messages: newMessages}) 
+>>>>>>> 4b1105cb587afff5ca1ca28d53170cc8461c7719
     
   //   socket.on( 'my response', function( msg ) {
   //     // envoyer un message à toutes les sessions actives
@@ -136,6 +150,7 @@ class InstantChat extends React.Component {
     
       return (
       <> 
+<<<<<<< HEAD
         <h1 id="simple-modal-title">CHATROOM</h1>
         {this.state.messages.map((message) => {
           return (
@@ -149,6 +164,18 @@ class InstantChat extends React.Component {
             </div>
           )
         })}     
+=======
+        <h1 id="simple-modal-title">CHATROOM: {{ session['chatroom'] }}</h1>
+        <div className="messages"> 
+          <ul>  
+            {this.state.messages.map(item => (
+                <li>
+                  Message: {item}
+                </li>    
+                ))}             
+          </ul> 
+        </div>       
+>>>>>>> 4b1105cb587afff5ca1ca28d53170cc8461c7719
         <form onSubmit={this.handleRegister}>
           <div className="box" id={this.props.id}>
             <label for="">Message: </label>

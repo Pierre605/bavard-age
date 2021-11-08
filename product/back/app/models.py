@@ -158,6 +158,6 @@ def init_db():
                     VALUES (?, ?, ?);""", (msg[i%2], i, j))
             n += 1   
 
-    execute_db("""INSERT INTO message (content, sent_date, user_id, conversation_id)
-                    VALUES (?, ?, ?, ?);""", ("hello world!", "2021-12-10 17:51:12" , "2", "2"))      
+    execute_db("""INSERT INTO message (content, user_id, conversation_id)
+                    VALUES (?, ?, ?);""", ("Hello, World!", "2", "2"))      
     

@@ -22,7 +22,7 @@ export default class DeleteMessage extends React.Component  {
 
         let my_messages2 = document.getElementsByClassName("checkbox")
         console.log(my_messages2)
-        if (expanded == false) {
+        if (expanded === false) {
             let L = []
         for (let i=0; i < my_messages2.length; i++) {
             L.push(my_messages2[i])
@@ -60,7 +60,7 @@ export default class DeleteMessage extends React.Component  {
         console.log(form)
         let data = new FormData()
         for (let i=0; i < form.length; i++) {
-            if (form[i].checked == true) {
+            if (form[i].checked === true) {
                 data.append('id', form[i].value)
             }
         }

@@ -6,7 +6,7 @@ import './MessagesDisplay.css'
 export default function MessagesDisplay(props) {
 
     if (props.username === props.author) {
-        if (props.content == 'message supprimé') {
+        if (props.content === 'message supprimé') {
             console.log("un message supprimé")
             return (
                 <div className="contain-messages-user">
@@ -34,7 +34,7 @@ export default function MessagesDisplay(props) {
     }}
   
     else {
-        if (props.content == 'message supprimé') {
+        if (props.content === 'message supprimé') {
             console.log("un message supprimé")
             return (
                 <div className="contain-messages">
