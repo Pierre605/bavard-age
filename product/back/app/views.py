@@ -225,7 +225,7 @@ def register():
 def chatroom_select():
     if session['user']:
         result_list = []
-        print("current_user ", current_user)
+        # print("current_user ", current_user)
         # on vérifie que user fait bien partie de conversation
         conversations = query_db(""" 
             SELECT
