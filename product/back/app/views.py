@@ -8,7 +8,7 @@ from flask import send_from_directory, session, abort, Markup, make_response
 from flask_cors import CORS
 # from flask_login.utils import login_user, logout_user
 from flask_socketio import SocketIO, emit
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+# from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from io import BytesIO
 from werkzeug.utils import secure_filename
 
@@ -21,7 +21,7 @@ app.config.from_object('config')
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['DEBUG'] = True
 # host à localhost
-app.host = 'localhost'
+# app.host = 'localhost'
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
@@ -37,18 +37,18 @@ from .models import query_db, execute_db
 session = {'user': '', 'chatroom': '', 'username': ''}
     
 
-class User(UserMixin):
+# class User(UserMixin):
 
-    def __init__(self, id):
-        self.id = id
+#     def __init__(self, id):
+#         self.id = id
         
-    def __repr__(self):
-        return ({"id": self.id, "is_authenticated": "", "is_active": ""})
+#     def __repr__(self):
+#         return ({"id": self.id, "is_authenticated": "", "is_active": ""})
 
-@login_manager.user_loader
-def load_user(user_id):
-    print(User.get(user_id))
-    return User.get(user_id)
+# @login_manager.user_loader
+# def load_user(user_id):
+#     print(User.get(user_id))
+#     return User.get(user_id)
 
 # fonctions
 def get_user_connected():
