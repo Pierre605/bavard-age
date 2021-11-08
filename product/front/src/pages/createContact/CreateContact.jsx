@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./CreateContact.css";
-import NavBar from "../../components/navBar/NavBar.js";
+// import NavBar from "../../components/navBar/NavBar.js";
 
 
 class CreateContact extends React.Component {

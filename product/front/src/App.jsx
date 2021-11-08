@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // import { AppBar, Typography, Toolbar } from "@mui/material";
 // Composants enfants
 // import NavBar from "./components/navBar/NavBar.js";
-import Header from "./components/header/Header";
+// import Header from "./components/header/Header";
 import HomePage from "./pages/homePage/HomePage";
 import UserHomePage from "./pages/userHomePage/UserHomePage";
 import InConversation from "./pages/InConversation/InConversation";
