@@ -6,7 +6,7 @@ import sqlite3
 from flask import jsonify, Flask, render_template, request, redirect, url_for, current_app
 from flask import send_from_directory, session, abort, Markup, make_response
 from flask_cors import CORS
-from flask_login.utils import login_user, logout_user
+# from flask_login.utils import login_user, logout_user
 from flask_socketio import SocketIO, emit
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from io import BytesIO
@@ -25,9 +25,9 @@ app.host = 'localhost'
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+# login_manager.login_view = "login"
 
 # import du modèle
 from .models import query_db, execute_db
