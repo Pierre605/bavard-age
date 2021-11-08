@@ -17,10 +17,10 @@ class HomePage extends React.Component {
   // Rendu React du composant
   render() {
     return (
-      <Container>
+      <div className='img_header'>
         <Login />
         <RegisterModal />
-      </Container>
+      </div>
     );
   }
 }
