@@ -12,7 +12,6 @@ export default function Header() {
             <img src='/logo2.png' width='5%' alt='logo-provisoire' />
           </a>
         </Typography>
-        <NavBar />
       </Toolbar>
     </AppBar>
   );

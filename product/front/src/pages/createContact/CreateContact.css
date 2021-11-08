@@ -18,3 +18,7 @@ button {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.create-contact-button {
+  float: left;
+}

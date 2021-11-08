@@ -22,3 +22,12 @@ button {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.side-bar-not-fixed {
+    font-size: x-large;
+    width: 28%;
+    height: 100vh;
+    background-color: #259185;
+    color: white;
+    top: 2.76em;
+}
