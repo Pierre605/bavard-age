@@ -5,7 +5,6 @@ import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import ContactsDisplay from "../../components/contactsDisplay/ContactsDisplay";
 import NavBar from "../../components/navBar/NavBar.js";
 
-
 class UserHomePage extends React.Component {
   constructor(props) {
     super(props);
