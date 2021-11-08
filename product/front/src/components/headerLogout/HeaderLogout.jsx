@@ -1,5 +1,6 @@
 // import "./HeaderLogout.css";
 import Logout from "../logout/Logout";
+import './HeaderLogout.css'
 
 export default function HeaderLogout() {
   return (

@@ -75,12 +75,17 @@ export default class DeleteMessage extends React.Component  {
         })
 
     }
+
+    scrollBottom = (event) => {
+        window.scrollTo(0,document.getElementById("background").scrollHeight)
+      }
     
     render() {
 
 
     return (
         <div className="rm-button">
+            <button onClick={this.scrollBottom}>⬇️</button>
             <button onClick={this.handleDelete} id="delete">Supprimer</button>
             <button id="open" onClick={this.openSelect}>Supprimer un message</button>
         </div>

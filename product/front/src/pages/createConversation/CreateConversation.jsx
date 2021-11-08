@@ -102,11 +102,10 @@ class CreateConversation extends React.Component {
 
   render() {
     return (
-      <>
-        <NavBar />      
+      <>    
         <HeaderLogout />
         <div id="div-aside">
-          <div className="side-bar">
+          <div className="side-bar-not-fixed">
             <section>
               <div>Contacts:</div>             
                 {this.state.contacts.map((member) => {

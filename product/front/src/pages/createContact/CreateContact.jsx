@@ -48,8 +48,7 @@ class CreateContact extends React.Component {
 
   render() {
     return (
-      <>
-        <NavBar />      
+      <>     
         <HeaderLogout />
         <form onSubmit={this.createContact}>
           <div className='flex'>
@@ -66,7 +65,7 @@ class CreateContact extends React.Component {
               />
             </div>
           </div>
-          <div>
+          <div className="create-contact-button">
             <button>Créer contact</button>
           </div>
         </form>

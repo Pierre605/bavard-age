@@ -43,9 +43,6 @@ class InConversation extends React.Component {
       });
   };
 
-  scrollBottom = (event) => {
-    window.scrollTo(0,document.getElementById("background").scrollHeight)
-  }
  
   // myFunction = () => {
   //   window.addEventListener("scroll", function(event) {
@@ -69,11 +66,10 @@ class InConversation extends React.Component {
       <>
         <div id="myHeader">
           <HeaderLogout />
-          <button onClick={this.scrollBottom}>⬇️</button>
           <DeleteMessage conversation={this.state.conv_id}/>
         </div>
         <div className='flex-aside'>
-          <div className='side-bar'>
+          <div className='side-bar-in-conv'>
             <span>Participants:</span>
             {this.state.participants.map((member) => {
               return (
