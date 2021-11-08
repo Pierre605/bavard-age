@@ -114,7 +114,7 @@ class CreateConversation extends React.Component {
                   )
                 })}
               <div id="create-contact-container">
-                <a href='http://localhost:3000/create-contact'><img id="create-contact" src="/convers-icon.png"/></a>
+                <a href='http://localhost:3000/create-contact'><img id="create-contact" src="/convers-icon.png" alt="icone de bouton avec une personne et un plus pour ajouter un contact"/></a>
                 <div id="create-contact-msg"></div>
               </div> 
             </section>                         

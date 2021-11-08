@@ -5,7 +5,7 @@ import "./InConversation.css";
 import "../../components/participantsDisplay/ParticipantsDisplay.css"
 import ParticipantsDisplay from "../../components/participantsDisplay/ParticipantsDisplay";
 import InstantChat from "../../components/instantChat/InstantChat";
-import NavBar from "../../components/navBar/NavBar.js";
+// import NavBar from "../../components/navBar/NavBar.js";
 import DeleteMessage from "../../components/messagesRemove/DeleteMessage";
 
 
