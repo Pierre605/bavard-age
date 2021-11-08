@@ -61,9 +61,8 @@ from .models import query_db, execute_db
 
 # variable globale de contexte utilisateur
 
-with app.app_context():
-    session = {'user': '', 'chatroom': ''}
-    current_app.name
+session = {'user': '', 'chatroom': '', 'username': ''}
+    
 
 class User(UserMixin):
 
@@ -165,13 +164,11 @@ def login():
 # en cas de succès, renvoie un dictionnaire {disconnected : true}
 # en cas d'échec, renvoie un dictionnaire {disconnected : false}
 @app.route("/logout")
-@login_required
 def logout():
     # logout_user()
     if session['user']:
-        # for key in list(session.keys()):
-        #     session.pop(key)
-        session.pop('user')
+        for key in list(session.keys()):
+            session.pop(key)
         return '{"disconnected" : true}'
     else:
         return '{"disconnected" : false}'
