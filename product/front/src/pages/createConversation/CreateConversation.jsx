@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./CreateConversation.css";
 import ContactsSelect from "../../components/contactsSelect/ContactsSelect";
-import NavBar from "../../components/navBar/NavBar.js";
+// import NavBar from "../../components/navBar/NavBar.js";
 
 
 class CreateConversation extends React.Component {
