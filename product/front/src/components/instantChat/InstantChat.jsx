@@ -37,7 +37,8 @@ class InstantChat extends React.Component {
     let newMessages = [...this.state.messages]
       newMessages.push(this.message.value)
       console.log('newMessages', newMessages)
-      this.setState({messages: newMessages}) 
+      this.setState({messages: newMessages})
+      this.setState({username: this.props.username})
     
     socket.on( 'my response', function( msg ) {
       // envoyer un message à toutes les sessions actives
