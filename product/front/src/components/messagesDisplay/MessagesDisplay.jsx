@@ -10,8 +10,10 @@ export default function MessagesDisplay(props) {
             console.log("un message supprimé")
             return (
                 <div className="contain-messages-user">
+                    <div className="author-user">Moi</div>
                     <div id={props.id} className="user-messages">
                         <div className="content-erased">🚫{props.content}</div>
+                        <div className="sent-date">{props.sent}</div>
                     </div>
                 </div>
             )
@@ -36,8 +38,10 @@ export default function MessagesDisplay(props) {
             console.log("un message supprimé")
             return (
                 <div className="contain-messages">
+                    <div className="author">{props.author}</div>
                     <div id={props.id} className="messages">
                         <div className="content-erased">🚫{props.content}</div>
+                        <div className="sent-date">{props.sent}</div>
                     </div>
                 </div>
             )
