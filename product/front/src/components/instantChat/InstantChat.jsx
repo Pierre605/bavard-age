@@ -34,10 +34,10 @@ class InstantChat extends React.Component {
       //   chatroom : this.state.chatroom
       // });
       // $( 'input.message' ).val( '' )
-    // let newMessages = [...this.state.messages]
-    //   newMessages.push(this.message.value)
-    //   console.log('newMessages', newMessages)
-    //   this.setState({messages: newMessages}) 
+        // let newMessages = [...this.state.messages]
+        //   newMessages.push(this.message.value)
+        //   console.log('newMessages', newMessages)
+        //   this.setState({messages: newMessages}) 
     
     socket.on( 'my response', function( msg ) {
       // envoyer un message à toutes les sessions actives
@@ -134,7 +134,7 @@ class InstantChat extends React.Component {
     
       return (
       <> 
-        <h1 id="simple-modal-title">CHATROOM</h1>
+        <h1 id="simple-modal-title">CHATROOM: {{ session['chatroom'] }}</h1>
         <div className="messages"> 
           <ul>  
             {this.state.messages.map(item => (
