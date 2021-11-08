@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+// reset mui
 import CssBaseline from "@mui/material/CssBaseline";
 // provides our theme
 import { ThemeProvider } from "@mui/material/styles";
