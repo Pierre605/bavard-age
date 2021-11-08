@@ -35,12 +35,12 @@ class CreateConversation extends React.Component {
   }
 
   addAdressSpace = () => {
-    let L = []
+    // let L = []
     let input = this.state.selected_contacts
-      let string = new String(input)
-      let formed_string = string.split(',').join(', ')
-      console.log(formed_string)
-      return formed_string
+    let string = String(input)
+    let formed_string = string.split(',').join(', ')
+    console.log(formed_string)
+    return formed_string
   }
 
   componentDidMount() {
@@ -51,10 +51,10 @@ class CreateConversation extends React.Component {
     ev.preventDefault();
 
     const data = new FormData();
-    if (this.emails.value && this.emailsmano.value == '') {
+    if (this.emails.value && this.emailsmano.value === '') {
       data.append('email', this.emails.value);
     }
-    else if (this.emailsmano.value && this.emails.value == '') {
+    else if (this.emailsmano.value && this.emails.value === '') {
       data.append('email', this.emailsmano.value);
     }
     data.append("name", this.name.value);
