@@ -8,7 +8,7 @@ export default function HeaderLogout() {
       <div className='inline-blocks'>
         <div>
           <a href='/conversation-list'>
-            <img src='/logo2.png' width='100px' alt='logo-provisoire' />
+            <img src='/logoblanc.png' width='100px' alt='logo-provisoire' />
           </a>
         </div>
         <div id='logout-button'>

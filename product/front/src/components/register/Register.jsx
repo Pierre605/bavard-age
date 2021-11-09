@@ -49,12 +49,12 @@ class Register extends React.Component {
     return (
       <>
         <div id='img'>
-          <img
+          <a href=""><img
             src='/red-cross.png'
             className='red-cross'
             onClick={this.props.close}
             alt='Pour fermer fenêtre'
-          />
+          /></a>
         </div>
         <h1 id='simple-modal-title'>INSCRIVEZ-VOUS</h1>
         <form onSubmit={this.handleRegister}>

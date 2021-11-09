@@ -12,7 +12,7 @@
 }
 
 #create-contact {
-  width: 90px;
+  width: 110px;
 }
 
 #create-contact-msg {
@@ -22,12 +22,12 @@
 #create-contact-container {
   text-align: left;
   position: fixed;
-  left: 4em;
+  left: 3em;
   bottom: 2em;
 }
 
 .conversation-list {
   width: 60%;
   margin-left: 28%;
-  margin-top: 4em;
+  margin-top: 6em;
 }

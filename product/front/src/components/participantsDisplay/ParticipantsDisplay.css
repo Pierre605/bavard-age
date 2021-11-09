@@ -2,10 +2,10 @@
   font-size: x-large;
   width: 28%;
   height: 100vh;
-  background-color: #259185;
+  background-color: #98AC37;
   color: white;
   position: fixed;
-  top: 2.76em;
+  top: 5em;
 }
 
 .members {
@@ -17,9 +17,9 @@
 }
 
 #background {
-  background-color: rgb(221, 217, 217);
+  background-color: #C4C4C4;
   flex: 1;
-  margin-top: 6em;
+  margin-top: 8em;
   margin-left: 28%;
 }
 
