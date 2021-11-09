@@ -538,7 +538,7 @@ def message_sent(jsonresponse):
         # id_user = rv[0] if rv else None
         # if id_user:
         socketio.emit('my response'
-                      , jsonresponse['message']
+                      , 'my response'
                       , callback=messageReceived)
                       # , chatroom=session['chatroom'])
         # send(jsonresponse['message'], broadcast=True)

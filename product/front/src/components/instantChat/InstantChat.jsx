@@ -22,7 +22,7 @@ class InstantChat extends React.Component {
   // Le composant a été mis à jour
   componentDidUpdate() {
     console.log( 'componentDidUpdate - my response')
-    socket.on( 'my response', function( msg ) {
+    socket.on( 'my response', ( msg ) => {
       // envoyer un message à toutes les sessions actives
       console.log( 'my response', msg )
       let newMessages = [...this.state.messages]
