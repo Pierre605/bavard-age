@@ -21,6 +21,15 @@ class InstantChat extends React.Component {
 
   // Le composant a été mis à jour
   componentDidUpdate() {
+    console.log( 'componentDidUpdate - my response')
+    socket.on( 'my response', function( msg ) {
+      // envoyer un message à toutes les sessions actives
+      console.log( 'my response', msg )
+      let newMessages = [...this.state.messages]
+      newMessages.push(this.message.value)
+      console.log('newMessages', newMessages)
+      this.setState({messages: newMessages}) 
+    })
   }
   
   handleRegister(ev) {
@@ -40,14 +49,7 @@ class InstantChat extends React.Component {
       this.setState({messages: newMessages})
       this.setState({username: this.props.username})
     
-    socket.on( 'my response', function( msg ) {
-      // envoyer un message à toutes les sessions actives
-      console.log( msg )
-      let newMessages = [...this.state.messages]
-      newMessages.push(this.message.value)
-      console.log('newMessages', newMessages)
-      this.setState({messages: newMessages}) 
-        })
+
       // if( typeof msg.username !== 'undefined' ) {
         // $( 'h3' ).remove()
         // la ligne ci-dessous est à adapter selon l'affichage de vos messages

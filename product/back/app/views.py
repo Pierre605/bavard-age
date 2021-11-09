@@ -34,7 +34,10 @@ from .models import query_db, execute_db
 
 # variable globale de contexte utilisateur
 
-session = {'user': '', 'chatroom': '', 'username': ''}
+user_session = {'user': '', 'chatroom': '', 'username': ''}
+print('user_session', user_session)
+session = {'sessions': [user_session, ]}
+print('session', session)
     
 
 # class User(UserMixin):
@@ -51,19 +54,35 @@ session = {'user': '', 'chatroom': '', 'username': ''}
 #     return User.get(user_id)
 
 # fonctions
-def get_user_connected():
-    if session['user']:
-        return session['user']
+def get_user_connected(id):
+    for user_session in session['sessions']:
+        print('user_session', user_session)
+        if user_session['user'] == id:
+            return user_session['user']
 
 
-def get_user_name():
-    if session['username']:
-        return session['username']
+def get_user_name(id):
+    for user_session in session['sessions']:
+        print('user_session', user_session)
+        if user_session['user'] == id:
+            if user_session['username']:
+                return user_session['username']    
 
 
-def get_user_chatroom():
-    if session['chatroom']:
-        return session['chatroom']
+def get_user_chatroom(id):
+    for user_session in session['sessions']:
+        print('user_session', user_session)
+        if user_session['user'] == id:
+            if user_session['chatroom']:
+                return user_session['chatroom']    
+
+
+def delete_user_session(id):
+    for user_session in session['sessions']:
+        print('user_session', user_session)
+        if user_session['user'] == id:
+            if user_session['chatroom']:
+                return user_session['chatroom']    
 
 
 # def str_to_bool(s):
@@ -519,9 +538,9 @@ def message_sent(jsonresponse):
         # id_user = rv[0] if rv else None
         # if id_user:
         socketio.emit('my response'
-                      , jsonresponse
-                      , callback=messageReceived
-                      , chatroom=session['chatroom'])
+                      , jsonresponse['message']
+                      , callback=messageReceived)
+                      # , chatroom=session['chatroom'])
         # send(jsonresponse['message'], broadcast=True)
         cur.execute(
             """INSERT INTO message
