@@ -88,9 +88,9 @@ class UserHomePage extends React.Component {
       <div id="myHeader">
         <HeaderLogout />
       </div>
-        <div className='flex-aside'>
-          <div className='side-bar'>
-              <div>Contacts :</div>
+        <div className='flexAsideList'>
+          <div className='sideBarList'>
+              <div className = "titreContact">CONTACTS :</div>
               {this.state.contacts.map((member, i) => {
                 return (
                   <ContactsDisplay
@@ -101,6 +101,7 @@ class UserHomePage extends React.Component {
                   />
                 );
               })}
+             
               <div id='create-contact-container'>
                 <a href='http://localhost:3000/create-contact'>
                   <img
@@ -113,10 +114,10 @@ class UserHomePage extends React.Component {
               </div>
           </div>
           <div className="conversation-list">
-            <div>Conversations :</div>
+            <div className = "titreConversation">CONVERSATIONS :</div>
             {this.state.conversations.map((conv, i) => {
               return (
-                <ConversationsDisplay key={i} id={conv.id} name={conv.name} />
+                <ConversationsDisplay key={i} id={conv.id} name={conv.name}/>
               );
             })}
             <div id='create-conv-container'>
