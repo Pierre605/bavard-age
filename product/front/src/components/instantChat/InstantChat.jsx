@@ -4,7 +4,8 @@ import "../messagesDisplay/MessagesDisplay.css"
 // import { Redirect } from 'react-router';
 // import { withRouter } from 'react-router-dom';
 import io from 'socket.io-client/dist/socket.io';
-const socket = io('http://localhost:5000/chat');
+const socket = io('http://localhost:5000');
+const userId = 1;
 
 class InstantChat extends React.Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class InstantChat extends React.Component {
   // Le composant a été mis à jour
   componentDidUpdate() {
     socket.on("connection",  async (socket) => {  
-        const userId = await fetchUserId(socket);
           socket.join(userId);
         });
 
