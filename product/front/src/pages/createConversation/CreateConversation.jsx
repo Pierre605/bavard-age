@@ -114,18 +114,17 @@ class CreateConversation extends React.Component {
                   )
                 })}
               <div id="create-contact-container">
-                <a href='http://localhost:3000/create-contact'><img id="create-contact" src="/convers-icon.png"/></a>
-                <div id="create-contact-msg"></div>
+                <a href='http://localhost:3000/create-contact'><img id="create-contact" src="/creer_un_contact.png"/></a>
               </div> 
             </section>                         
           </div> 
-          <form onSubmit={this.createConversation}>
-            <div className='flex'>
-              <div className='input-style'>          
+          <form className="form" onSubmit={this.createConversation}>
+            <div className='flex2'>
+              <div className='input-style-2'>          
                 <label for=''>Selectionnez parmi vos contacts un ou plusieurs participant(s) : </label>
                 <input
                   id='emails'
-                  className='input'
+                  className='input2'
                   type='text'
                   ref={(ref) => {
                     this.emails = ref;
@@ -133,24 +132,23 @@ class CreateConversation extends React.Component {
                   value={this.state.selected_contacts_string}
                 />
                 <label for=''>Ou bien saisissez une ou plusieurs adresses emails de participant(s) : </label>              
-                <input id="emails-mano" class="input" type="text" ref={(ref) => { this.emailsmano = ref; }} />              
+                <input id="emails-mano" className="input2" type="text" ref={(ref) => { this.emailsmano = ref; }} />              
                 <div id='emails-syntaxe-requirement'>
                   Si plusieurs adresses, n'oubliez pas de les séparer par une virgule et un espace (entre chaque email saisi) :
                   julien@blabla.fr, laura@blabla.fr, ...
                 </div>
               </div>
-              <div className='input-style'>
+              <div className='input-style-2'>
                 <label for=''>Nom de la conversation : </label>
                 <input
                   type='text'
+                  className="input2"
                   ref={(ref) => {
                     this.name = ref;
                   }}
                   required></input>
               </div>
-            </div>
-            <div>
-              <button>Créer une conversation</button>
+              <button className="button-form">Créer une conversation</button>
             </div>
           </form>
         </div>        

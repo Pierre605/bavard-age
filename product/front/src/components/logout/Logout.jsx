@@ -1,6 +1,7 @@
 import React from "react";
 // import './Logout.css';
 import { withRouter } from "react-router-dom";
+import './Logout.css'
 
 class Logout extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Logout extends React.Component {
   render() {
     return (
       <>
-        <button onClick={this.handleLogout}>Deconnexion</button>
+        <a href=""><img className="deconnection-pic" src="/se_deconnecter.png" onClick={this.handleLogout}/></a>
       </>
     );
   }

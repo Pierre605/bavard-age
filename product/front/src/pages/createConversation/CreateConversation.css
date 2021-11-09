@@ -1,16 +1,12 @@
 #div-aside {
     display: flex;
+    height: 80vh;
 }
 
-.flex {
-    margin-top: 10px;
-    margin-bottom: 15px;;
-}
-
-.input-style {
-    width: 300px;
+.input-style-2 {
+    width: 100%;
     margin-bottom: 10px;
-    margin-left: 10px;;
+    margin-left: 10px;
 }
 
 #emails-syntaxe-requirement {
@@ -26,8 +22,34 @@ button {
 .side-bar-not-fixed {
     font-size: x-large;
     width: 28%;
-    height: 100vh;
-    background-color: #259185;
+    height: 80vh;
+    background-color: #98AC37;
     color: white;
     top: 2.76em;
+}
+
+.button-form {
+    color: white;
+    background-color: #98AC37;
+    padding: 1em;
+}
+
+.form {
+    background-color: #C4C4C4;
+    text-align: -webkit-center;
+}
+
+.flex2 {
+    margin-top: 3em;
+    margin-bottom: 15px;
+    padding: 20px;
+    background-color: #4F3646;
+    color: white;
+    border-radius: 15px;
+    width: 70%;
+    text-align: center;
+}
+
+.input2 {
+    width: 90%;
 }
