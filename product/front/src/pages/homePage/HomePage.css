@@ -1,18 +1,22 @@
-/* .img_header{
-  displayMode: fill;
+.img_header {
+  display: fill;
   position: -webkit-sticky;
   position: sticky;
-  padding-top: 50px;
+  /* padding-top: 50px;
   padding-left: 20px;
-  padding: 0;
-  border: 0;
+  padding: 0; */
+  border: 2px solid red;
   outline: 0;
   vertical-align: baseline;
-  background: transparent;
-  object-fit: cover;
+  /* background: transparent; */
+  background-color: #61dafb;
+  /* object-fit: cover;
   object-position: 50% 50%;
-  top: 20px;
-} */
+  top: 20px; */
+  background-image: url(../../styles/assets/famille.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 .App {
   text-align: center;

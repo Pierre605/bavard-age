@@ -1,5 +1,5 @@
 import React from "react";
-import "./Login.css";
+// import "./Login.css";
 import {
   FormControl,
   InputLabel,
@@ -54,45 +54,50 @@ class Login extends React.Component {
           Page de connexion
         </Typography>
         <Box>
-          <Typography variant='h4' component='h2' color='primary'>
+          <Typography variant='h4' component='h2' color='primary.light'>
             Connectez-vous
           </Typography>
-          <div
+          {/* <div
             style={{
               display: "flex",
               justifyContent: "center",
               margin: 20,
               padding: 20,
-            }}>
-            <form onSubmit={this.handleLogin}>
-              <FormControl margin='normal' fullWidth required>
-                <InputLabel htmlFor='username'>Nom</InputLabel>
-                <Input
-                  id='username'
-                  placeholder='Votre nom'
-                  type='text'
-                  inputRef={(ref) => {
-                    this.username = ref;
-                  }}
-                  // required
-                />
-              </FormControl>
-              <FormControl margin='normal' fullWidth required>
-                <InputLabel htmlFor='userpwd'>Mot de passe</InputLabel>
-                <Input
-                  id='userpwd'
-                  type='text'
-                  inputRef={(ref) => {
-                    this.password = ref;
-                  }}
-                />
-              </FormControl>
+            }}> */}
+          <form onSubmit={this.handleLogin}>
+            <FormControl margin='normal' fullWidth required>
+              <InputLabel htmlFor='username'>Nom</InputLabel>
+              <Input
+                id='username'
+                placeholder='Votre nom'
+                type='text'
+                inputRef={(ref) => {
+                  this.username = ref;
+                }}
+                // required
+              />
+            </FormControl>
+            <FormControl margin='normal' fullWidth required>
+              <InputLabel htmlFor='userpwd'>Mot de passe</InputLabel>
+              <Input
+                id='userpwd'
+                type='text'
+                inputRef={(ref) => {
+                  this.password = ref;
+                }}
+              />
+            </FormControl>
 
-              <Button size='small' fullWidth variant='contained' type='submit'>
-                Envoyer
-              </Button>
-            </form>
-          </div>
+            <Button
+              size='small'
+              fullWidth
+              variant='contained'
+              color='secondary'
+              type='submit'>
+              Envoyer
+            </Button>
+          </form>
+          {/* </div> */}
         </Box>
       </>
     );
