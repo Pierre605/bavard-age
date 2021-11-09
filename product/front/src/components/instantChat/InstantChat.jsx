@@ -21,6 +21,11 @@ class InstantChat extends React.Component {
 
   // Le composant a été mis à jour
   componentDidUpdate() {
+    socket.on("connection",  async (socket) => {  
+        const userId = await fetchUserId(socket);
+          socket.join(userId);
+        });
+
     console.log( 'componentDidUpdate - my response')
     socket.on( 'my response', ( msg ) => {
       // envoyer un message à toutes les sessions actives
@@ -38,7 +43,7 @@ class InstantChat extends React.Component {
       console.log('Chat-handleRegister')
 
       console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value);
-      socket.emit( 'message sent', {
+      socket.to(userId).emit( 'message sent', {
         message : this.message.value,
         chatroom : this.state.chatroom
       });

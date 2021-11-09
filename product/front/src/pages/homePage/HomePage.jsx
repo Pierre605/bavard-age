@@ -28,10 +28,9 @@ class HomePage extends React.Component {
         maxWidth='sm'
         sx={{ width: "100vw" }}
         style={styles.paperContainer}>
-      <div className='img_header'>
         <Login />
         <RegisterModal />
-      </div>
+      </Container>
     );
   }
 }
