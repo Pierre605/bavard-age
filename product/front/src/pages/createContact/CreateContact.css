@@ -46,24 +46,26 @@
 }
 
 /* Objets du formulaire */
-.labelEmail{
+/* .labelEmail{
   color: white;
   font-size: 24px;
-}
 
-.separateur {
-  background-color: #98ac39;
-  height:3%;
-}
+} */
+
 
 .input{
-  /* padding: 5%; */
+
   height: 50px;
   width: 90%;
   background-color: #4F3646;
   border : none;
   color : whitesmoke;
   font-size: 24px;
+  border-bottom-style: solid;
+  border-bottom-width: 0.4rem;
+  border-color: white;
+  border-width: 100%;
+  margin-bottom: 7%;
 }
 
 .boutonCréationContact{
