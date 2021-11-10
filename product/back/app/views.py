@@ -54,35 +54,51 @@ print('session', session)
 #     return User.get(user_id)
 
 # fonctions
-def get_user_connected(id):
-    for user_session in session['sessions']:
-        print('user_session', user_session)
-        if user_session['user'] == id:
-            return user_session['user']
+# <<<<<<< HEAD
+# def get_user_connected(id):
+#     for user_session in session['sessions']:
+#         print('user_session', user_session)
+#         if user_session['user'] == id:
+#             return user_session['user']
 
 
-def get_user_name(id):
-    for user_session in session['sessions']:
-        print('user_session', user_session)
-        if user_session['user'] == id:
-            if user_session['username']:
-                return user_session['username']    
+# def get_user_name(id):
+#     for user_session in session['sessions']:
+#         print('user_session', user_session)
+#         if user_session['user'] == id:
+#             if user_session['username']:
+#                 return user_session['username']    
 
 
-def get_user_chatroom(id):
-    for user_session in session['sessions']:
-        print('user_session', user_session)
-        if user_session['user'] == id:
-            if user_session['chatroom']:
-                return user_session['chatroom']    
+# def get_user_chatroom(id):
+#     for user_session in session['sessions']:
+#         print('user_session', user_session)
+#         if user_session['user'] == id:
+#             if user_session['chatroom']:
+#                 return user_session['chatroom']    
 
 
-def delete_user_session(id):
-    for user_session in session['sessions']:
-        print('user_session', user_session)
-        if user_session['user'] == id:
-            if user_session['chatroom']:
-                return user_session['chatroom']    
+# def delete_user_session(id):
+#     for user_session in session['sessions']:
+#         print('user_session', user_session)
+#         if user_session['user'] == id:
+#             if user_session['chatroom']:
+#                 return user_session['chatroom']    
+# =======
+# def get_user_connected():
+#     if session['user']:
+#         return session['user']
+
+
+# def get_user_name():
+#     if session['username']:
+#         return session['username']
+
+
+# def get_user_chatroom():
+#     if session['chatroom']:
+#         return session['chatroom']
+# >>>>>>> branche-de-pierre
 
 
 # def str_to_bool(s):
@@ -242,7 +258,8 @@ def register():
 # renvoie une liste vide []
 @app.route("/conversation-list", methods=['GET'])
 def chatroom_select():
-    if session['user']:
+    if session.get('user'):
+        user = session.get('user')
         result_list = []
         # print("current_user ", current_user)
         # on vérifie que user fait bien partie de conversation
@@ -274,19 +291,22 @@ def chatroom_select():
             AND user_id = (?))
             GROUP BY
             conversation.name"""
-            , [session['user']])
+            , [user])
+
+        print('conversations: ', conversations)
         contacts = query_db(""" 
                     SELECT u.id, u.username, u.email
                     FROM user_contact uc
                     INNER JOIN user as u
                     ON uc.contact_id=u.id
                     WHERE user_id = (?)"""
-                    , [session['user']])
+                    , [user])
         print("SUCESS !!")
-        return jsonify({'conversations': [dict(row) for row in conversations]
-            , 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts]})
-    else:
-        return ("no user session")
+        if conversations:
+            return jsonify({'conversations': [dict(row) for row in conversations]
+                , 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts]})
+        else:
+            return ([])
 
 
 # Route de création de conversation
@@ -411,7 +431,7 @@ def conversation(conversation_id):
 
                     session['room'] = conversation_id
                     print(list_convers_messages, str(session['username']))
-                    return jsonify(list_convers_messages, str(session['username']), liste_participants)
+                    return jsonify(list_convers_messages, str(session['username']), liste_participants, str(session['user']))
                 else:
                     print("user not in this conversation")
                     return jsonify("user not in this conversation")
@@ -516,16 +536,16 @@ def messageReceived(methods=['GET', 'POST']):
 def message_sent(jsonresponse):
     result = dict(sent_message = False)
     print('jsonresponse', jsonresponse)
-    session['chatroom']=jsonresponse['chatroom'];
-    print('session-room', session['chatroom'])
-    if session.get('user') and session.get('chatroom'):
+    # session['chatroom']=jsonresponse['chatroom'];
+    # print('session-room', session['chatroom'])
+    if jsonresponse['user'] and jsonresponse['chatroom']:
         # if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chatroom'] and jsonresponse['chatroom'] == session.get('room'):
         db = getattr(g, '_database', None)
         if db is None:
             db = g._database = sqlite3.connect(app.config['DATABASE'])
             db.row_factory = sqlite3.Row
         cur = db.cursor()
-        print("session['user'], session['chatroom']", session['user'], session['chatroom'])
+        # print("session['user'], session['chatroom']", session['user'], session['chatroom'])
         # cur.execute(
         #     """SELECT user.id 
         #     FROM user, user_conversation 
@@ -537,16 +557,24 @@ def message_sent(jsonresponse):
         # rv = cur.fetchall()
         # id_user = rv[0] if rv else None
         # if id_user:
+# <<<<<<< HEAD
         socketio.emit('my response'
                       , 'my response'
                       , callback=messageReceived)
                       # , chatroom=session['chatroom'])
+# =======
+        # emit('my response'
+        #               , jsonresponse
+        #               , callback=messageReceived
+        #               , chatroom=jsonresponse['chatroom']
+        #               , broadcast=True)
+# >>>>>>> branche-de-pierre
         # send(jsonresponse['message'], broadcast=True)
         cur.execute(
             """INSERT INTO message
             (user_id, conversation_id, content) 
             VALUES (?, ?, ?)
-            """, (session['user'], session['chatroom'], jsonresponse['message']))
+            """, (jsonresponse['user'], jsonresponse['chatroom'], jsonresponse['message']))
         cur.close()
         message = cur.lastrowid
         if message:    
