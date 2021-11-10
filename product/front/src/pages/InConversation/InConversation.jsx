@@ -12,7 +12,7 @@ import DeleteMessage from "../../components/messagesRemove/DeleteMessage";
 class InConversation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [], username: "", participants: [], conv_id: "", };
+    this.state = { messages: [], username: [], user_id: [], participants: [], conv_id: [], };
     // this.handleRegister = this.handleRegister.bind(this)
   }
   componentDidMount() {
@@ -37,8 +37,10 @@ class InConversation extends React.Component {
             messages: messages[0],
             username: messages[1],
             participants: messages[2],
+            user_id: messages[3],
             conv_id: this.props.match.params.id,
           });
+          console.log("user_id: ", this.state.user_id)
         }
       });
   };
@@ -66,7 +68,9 @@ class InConversation extends React.Component {
       <>
         <div id="myHeader">
           <HeaderLogout />
-          <DeleteMessage conversation={this.state.conv_id}/>
+          <DeleteMessage 
+          conversation={this.state.conv_id} 
+          refresh={this.getConversation}/>
         </div>
         <div className='flex-aside'>
           <div className='side-bar-in-conv'>
@@ -93,6 +97,8 @@ class InConversation extends React.Component {
             <InstantChat
               id={this.props.match.params.id}
               username={this.state.username}
+              user={this.state.user_id}
+              refresh={this.getConversation}
             />
           </div>
         </div>

@@ -73,6 +73,9 @@ export default class DeleteMessage extends React.Component  {
         .then((response) => {
           return response.json();
         })
+        .then(() => {
+            this.props.refresh()
+        })
 
     }
 
