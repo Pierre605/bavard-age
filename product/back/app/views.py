@@ -116,6 +116,68 @@ def allowed_file(filename):
  and filename.rsplit('.', 1)[1].lower() \
  in app.config['ALLOWED_EXTENSIONS']
 
+@socketio.on('message sent')
+def handle_my_custom_event(json, methods=['GET', 'POST']):
+    print('received my event: ' + str(json))
+    socketio.emit('my response du back', json, callback=messageReceived)
+
+# Socket IO
+# Quand un Client émet un événemet utilisant une réponse json,
+# contenant un message,
+# la fonction message_sent renvoie ce message à tous les clients
+# @socketio.on('message sent', namespace='/chat')
+# def message_sent(json, methods=['GET', 'POST']):
+#     print('received my event: ' + str(json))
+#     socketio.emit('my response', json, callback=messageReceived)
+#     result = dict(sent_message = False)
+#     print('jsonresponse', jsonresponse)
+#     # session['chatroom']=jsonresponse['chatroom'];
+#     # print('session-room', session['chatroom'])
+#     if jsonresponse['user'] and jsonresponse['chatroom']:
+#         # if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chatroom'] and jsonresponse['chatroom'] == session.get('room'):
+#         db = getattr(g, '_database', None)
+#         if db is None:
+#             db = g._database = sqlite3.connect(app.config['DATABASE'])
+#             db.row_factory = sqlite3.Row
+#         cur = db.cursor()
+#         # print("session['user'], session['chatroom']", session['user'], session['chatroom'])
+#         # cur.execute(
+#         #     """SELECT user.id 
+#         #     FROM user, user_conversation 
+#         #     WHERE user.id = user_conversation.user_id
+#         #     user_conversation.user_id=(?) 
+#         #     AND
+#         #     user_conversation.conversation_id = (?);
+#         #     """, [session['user'], session['chatroom']])
+#         # rv = cur.fetchall()
+#         # id_user = rv[0] if rv else None
+#         # if id_user:
+# # <<<<<<< HEAD
+#         socketio.emit('my response'
+#                       , 'my response'
+#                       , callback=messageReceived)
+#                       # , chatroom=session['chatroom'])
+# # =======
+#         # emit('my response'
+#         #               , jsonresponse
+#         #               , callback=messageReceived
+#         #               , chatroom=jsonresponse['chatroom']
+#         #               , broadcast=True)
+# # >>>>>>> branche-de-pierre
+#         # send(jsonresponse['message'], broadcast=True)
+#         cur.execute(
+#             """INSERT INTO message
+#             (user_id, conversation_id, content) 
+#             VALUES (?, ?, ?)
+#             """, (jsonresponse['user'], jsonresponse['chatroom'], jsonresponse['message']))
+#         cur.close()
+#         message = cur.lastrowid
+#         if message:    
+#             result = dict(sent_message=True)
+#             # renvoyer (json)
+#     return jsonify(result)
+
+
 # Routes Flask de l'app views 
 # 
 #   /    -> HomePage.jsx
@@ -137,9 +199,25 @@ def allowed_file(filename):
 
 
 # Route principale (homepage -> HomePage.jsx)
-@app.route("/")
-def hello():
-    return ("hello world!")
+# @app.route("/")
+# def hello():
+#     return ("hello world!")
+
+# @app.route("/sessions/<int:user_id>", methods=['GET'])
+@app.route("/conversation/17", methods=['GET', 'POST'])
+def sessions():
+    print('routesessionhtml')
+    # username = query_db(""" SELECT username
+    #                         FROM user
+    #                         WHERE id = 1"""
+    #                         , one=True)[0]
+    #                         # , [user_id], one=True)[0]
+    # print('username', username)
+    return render_template('session.html')  # , username = username)
+
+
+def messageReceived(methods=['GET', 'POST']):
+    print('message was received!!!')
 
 
 # Route de connexion (login -> Login.jsx)
@@ -516,70 +594,6 @@ def create_contact():
                                     (?, ?)""", [session['user'], contact_id[0]])
                     print('user_id, new_user_contact_id', session['user'], new_user_contact_id)
                     result = dict(contact_created = dict(result = True, contact_id = contact_id[0]))
-    return jsonify(result)
-
-
-
-def sessions():
-    print('routesessionhtml')
-    return render_template('session.html')
-
-def messageReceived(methods=['GET', 'POST']):
-    print('message was received!!!')
-
-
-# Socket IO
-# Quand un Client émet un événemet utilisant une réponse json,
-# contenant un message,
-# la fonction message_sent renvoie ce message à tous les clients
-@socketio.on('message sent', namespace='/chat')
-def message_sent(jsonresponse):
-    result = dict(sent_message = False)
-    print('jsonresponse', jsonresponse)
-    # session['chatroom']=jsonresponse['chatroom'];
-    # print('session-room', session['chatroom'])
-    if jsonresponse['user'] and jsonresponse['chatroom']:
-        # if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chatroom'] and jsonresponse['chatroom'] == session.get('room'):
-        db = getattr(g, '_database', None)
-        if db is None:
-            db = g._database = sqlite3.connect(app.config['DATABASE'])
-            db.row_factory = sqlite3.Row
-        cur = db.cursor()
-        # print("session['user'], session['chatroom']", session['user'], session['chatroom'])
-        # cur.execute(
-        #     """SELECT user.id 
-        #     FROM user, user_conversation 
-        #     WHERE user.id = user_conversation.user_id
-        #     user_conversation.user_id=(?) 
-        #     AND
-        #     user_conversation.conversation_id = (?);
-        #     """, [session['user'], session['chatroom']])
-        # rv = cur.fetchall()
-        # id_user = rv[0] if rv else None
-        # if id_user:
-# <<<<<<< HEAD
-        socketio.emit('my response'
-                      , 'my response'
-                      , callback=messageReceived)
-                      # , chatroom=session['chatroom'])
-# =======
-        # emit('my response'
-        #               , jsonresponse
-        #               , callback=messageReceived
-        #               , chatroom=jsonresponse['chatroom']
-        #               , broadcast=True)
-# >>>>>>> branche-de-pierre
-        # send(jsonresponse['message'], broadcast=True)
-        cur.execute(
-            """INSERT INTO message
-            (user_id, conversation_id, content) 
-            VALUES (?, ?, ?)
-            """, (jsonresponse['user'], jsonresponse['chatroom'], jsonresponse['message']))
-        cur.close()
-        message = cur.lastrowid
-        if message:    
-            result = dict(sent_message=True)
-            # renvoyer (json)
     return jsonify(result)
 
 
