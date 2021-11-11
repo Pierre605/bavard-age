@@ -27,13 +27,13 @@ class InstantChat extends React.Component {
                    chatroom: props.id})
     }
 
-    componentDidUpdate(prevProps, prevState) {
-      if (prevState.messages !== this.state.messages) {
-        console.log("refresh !!")
-        this.props.refresh()
+  //   componentDidUpdate(prevProps, prevState) {
+  //     if (prevState.messages !== this.state.messages) {
+  //       console.log("refresh !!")
+  //       this.props.refresh()
         
-    }
-  }
+  //   }
+  // }
   
   handleRegister(ev) {
 
@@ -53,6 +53,7 @@ class InstantChat extends React.Component {
       newMessages.push(this.message.value)
       console.log('newMessages', newMessages)
       this.setState({messages: newMessages})
+      this.props.refresh()
     
     socket.on( 'my response', function( msg ) {
       // envoyer un message à toutes les sessions actives
