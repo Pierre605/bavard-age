@@ -32,7 +32,7 @@
               let message = $( 'input.message' ).val()      
               let username = $( 'input.username' ).val()
               if (message != ''){
-                console.log('message', message)
+                console.log("message != ''", message)
                 console.log('username', username) 
                   socket.emit( 'message sent', {
                       username : username,

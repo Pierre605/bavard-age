@@ -36,6 +36,9 @@
   width: 90px;
 }
 
+#create-conv {
+  width: 90px;
+}
 /* Partie pour les conversations */
 
 .titreConversation{
@@ -52,21 +55,12 @@
   
 }
 
-/*<<<<<<< HEAD avant merge Aude811Soir
-#create-contact-container {
-  text-align: left;
-  position: fixed;
-  left: 3em;
-  bottom: 2em;
-=======*/
 .conversation-list {
   width: 70%;
   background-color: #a0929b;
   padding-bottom: 18.4%;
     /* font-size:20px; */
 }
-
-
 
 
 /* Partie Contact / Side-bar */
@@ -100,56 +94,51 @@
 /* Tablette en mode portrait */
 
 @media all and (min-width : 480px) and (max-width : 1000px) and (orientation: landscape) {
-/* Conteneur de la page */
-.flexAsideList{
-  display: flex; 
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%; 
-  height: 100%;
-  margin-top: 10%;
- 
+  /* Conteneur de la page */
+  .flexAsideList{
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%; 
+    height: 100%;
+    margin-top: 10%;
+   
+  }
+
+  /* Partie Contact / Side-bar */
+
+  .titreContact{
+    padding-left: 15%;
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    padding-top:4%;
+    padding-bottom: 1%;
+    font-size: 14px;
+
+  }
+  .sideBarList{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; */
+    width: 45%;
+    background-color: #98ac39;
+    padding-bottom: 18%;
+    color: whitesmoke;
+  }
+
+  .members{
+    margin: none;
+    font-size: 10px;
+  }
 }
-
-/* Partie Contact / Side-bar */
-
-.titreContact{
-  padding-left: 15%;
-  border-bottom-style: solid;
-  border-color: white;
-  border-width: 100%;
-  padding-top:4%;
-  padding-bottom: 1%;
-  font-size: 14px;
-
-}
-.sideBarList{
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center; */
-  width: 45%;
-  background-color: #98ac39;
-  padding-bottom: 18%;
-  color: whitesmoke;
-}
-
-.members{
-  margin: none;
-  font-size: 10px;
-}
-
 
 
 /* Partie pour les conversations */
 .conversation-list {
-/*<<<<<<< HEAD avant merge Aude811Soir
-  width: 60%;
-  margin-left: 28%;
-  margin-top: 6em;
-=======*/
   width: 55%;
   background-color: #a0929b;
   padding-bottom: 18%;
@@ -165,71 +154,70 @@
   padding-top:5%;
   font-size: 14px;
 }
-}
   
   /* Tablette en mode paysage */
   
-  @media all and (min-width : 480px) and (max-width : 1000px) and (orientation : portrait) {
-    /* Conteneur de la page */
-    .flexAsideList{
-      display: flex; 
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      align-items: flex-start;
-      width: 100%; 
-      height: 100%;
-      margin-top: 10%;
-     
-    }
-    
-    /* Partie Contact / Side-bar */
-    
-    .titreContact{
-      padding-left: 15%;
-      border-bottom-style: solid;
-      border-color: white;
-      border-width: 100%;
-      padding-top:4%;
-      padding-bottom: 1%;
-      font-size: 14px;
-    
-    }
-    .sideBarList{
-      /* display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center; */
-      width: 45%;
-      background-color: #98ac39;
-      padding-bottom: 18%;
-      color: whitesmoke;
-    }
-    
-    .members{
-      margin: none;
-      font-size: 10px;
-    }
-    
-    
-    
-    /* Partie pour les conversations */
-    .conversation-list {
-      width: 55%;
-      background-color: #a0929b;
-      padding-bottom: 18%;
-      font-size: 14px;
-    }
-    
-    .titreConversation{
-      color: black;
-      border-bottom-style: solid;
-      border-color: white;
-      border-width: 100%;
-      padding-bottom: 1%;
-      padding-top:5%;
-      font-size: 14px;
-    }
+@media all and (min-width : 480px) and (max-width : 1000px) and (orientation : portrait) {
+  /* Conteneur de la page */
+  .flexAsideList{
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%; 
+    height: 100%;
+    margin-top: 10%;
+   
   }
+  
+  /* Partie Contact / Side-bar */
+  
+  .titreContact{
+    padding-left: 15%;
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    padding-top:4%;
+    padding-bottom: 1%;
+    font-size: 14px;
+  
+  }
+  .sideBarList{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; */
+    width: 45%;
+    background-color: #98ac39;
+    padding-bottom: 18%;
+    color: whitesmoke;
+  }
+  
+  .members{
+    margin: none;
+    font-size: 10px;
+  }
+    
+    
+    
+  /* Partie pour les conversations */
+  .conversation-list {
+    width: 55%;
+    background-color: #a0929b;
+    padding-bottom: 18%;
+    font-size: 14px;
+  }
+  
+  .titreConversation{
+    color: black;
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    padding-bottom: 1%;
+    padding-top:5%;
+    font-size: 14px;
+  }
+}
   
 
