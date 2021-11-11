@@ -28,16 +28,16 @@ class Register extends React.Component {
         .then((response) => {
           // console.log(response.text());
           this.props.close();
-          return response.text();
+          return response.json();
         })
         .then((data) => {
-          console.log(data);
-          if (data.includes("true")) {
-            this.props.history.push("/conversation-list");
+          console.log(data[0]);
+          if (data[1]) {
+            this.props.history.push(`/${data[1]}/conversation-list`);
           } else {
             alert("Registration failed");
           }
-          // window.location.reload(false);
+          window.location.reload(false);
         });
     } else {
       document.getElementById("warning-password").textContent =

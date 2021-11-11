@@ -11,9 +11,9 @@ export default function ConversationsDisplay(props) {
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Divider />
-      <nav className = "bgColor">
+      <nav>
         <List>
-          <a className='list-conv' href={`/conversation/${props.id}`}>
+          <a className='list-conv' href={`/${props.user_id}/conversation/${props.id}`}>
             <ListItem disablePadding>
               <ListItemButton>
                 <Typography variant='h5' gutterBottom component='div'>

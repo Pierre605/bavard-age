@@ -45,22 +45,21 @@ export default function RegisterModal() {
       <Typography variant='h4' component='h2' color='primary'>
         Pas encore inscrit ?
       </Typography>
-      {/* <div
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
           margin: 20,
           padding: 20,
-        }}> */}
-      <Button
-        fullWidth
-        type='button'
-        color='primary'
-        variant='contained'
-        onClick={handleOpen}>
-        Enregistrez-vous
-      </Button>
-      {/* </div> */}
+        }}>
+        <Button
+          fullWidth
+          type='button'
+          variant='contained'
+          onClick={handleOpen}>
+          Enregistrez-vous
+        </Button>
+      </div>
       <Modal
         open={open}
         onClose={handleClose}

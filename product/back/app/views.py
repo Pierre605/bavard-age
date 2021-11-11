@@ -3,7 +3,7 @@ from datetime import datetime
 import hashlib
 import sqlite3
 
-from flask import jsonify, Flask, render_template, request, redirect, url_for, current_app
+from flask import jsonify, Flask, render_template, request, redirect, url_for, flash
 from flask import send_from_directory, session, abort, Markup, make_response
 from flask_cors import CORS
 # from flask_login.utils import login_user, logout_user
@@ -34,10 +34,8 @@ from .models import query_db, execute_db
 
 # variable globale de contexte utilisateur
 
-user_session = {'user': '', 'chatroom': '', 'username': ''}
-print('user_session', user_session)
-session = {'sessions': [user_session, ]}
-print('session', session)
+session = {'user': [], 'chatroom': [], 'username': []}
+indexof = []
     
 
 # class User(UserMixin):
@@ -54,37 +52,6 @@ print('session', session)
 #     return User.get(user_id)
 
 # fonctions
-# <<<<<<< HEAD
-# def get_user_connected(id):
-#     for user_session in session['sessions']:
-#         print('user_session', user_session)
-#         if user_session['user'] == id:
-#             return user_session['user']
-
-
-# def get_user_name(id):
-#     for user_session in session['sessions']:
-#         print('user_session', user_session)
-#         if user_session['user'] == id:
-#             if user_session['username']:
-#                 return user_session['username']    
-
-
-# def get_user_chatroom(id):
-#     for user_session in session['sessions']:
-#         print('user_session', user_session)
-#         if user_session['user'] == id:
-#             if user_session['chatroom']:
-#                 return user_session['chatroom']    
-
-
-# def delete_user_session(id):
-#     for user_session in session['sessions']:
-#         print('user_session', user_session)
-#         if user_session['user'] == id:
-#             if user_session['chatroom']:
-#                 return user_session['chatroom']    
-# =======
 # def get_user_connected():
 #     if session['user']:
 #         return session['user']
@@ -98,7 +65,6 @@ print('session', session)
 # def get_user_chatroom():
 #     if session['chatroom']:
 #         return session['chatroom']
-# >>>>>>> branche-de-pierre
 
 
 # def str_to_bool(s):
@@ -115,68 +81,6 @@ def allowed_file(filename):
         return '.' in filename \
  and filename.rsplit('.', 1)[1].lower() \
  in app.config['ALLOWED_EXTENSIONS']
-
-@socketio.on('message sent')
-def handle_my_custom_event(json, methods=['GET', 'POST']):
-    print('received my event: ' + str(json))
-    socketio.emit('my response du back', json, callback=messageReceived)
-
-# Socket IO
-# Quand un Client émet un événemet utilisant une réponse json,
-# contenant un message,
-# la fonction message_sent renvoie ce message à tous les clients
-# @socketio.on('message sent', namespace='/chat')
-# def message_sent(json, methods=['GET', 'POST']):
-#     print('received my event: ' + str(json))
-#     socketio.emit('my response', json, callback=messageReceived)
-#     result = dict(sent_message = False)
-#     print('jsonresponse', jsonresponse)
-#     # session['chatroom']=jsonresponse['chatroom'];
-#     # print('session-room', session['chatroom'])
-#     if jsonresponse['user'] and jsonresponse['chatroom']:
-#         # if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chatroom'] and jsonresponse['chatroom'] == session.get('room'):
-#         db = getattr(g, '_database', None)
-#         if db is None:
-#             db = g._database = sqlite3.connect(app.config['DATABASE'])
-#             db.row_factory = sqlite3.Row
-#         cur = db.cursor()
-#         # print("session['user'], session['chatroom']", session['user'], session['chatroom'])
-#         # cur.execute(
-#         #     """SELECT user.id 
-#         #     FROM user, user_conversation 
-#         #     WHERE user.id = user_conversation.user_id
-#         #     user_conversation.user_id=(?) 
-#         #     AND
-#         #     user_conversation.conversation_id = (?);
-#         #     """, [session['user'], session['chatroom']])
-#         # rv = cur.fetchall()
-#         # id_user = rv[0] if rv else None
-#         # if id_user:
-# # <<<<<<< HEAD
-#         socketio.emit('my response'
-#                       , 'my response'
-#                       , callback=messageReceived)
-#                       # , chatroom=session['chatroom'])
-# # =======
-#         # emit('my response'
-#         #               , jsonresponse
-#         #               , callback=messageReceived
-#         #               , chatroom=jsonresponse['chatroom']
-#         #               , broadcast=True)
-# # >>>>>>> branche-de-pierre
-#         # send(jsonresponse['message'], broadcast=True)
-#         cur.execute(
-#             """INSERT INTO message
-#             (user_id, conversation_id, content) 
-#             VALUES (?, ?, ?)
-#             """, (jsonresponse['user'], jsonresponse['chatroom'], jsonresponse['message']))
-#         cur.close()
-#         message = cur.lastrowid
-#         if message:    
-#             result = dict(sent_message=True)
-#             # renvoyer (json)
-#     return jsonify(result)
-
 
 # Routes Flask de l'app views 
 # 
@@ -199,25 +103,9 @@ def handle_my_custom_event(json, methods=['GET', 'POST']):
 
 
 # Route principale (homepage -> HomePage.jsx)
-# @app.route("/")
-# def hello():
-#     return ("hello world!")
-
-# @app.route("/sessions/<int:user_id>", methods=['GET'])
-@app.route("/chat", methods=['GET', 'POST'])
-def sessions():
-    print('routesessionhtml')
-    # username = query_db(""" SELECT username
-    #                         FROM user
-    #                         WHERE id = 1"""
-    #                         , one=True)[0]
-    #                         # , [user_id], one=True)[0]
-    # print('username', username)
-    return render_template('session.html')  # , username = username)
-
-
-def messageReceived(methods=['GET', 'POST']):
-    print('message was received!!!')
+@app.route("/")
+def hello():
+    return ("hello world!")
 
 
 # Route de connexion (login -> Login.jsx)
@@ -233,14 +121,18 @@ def login():
                                     and password = (?);
                                     """, (username, password), one=True)
         if existing_user:
-            session['user'] = existing_user[0]
-            session['username'] = username
-            print("login/session_user", session['user'])
-            print('login/session_username', session['username'])
-            # user = User(existing_user[0])
-            # print("User.id: ", user.id)
-            # login_user(user)     
-            return jsonify("{logged_in : true}")
+            if existing_user[0] not in session['user']:
+                session['user'].append(existing_user[0])
+                session['username'] = username
+                # indexof.append(session['user'].index(existing_user[0]))
+                print("login/session_user", session['user'])
+                print('login/session_username', session['username'])
+                # user = User(existing_user[0])
+                # print("User.id: ", user.id)
+                # login_user(user)     
+                return jsonify("{logged_in : true}", existing_user[0])
+            else:
+                return jsonify("{logged_in : true}", existing_user[0])
         else:
             return "{logged_in : false}"
 
@@ -249,12 +141,12 @@ def login():
 # déconnecte l'utilisateur
 # en cas de succès, renvoie un dictionnaire {disconnected : true}
 # en cas d'échec, renvoie un dictionnaire {disconnected : false}
-@app.route("/logout")
-def logout():
+@app.route("/<int:user_id>/logout")
+def logout(user_id):
     # logout_user()
     if session['user']:
-        for key in list(session.keys()):
-            session.pop(key)
+        session['user'].remove(user_id)
+        print("session['user']: ", session['user'])
         return '{"disconnected" : true}'
     else:
         return '{"disconnected" : false}'
@@ -319,7 +211,7 @@ def register():
                 if session['user']:    
                     result = dict(registered = True)
             # renvoyer (json)
-    return jsonify(result)
+    return jsonify(result, session['user'])
 
 
 # Route de liste des conversations
@@ -334,10 +226,11 @@ def register():
 #   [[username1, message1], [username2, message2], ...]
 # si l'utilisateur n'a pas de conversations :
 # renvoie une liste vide []
-@app.route("/conversation-list", methods=['GET'])
-def chatroom_select():
-    if session.get('user'):
-        user = session.get('user')
+@app.route("/<int:user_id>/conversation-list", methods=['GET'])
+def chatroom_select(user_id):
+    print("session['user]: ", session['user'])
+    if user_id in session['user']:
+        user = user_id
         result_list = []
         # print("current_user ", current_user)
         # on vérifie que user fait bien partie de conversation
@@ -382,9 +275,13 @@ def chatroom_select():
         print("SUCESS !!")
         if conversations:
             return jsonify({'conversations': [dict(row) for row in conversations]
-                , 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts]})
+                , 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts],
+                'user_id': user})
         else:
-            return ([])
+            return (jsonify({'conversations': [], 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts],
+                'user_id': user}))
+    else:
+        return jsonify("user not connected")
 
 
 # Route de création de conversation
@@ -396,16 +293,13 @@ def chatroom_select():
 # sous forme de dictionnaire json {created_conversation : id }
 # si aucun email des emails fournis ne correspond à un utilisateur,
 # renvoyer le dico json {created_conversation : false }
-@app.route('/create_conversation', methods=['POST'])
-def create_conversation(): 
+@app.route('/<int:user_id>/create_conversation', methods=['POST'])
+def create_conversation(user_id): 
     postdata = request.form
     L = []
     user_list = []    
     result = dict(conversation_created = False)
-    if session['user'] != '' \
-        and session['username'] != '' \
-        and postdata['email'] \
-        and postdata.getlist('email'):
+    if user_id in session['user'] and session['username'] != '' and postdata['email'] and postdata.getlist('email'):
         print("post_data", postdata['email'], postdata['name'])
         if postdata['name']:
             conversation_name = postdata['name']
@@ -418,20 +312,20 @@ def create_conversation():
 
         for email in emails:
             print('email', email)
-            user_id = query_db(""" SELECT id
+            user = query_db(""" SELECT id
                                     FROM user
                                     WHERE email = (?)"""
                                     , [email], one=True)[0]
-            if user_id:
-                L.append(user_id)
+            if user:
+                L.append(user)
 
         for id in L:
             user_list.append(id)
         print('liste participants:  ', user_list)
 
     if len(user_list) > 0:
-        if session['user'] not in user_list:
-            user_list.append(session['user'])
+        if user_id not in user_list:
+            user_list.append(user_id)
         new_conversation_id = execute_db(""" 
                                 INSERT INTO conversation 
                                 (name) VALUES (?)"""
@@ -461,13 +355,13 @@ def create_conversation():
 # si l'utilisateur n'a pas de conversations : renvoie une liste vide []
 # POST
 # envoi un message pour une chatroom donnée
-@app.route('/conversation/<int:conversation_id>', methods=['GET', 'POST', 'PUT'])
-def conversation(conversation_id):
+@app.route('/<int:user_id>/conversation/<int:conversation_id>', methods=['GET', 'POST', 'PUT'])
+def conversation(user_id, conversation_id):
     try:
         if request.method == "GET":
-            if session['user']:
+            if user_id in session['user']:
                 list_convers_messages = []
-                user = session['user']
+                user = user_id
                 # on vérifie que user fait bien partie de conversation
                 user_ok = query_db("""
                     SELECT
@@ -490,6 +384,14 @@ def conversation(conversation_id):
                         , [conversation_id])
                     for message in res_messages:
                         list_convers_messages.append(list(message))
+                    
+                    username_res = query_db("""
+                        SELECT username 
+                        FROM user
+                        WHERE user.id = (?);""" 
+                        , [user])
+                    username = username_res[0][0]
+
                     liste_particip = query_db(""" SELECT 
                     GROUP_CONCAT(user.username) AS participants
                     FROM
@@ -508,8 +410,8 @@ def conversation(conversation_id):
                     liste_participants = (participants).split(',')
 
                     session['room'] = conversation_id
-                    print(list_convers_messages, str(session['username']))
-                    return jsonify(list_convers_messages, str(session['username']), liste_participants, str(session['user']))
+                    print(list_convers_messages)
+                    return jsonify(list_convers_messages, str(username), liste_participants, str(user))
                 else:
                     print("user not in this conversation")
                     return jsonify("user not in this conversation")
@@ -562,12 +464,11 @@ def conversation(conversation_id):
 # sous forme de dictionnaire json {created_contact : id }
 # si l'email fourni ne correspond à aucun utilisateur (User),
 # renvoyer le dico json {created_contact : false }
-@app.route('/create_contact', methods=['POST'])
-def create_contact(): 
+@app.route('/<int:user_id>/create_contact', methods=['POST'])
+def create_contact(user_id): 
     postdata = request.form   
     result = dict(contact_created = dict(result = False, contact_id = 'NULL'))
-    if session['user'] != '' \
-        and postdata['email']:
+    if user_id in session['user'] and postdata['email']:
         print("post_data", postdata['email'])
         if postdata['email']:
             contact_email = postdata['email']
@@ -579,21 +480,82 @@ def create_contact():
                                 WHERE email = (?)"""
                                 , [contact_email], one=True)
         if not contact_id is None:
-            if contact_id[0] != session['user']:
-                print('contact_id:  ', contact_id[0])
-                not_existing_contact_id = query_db(""" SELECT count(*)
-                            FROM user_contact
-                            WHERE user_id = (?)
-                            AND contact_id = (?)"""
-                            , [session['user'], contact_id[0]], one=True)[0]
-                if not_existing_contact_id ==0:
-                    print('not_existing_contact_id:  ', not_existing_contact_id)
-                    new_user_contact_id = execute_db("""
-                                    INSERT INTO user_contact 
-                                    (user_id, contact_id) VALUES
-                                    (?, ?)""", [session['user'], contact_id[0]])
-                    print('user_id, new_user_contact_id', session['user'], new_user_contact_id)
-                    result = dict(contact_created = dict(result = True, contact_id = contact_id[0]))
+            # if contact_id[0] != session['user']:
+            print('contact_id:  ', contact_id[0])
+            not_existing_contact_id = query_db(""" SELECT count(*)
+                        FROM user_contact
+                        WHERE user_id = (?)
+                        AND contact_id = (?)"""
+                        , [user_id, contact_id[0]], one=True)[0]
+            if not_existing_contact_id ==0:
+                print('not_existing_contact_id:  ', not_existing_contact_id)
+                new_user_contact_id = execute_db("""
+                                INSERT INTO user_contact 
+                                (user_id, contact_id) VALUES
+                                (?, ?)""", [user_id, contact_id[0]])
+                contact_id_new_user = execute_db("""
+                                INSERT INTO user_contact 
+                                (user_id, contact_id) VALUES
+                                (?, ?)""", [contact_id[0], user_id])
+                print('user_id, new_user_contact_id', session['user'], new_user_contact_id)
+                result = dict(contact_created = dict(result = True, contact_id = contact_id[0]))
+    return jsonify(result)
+
+
+
+def sessions():
+    print('routesessionhtml')
+    return render_template('session.html')
+
+def messageReceived(methods=['GET', 'POST']):
+    print('message was received!!!')
+
+
+# Socket IO
+# Quand un Client émet un événemet utilisant une réponse json,
+# contenant un message,
+# la fonction message_sent renvoie ce message à tous les clients
+@socketio.on('message sent', namespace='/chat')
+def message_sent(jsonresponse):
+    result = dict(sent_message = False)
+    print('jsonresponse', jsonresponse)
+    # session['chatroom']=jsonresponse['chatroom'];
+    # print('session-room', session['chatroom'])
+    if jsonresponse['user'] and jsonresponse['chatroom']:
+        # if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chatroom'] and jsonresponse['chatroom'] == session.get('room'):
+        db = getattr(g, '_database', None)
+        if db is None:
+            db = g._database = sqlite3.connect(app.config['DATABASE'])
+            db.row_factory = sqlite3.Row
+        cur = db.cursor()
+        # print("session['user'], session['chatroom']", session['user'], session['chatroom'])
+        # cur.execute(
+        #     """SELECT user.id 
+        #     FROM user, user_conversation 
+        #     WHERE user.id = user_conversation.user_id
+        #     user_conversation.user_id=(?) 
+        #     AND
+        #     user_conversation.conversation_id = (?);
+        #     """, [session['user'], session['chatroom']])
+        # rv = cur.fetchall()
+        # id_user = rv[0] if rv else None
+        # if id_user:
+        emit('my response'
+                      , jsonresponse
+                      , callback=messageReceived
+                      , chatroom=jsonresponse['chatroom']
+                      , broadcast=True)
+        # send(jsonresponse['message'], broadcast=True)
+        cur.execute(
+            """INSERT INTO message
+            (user_id, conversation_id, content) 
+            VALUES (?, ?, ?)
+            """, (jsonresponse['user'], jsonresponse['chatroom'], jsonresponse['message']))
+        cur.close()
+        message = cur.lastrowid
+        if message:    
+            result = dict(sent_message=True)
+            # renvoyer (json)
     return jsonify(result)
 
 

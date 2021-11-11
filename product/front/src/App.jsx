@@ -4,16 +4,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // import { AppBar, Typography, Toolbar } from "@mui/material";
 // Composants enfants
 // import NavBar from "./components/navBar/NavBar.js";
-// import Header from "./components/header/Header";
+import Header from "./components/header/Header";
 import HomePage from "./pages/homePage/HomePage";
 import UserHomePage from "./pages/userHomePage/UserHomePage";
 import InConversation from "./pages/InConversation/InConversation";
 import CreateConversation from "./pages/createConversation/CreateConversation";
 import CreateContact from "./pages/createContact/CreateContact";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Footer from "./components/footer/Footer";
-import Typography from "@mui/material/Typography";
 
 // Composant de classe App, principal de l'App React BLAblaPp
 class App extends React.Component {
@@ -21,32 +17,33 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <AppBar position='static'>
+        {/* <AppBar position='static'>
           <Toolbar>
             <Typography variant='title'>
               <a href='/'>
-                <img src='/logo.png' width='100px' alt='logo-provisoire' />
+                <img src='/logo2.png' width='100px' alt='logo-provisoire' />
               </a>
             </Typography>
-            {/* <NavBar /> */}
+            <NavBar />
           </Toolbar>
-        </AppBar>
+        </AppBar> */}
         <Router>
           <Route path='/' exact>
             <HomePage />
           </Route>
-          <Route path='/conversation-list' exact>
-            <UserHomePage />
-          </Route>
-          <Route path='/create-conversation' exact>
-            <CreateConversation />
-          </Route>
-          <Route path='/create-contact' exact>
-            <CreateContact />
-          </Route>
-          <Route path='/conversation/:id' exact component={InConversation} />
+          
+          <Route path='/:user_id/conversation-list' exact render={(props) => <UserHomePage {...props} />}/>
+            
+          <Route path='/:user_id/create-conversation' exact render={(props) => <CreateConversation {...props} />}/>
+
+          <Route path='/:user_id/create-contact' exact render={(props) => <CreateContact {...props} />}/>
+
+          <Route
+            path='/:user_id/conversation/:id'
+            exact
+            render= {(props) => <InConversation {...props}/>}
+          />
         </Router>
-        <Footer />
       </>
     );
   }

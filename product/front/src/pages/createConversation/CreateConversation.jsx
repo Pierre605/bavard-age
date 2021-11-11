@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./CreateConversation.css";
 import ContactsSelect from "../../components/contactsSelect/ContactsSelect";
-// import NavBar from "../../components/navBar/NavBar.js";
+import NavBar from "../../components/navBar/NavBar.js";
 
 
 class CreateConversation extends React.Component {
@@ -35,31 +35,37 @@ class CreateConversation extends React.Component {
   }
 
   addAdressSpace = () => {
-    // let L = []
+    let L = []
     let input = this.state.selected_contacts
-    let string = String(input)
-    let formed_string = string.split(',').join(', ')
-    console.log(formed_string)
-    return formed_string
+      let string = new String(input)
+      let formed_string = string.split(',').join(', ')
+      console.log(formed_string)
+      return formed_string
   }
 
   componentDidMount() {
     this.getContacts()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      this.setHref()
+  }
+}
+
   createConversation(ev) {
     ev.preventDefault();
 
     const data = new FormData();
-    if (this.emails.value && this.emailsmano.value === '') {
+    if (this.emails.value && this.emailsmano.value == '') {
       data.append('email', this.emails.value);
     }
-    else if (this.emailsmano.value && this.emails.value === '') {
+    else if (this.emailsmano.value && this.emails.value == '') {
       data.append('email', this.emailsmano.value);
     }
     data.append("name", this.name.value);
 
-    fetch("http://localhost:5000/create_conversation", {
+    fetch("http://localhost:5000/" + this.props.match.params.user_id + "/create_conversation", {
       method: "POST",
       body: data,
     })
@@ -71,8 +77,9 @@ class CreateConversation extends React.Component {
         console.log(created_conv);
         console.log(typeof created_conv);
         if (created_conv.includes("conversation_id")) {
-          this.props.history.push("/conversation-list");
-        } else {
+          this.props.history.push(`/${this.props.match.params.user_id}/conversation-list`)
+        } 
+        else {
           alert('Adresse(s) email non reconnues')
         }
         // window.location.reload(false);
@@ -80,7 +87,7 @@ class CreateConversation extends React.Component {
   }
 
   getContacts = () => {
-    fetch('http://localhost:5000/conversation-list')
+    fetch('http://localhost:5000/'+ this.props.match.params.user_id+ '/conversation-list')
     .then(response => {
       return(
         response.json()
@@ -90,7 +97,7 @@ class CreateConversation extends React.Component {
       // Sauvegarde de l'état du composant avec le résultat de la réponse parsée de la DB
       this.setState({
         contacts : convers_list.contacts
-      });
+      })
           }, (error) => {
             this.setState({
               error
@@ -99,11 +106,15 @@ class CreateConversation extends React.Component {
       )
   };
 
+  setHref = () => {
+    document.getElementById('cr-cont').href = `/${this.props.match.params.user_id}/create-contact`
+    }
+
 
   render() {
     return (
       <>    
-        <HeaderLogout />
+        <HeaderLogout user={this.props.match.params.user_id}/>
         <div id="div-aside">
           <div className="side-bar-not-fixed">
             <section>
@@ -114,18 +125,17 @@ class CreateConversation extends React.Component {
                   )
                 })}
               <div id="create-contact-container">
-                <a href='http://localhost:3000/create-contact'><img id="create-contact" src="/creer_un_contact.png" alt="icone de bouton avec une personne et un plus pour ajouter un contact"/></a>
+                <a id="cr-cont" href=""><img id="create-contact" src="/creer_un_contact.png"/></a>
               </div> 
             </section>                         
           </div> 
-          <form className = "conteneurConversation" onSubmit={this.createConversation}>
-            <div className = "formulaireARemplir">
-            <div className='flexConversation'>
-              <div className='input-style'>          
-                <label for=''>Selectionnez parmi vos contacts un ou plusieurs participant(s): </label>
+          <form className="form" onSubmit={this.createConversation}>
+            <div className='flex2'>
+              <div className='input-style-2'>          
+                <label for=''>Selectionnez parmi vos contacts un ou plusieurs participant(s) : </label>
                 <input
                   id='emails'
-                  className='inputCreateConvesation'
+                  className='input2'
                   type='text'
                   ref={(ref) => {
                     this.emails = ref;
@@ -139,19 +149,17 @@ class CreateConversation extends React.Component {
                   julien@blabla.fr, laura@blabla.fr, ...
                 </div>
               </div>
-              <div className='input-style'>
-                <label for=''>Nom de la conversation: </label>
-                <br/>
+              <div className='input-style-2'>
+                <label for=''>Nom de la conversation : </label>
                 <input
                   type='text'
-                  className = 'inputCreateConvesation'
+                  className="input2"
                   ref={(ref) => {
                     this.name = ref;
                   }}
                   required></input>
               </div>
               <button className="button-form">Créer une conversation</button>
-            </div>
             </div>
           </form>
         </div>        

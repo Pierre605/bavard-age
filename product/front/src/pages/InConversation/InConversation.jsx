@@ -17,13 +17,11 @@ class InConversation extends React.Component {
   }
   componentDidMount() {
     this.getConversation();
+    this.setRefesh();
   }
 
-  // handleRegister(ev) {
-  // }
-
   getConversation = () => {
-    fetch("http://localhost:5000/conversation/" + this.props.match.params.id)
+    fetch("http://localhost:5000/" + this.props.match.params.user_id + "/conversation/" + this.props.match.params.id)
       .then((response) => {
         return response.text();
       })
@@ -45,21 +43,9 @@ class InConversation extends React.Component {
       });
   };
 
- 
-  // myFunction = () => {
-  //   window.addEventListener("scroll", function(event) {
-  //     let header = document.getElementById("myHeader");
-  //     var sticky = header.offsetTop;
-  //     console.log(header.offsetTop)
-  //     if (window.pageYOffset > sticky) {
-  //       console.log("add sticky")
-  //       header.classList.add("sticky");
-  //     } else {
-  //       console.log("remove sticky")
-  //       header.classList.remove("sticky");
-  //     }
-  //   }
-  //   )}
+  setRefesh = () => {
+    setInterval(this.getConversation, 1000);
+    }
    
 
   // Rendu React du composant
@@ -67,17 +53,18 @@ class InConversation extends React.Component {
     return (
       <>
         <div id="myHeader">
-          <HeaderLogout />
+          <HeaderLogout user={this.state.user_id}/>
           <DeleteMessage 
           conversation={this.state.conv_id} 
-          refresh={this.getConversation}/>
+          refresh={this.getConversation} 
+          user={this.state.user_id}/>
         </div>
         <div className='flex-aside'>
           <div className='side-bar-in-conv'>
             <span>Participants:</span>
             {this.state.participants.map((member) => {
               return (
-                <ParticipantsDisplay name={member} user={this.state.username} />
+                <ParticipantsDisplay name={member} username={this.state.username} />
               );
             })}
           </div>

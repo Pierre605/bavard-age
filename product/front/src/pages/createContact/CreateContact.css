@@ -1,124 +1,24 @@
-/* Formulaire d'ajout de contact pour ordinateur */
-
-/* Emplacement du formulaire */
 .flex {
-  width: 80%;
-  /* margin-top: 10px;
-  margin-bottom: 15px; */
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .input-style {
-  width: 100%;
-  /* margin-bottom: 10px;
-  margin-left: 10px; */
+  width: 300px;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
-/* #emails-syntaxe-requirement {
-  color: rgb(128, 128, 128);
+#emails-syntaxe-requirement {
+  color: grey;
   font-size: 0.8em;
-} */
+}
 
-/* button {
+button {
   margin-left: 10px;
   margin-right: 10px;
-} */
+}
 
 .create-contact-button {
   float: left;
 }
-
-.conteneur {
-  width: 50%;
-  height: 100%;
-  display : flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #4F3646;
-  padding-top: 5%;
-  padding-right: 3%;
-  padding-left: 3%;
-  padding-bottom: 7%;
-  margin-top : 5%;
-  margin-right: 20%;
-  margin-left:20%;
-  border-radius: 30px;
-}
-
-/* Objets du formulaire */
-/* .labelEmail{
-  color: white;
-  font-size: 24px;
-
-} */
-
-
-.input{
-
-  height: 50px;
-  width: 90%;
-  background-color: #4F3646;
-  border : none;
-  color : whitesmoke;
-  font-size: 24px;
-  border-bottom-style: solid;
-  border-bottom-width: 0.4rem;
-  border-color: white;
-  border-width: 100%;
-  margin-bottom: 7%;
-}
-
-.boutonCréationContact{
-  /* margin-top: 10%; */
-  background-color: #98ac39;
-  color : white;
-  width: 100%;
-  height: 100%;
-  font-size: 32px;
-}
-
-
-/* Tablette en mode portrait */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-.create-contact-button{
-  height: 100%;
-}
-
-.flex {
-  width: 80%;
-  font-size: 20px;
-  /* margin-top: 10px;
-  margin-bottom: 15px; */
-}
-.boutonCréationContact{
-  margin-top: 10%;
-  background-color: #98ac39;
-  color : white;
-}
-
-.input-style{
-  width: 70%;
-  color: white;
-  font-size: 16px;
-}
-}
-
-/* Tablette en mode paysage */
-
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
- .create-contact-button{
-  height: 100%;
-}
-
-.boutonCréationContact{
-  margin-top: 10%;
-  background-color: #98ac39;
-  color : white;
-  font-size: 20px;
-}
-
-.input{
-  color: white;
-  font-size: 16px;
-}
-  }

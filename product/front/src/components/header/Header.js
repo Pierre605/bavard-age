@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Typography, Toolbar } from "@mui/material";
 // Composants enfants
-// import NavBar from "../navBar/NavBar";
+import NavBar from "../navBar/NavBar";
 
 export default function Header() {
   return (

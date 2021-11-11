@@ -3,12 +3,14 @@
     display: flex;
     align-items: flex-end;
     flex-direction: column;
+    margin-top: 10px;
 }
 
 .contain-messages {
     width: 70vw;
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
 }
 
 
