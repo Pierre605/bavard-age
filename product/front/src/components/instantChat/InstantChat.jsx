@@ -1,9 +1,8 @@
 import React from 'react';
 import "./InstantChat.css";
 import "../messagesDisplay/MessagesDisplay.css"
-import { withRouter } from 'react-router-dom';
 import io from 'socket.io-client/dist/socket.io';
-let socket = io('http://localhost:5000');
+let socket = io('http://localhost:5000/chat');
 
 class InstantChat extends React.Component {
   constructor(props) {
