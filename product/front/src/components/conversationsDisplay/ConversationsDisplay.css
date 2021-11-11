@@ -1,3 +1,19 @@
 .list-conv {
   text-decoration: none;
 }
+
+.bgColor{
+  background-color: #a0929b;
+}
+
+@media all and (min-width : 480px) and (max-width : 1000px) and (orientation : landscape){
+  .bgColor {
+    font-size: 10px;
+  }
+}
+
+@media all and (min-width : 480px) and (max-width : 1000px) and (orientation : portrait){
+  .bgColor {
+    font-size: 10px;
+  }
+}

@@ -118,13 +118,14 @@ class CreateConversation extends React.Component {
               </div> 
             </section>                         
           </div> 
-          <form className="form" onSubmit={this.createConversation}>
-            <div className='flex2'>
-              <div className='input-style-2'>          
-                <label for=''>Selectionnez parmi vos contacts un ou plusieurs participant(s) : </label>
+          <form className = "conteneurConversation" onSubmit={this.createConversation}>
+            <div className = "formulaireARemplir">
+            <div className='flexConversation'>
+              <div className='input-style'>          
+                <label for=''>Selectionnez parmi vos contacts un ou plusieurs participant(s): </label>
                 <input
                   id='emails'
-                  className='input2'
+                  className='inputCreateConvesation'
                   type='text'
                   ref={(ref) => {
                     this.emails = ref;
@@ -138,17 +139,19 @@ class CreateConversation extends React.Component {
                   julien@blabla.fr, laura@blabla.fr, ...
                 </div>
               </div>
-              <div className='input-style-2'>
-                <label for=''>Nom de la conversation : </label>
+              <div className='input-style'>
+                <label for=''>Nom de la conversation: </label>
+                <br/>
                 <input
                   type='text'
-                  className="input2"
+                  className = 'inputCreateConvesation'
                   ref={(ref) => {
                     this.name = ref;
                   }}
                   required></input>
               </div>
               <button className="button-form">Créer une conversation</button>
+            </div>
             </div>
           </form>
         </div>        

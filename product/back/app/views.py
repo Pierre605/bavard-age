@@ -204,7 +204,7 @@ def handle_my_custom_event(json, methods=['GET', 'POST']):
 #     return ("hello world!")
 
 # @app.route("/sessions/<int:user_id>", methods=['GET'])
-@app.route("/conversation/17", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def sessions():
     print('routesessionhtml')
     # username = query_db(""" SELECT username

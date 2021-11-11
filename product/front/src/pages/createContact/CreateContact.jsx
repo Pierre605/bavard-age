@@ -65,7 +65,6 @@ class CreateContact extends React.Component {
                 }}
                 required
               />
-               <hr className = "separateur"/>
             </div>
           </div>
           <div className="create-contact-button">

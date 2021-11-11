@@ -4,7 +4,7 @@ import "../messagesDisplay/MessagesDisplay.css"
 import { Redirect } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import io from 'socket.io-client/dist/socket.io';
-let socket = io('http://localhost:3000/conversation/17');
+let socket = io('http://localhost:5000');
 
 class InstantChat extends React.Component {
   constructor(props) {

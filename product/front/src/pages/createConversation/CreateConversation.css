@@ -3,8 +3,44 @@
     height: 80vh;
 }
 
+/*<<<<<<< HEAD avant merge Aude811Soir
 .input-style-2 {
     width: 100%;
+=======
+*/
+.formulaireARemplir{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #4F3646;
+    border : 2px solid;
+    border-radius: 5%;
+    padding: 5%;
+    margin-right: 3%;
+    margin-left: 3%;
+    margin-bottom: 5%;
+    margin-top: 2%;
+    font-size: 24px;
+
+}
+.flexConversation{
+
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.inputCreateConvesation{
+    width : 100%;
+    height: 40%;
+}
+.input-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
     margin-bottom: 10px;
     margin-left: 10px;
 }
@@ -20,14 +56,15 @@ button {
 }
 
 .side-bar-not-fixed {
-    font-size: x-large;
+    font-size: 28px;
     width: 28%;
-    height: 80vh;
-    background-color: #98AC37;
+    height: 100vh;
+    background-color: #98ac39;
     color: white;
     top: 2.76em;
 }
 
+/*<<<<<<< HEAD avant merge Aude811Soir
 .button-form {
     color: white;
     background-color: #98AC37;
@@ -52,4 +89,10 @@ button {
 
 .input2 {
     width: 90%;
+}
+=======*/
+.conteneurConversation{
+    /* background-color: #4F3646;
+    opacity : 0.54; */
+
 }

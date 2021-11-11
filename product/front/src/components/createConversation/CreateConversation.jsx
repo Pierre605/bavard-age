@@ -126,48 +126,51 @@ class CreateConversation extends React.Component {
               </div>
             </section>
           </div>
-          <form onSubmit={this.createConversation}>
-            <div className='flex'>
-              <div className='input-style'>
-                <label for=''>Selectionnez parmi vos contacts: </label>
-                <input
-                  id='emails'
-                  class='input'
-                  type='text'
-                  ref={(ref) => {
-                    this.emails = ref;
-                  }}
-                  value={this.state.selected_contacts_string}
-                />
-                <label for=''>
-                  Ou bien saisissez une ou des adresses emails:{" "}
-                </label>
-                <input
-                  id='emails-mano'
-                  class='input'
-                  type='text'
-                  ref={(ref) => {
-                    this.emailsmano = ref;
-                  }}
-                />
-                <div id='emails-syntaxe-requirement'>
-                  Si plusieurs adresses, les séparer par des virgule espace:
-                  julien@blabla.fr, laura@blabla.fr, ...
+          <form className = "conteneurConversation" onSubmit={this.createConversation}>
+            <div className = "formulaireARemplir">
+              <div className='flexConversation'>
+                <div className='input-style'>
+                  <label for=''>Selectionnez parmi vos contacts : </label>
+                  <input
+                    id='emails'
+                    class='input'
+                    type='text'
+                    ref={(ref) => {
+                      this.emails = ref;
+                    }}
+                    value={this.state.selected_contacts_string}
+                  />
+                  <label for=''>
+                    Ou bien saisissez une ou des adresses emails:{" "}
+                  </label>
+                  <input
+                    id='emails-mano'
+                    class='input'
+                    type='text'
+                    ref={(ref) => {
+                      this.emailsmano = ref;
+                    }}
+                  />
+                  <div id='emails-syntaxe-requirement'>
+                    Si plusieurs adresses, les séparer par des virgule espace:
+                    julien@blabla.fr, laura@blabla.fr, ...
+                  </div>
+                </div>
+                <div className='input-style'>
+                  <label for=''>Nom de la conversation : </label>
+                  <input
+                    type='text'
+                    className = 'inputCreateConvesation'
+                    ref={(ref) => {
+                      this.name = ref;
+                    }}
+                    required></input>
                 </div>
               </div>
-              <div className='input-style'>
-                <label for=''>Nom de la conversation: </label>
-                <input
-                  type='text'
-                  ref={(ref) => {
-                    this.name = ref;
-                  }}
-                  required></input>
+              <div>
+                <button>Créer conversation</button>
               </div>
-            </div>
-            <div>
-              <button>Créer conversation</button>
-            </div>
+             </div>
           </form>
         </div>
       </>
