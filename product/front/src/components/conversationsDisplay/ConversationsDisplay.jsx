@@ -13,7 +13,7 @@ export default function ConversationsDisplay(props) {
       <Divider />
       <nav>
         <List>
-          <a className='list-conv' href={`/conversation/${props.id}`}>
+          <a className='list-conv' href={`/${props.user_id}/conversation/${props.id}`}>
             <ListItem disablePadding>
               <ListItemButton>
                 <Typography variant='h5' gutterBottom component='div'>

@@ -35,11 +35,11 @@ class Login extends React.Component {
         return response.text();
       })
       .then((data) => {
-        let login = data;
-        console.log("login", login);
+        let login = JSON.parse(data);
+        console.log("login",login);
         console.log(typeof login);
-        if (login.includes("true")) {
-          this.props.history.push("/conversation-list");
+        if (login[0].includes("true")) {
+          this.props.history.push(`/${login[1]}/conversation-list`);
         } else {
           alert("Connection failed");
         }

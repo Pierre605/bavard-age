@@ -31,19 +31,17 @@ class App extends React.Component {
           <Route path='/' exact>
             <HomePage />
           </Route>
-          <Route path='/conversation-list' exact>
-            <UserHomePage />
-          </Route>
-          <Route path='/create-conversation' exact>
-            <CreateConversation />
-          </Route>
-          <Route path='/create-contact' exact>
-            <CreateContact />
-          </Route>
+          
+          <Route path='/:user_id/conversation-list' exact render={(props) => <UserHomePage {...props} />}/>
+            
+          <Route path='/:user_id/create-conversation' exact render={(props) => <CreateConversation {...props} />}/>
+
+          <Route path='/:user_id/create-contact' exact render={(props) => <CreateContact {...props} />}/>
+
           <Route
-            path='/conversation/:id'
+            path='/:user_id/conversation/:id'
             exact
-            component={InConversation}
+            render= {(props) => <InConversation {...props}/>}
           />
         </Router>
       </>

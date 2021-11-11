@@ -29,7 +29,9 @@ class InstantChat extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
       if (prevState.messages !== this.state.messages) {
+        console.log("refresh !!")
         this.props.refresh()
+        
     }
   }
   
@@ -75,14 +77,15 @@ class InstantChat extends React.Component {
       <> 
 
         <h1 id="simple-modal-title">CHATROOM</h1>
- 
-        <form onSubmit={this.handleRegister}>
-          <div className="box" id={this.props.id}>
-            <label for="">Message: </label>
-            <input ref={(ref) => { this.message = ref; }} type="text"name="" id="" cols="30" rows="10" required/>
-            <button className="button">Envoyer</button>
-          </div>
-        </form>
+        <div>
+          <form onSubmit={this.handleRegister}>
+            <div className="box" id={this.props.id}>
+              <label for="">Message: </label>
+              <input ref={(ref) => { this.message = ref; }} type="text"name="" id="" cols="30" rows="10" required/>
+              <button className="button">Envoyer</button>
+            </div>
+          </form>
+        </div>
       </>
       );
     }

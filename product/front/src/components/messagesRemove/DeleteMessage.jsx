@@ -8,6 +8,7 @@ export default class DeleteMessage extends React.Component  {
         this.state = {
             expanded: false,
             conv_id: "",
+            user_id: [],
         }
         this.handleDelete = this.handleDelete.bind(this)
     }
@@ -15,7 +16,8 @@ export default class DeleteMessage extends React.Component  {
     
 
     openSelect = () => {
-        this.setState({conv_id: this.props.conversation})
+        this.setState({conv_id: this.props.conversation,
+                        user_id: this.props.user})
         // let my_messages = document.getElementsByClassName("user-messages")
         // console.log(my_messages)
         let expanded = this.state.expanded
@@ -66,7 +68,7 @@ export default class DeleteMessage extends React.Component  {
         }
         console.log(data)
         console.log(this.state.conv_id)
-        fetch("http://localhost:5000/conversation/" + this.state.conv_id, {
+        fetch("http://localhost:5000/" + this.state.user_id + "/conversation/" + this.state.conv_id, {
         method : 'PUT',
         body: data,
     })

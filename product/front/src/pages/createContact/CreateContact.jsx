@@ -26,7 +26,7 @@ class CreateContact extends React.Component {
 
     data.append("email", newContactEMAIL);
 
-    fetch("http://localhost:5000/create_contact", {
+    fetch("http://localhost:5000/" + this.props.match.params.user_id + "/create_contact", {
       method: "POST",
       body: data,
     })
@@ -38,7 +38,7 @@ class CreateContact extends React.Component {
         console.log(created_contact);
         console.log(typeof created_contact);
         if (created_contact === true) {
-          this.props.history.push("/conversation-list");
+          this.props.history.push(`/${this.props.match.params.user_id}/conversation-list`);
         } else {
           alert("Echec de la création du contact");
         }
@@ -49,7 +49,7 @@ class CreateContact extends React.Component {
   render() {
     return (
       <>     
-        <HeaderLogout />
+        <HeaderLogout user={this.props.match.params.user_id}/>
         <form onSubmit={this.createContact}>
           <div className='flex'>
             <div className='input-style'>

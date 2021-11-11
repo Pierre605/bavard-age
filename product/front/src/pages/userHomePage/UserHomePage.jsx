@@ -11,32 +11,45 @@ class UserHomePage extends React.Component {
     super(props);
     // Etat du composant
     this.state = {
-      // liste des conversations de l'utilisateur connecté
       conversations: [],
-      // liste des contacts de l'utilisateur connecté
       contacts: [],
+      user_id: [],
     };
+    this.getConversations = this.getConversations.bind(this);
   }
 
   componentDidMount() {
+    console.log("params: ", this.props.match.params.user_id)
     this.getConversations();
     this.createConvMouseOver();
     this.createContactMouseOver();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.user_id !== this.state.user_id) {
+      this.setHref()
+  }
+}
+
   getConversations = () => {
-    fetch("http://localhost:5000/conversation-list")
+    fetch("http://localhost:5000/" + this.props.match.params.user_id + "/conversation-list")
       .then((response) => {
         return response.json();
       })
       .then(
         (convers_list) => {
           console.log("UserHome/getConversations/convers_list", convers_list);
-          // Sauvegarde de l'état du composant avec le résultat de la réponse parsée de la DB
-          this.setState({
-            conversations: convers_list.conversations,
-            contacts: convers_list.contacts,
-          });
+          console.log("UserHome/getConversations/convers_list", typeof convers_list);
+          if (convers_list['contacts']) {
+            this.setState({
+              conversations: convers_list.conversations,
+              contacts: convers_list.contacts,
+              user_id: convers_list.user_id,
+             })
+          }
+          else {
+            alert("User not connected")
+          }
         },
         (error) => {
           this.setState({
@@ -81,12 +94,19 @@ class UserHomePage extends React.Component {
     );
   }
 
+    setHref = () => {
+    document.getElementById('cr-cont').href = `/${this.state.user_id}/create-contact`
+    document.getElementById('cr-conv').href = `/${this.state.user_id}/create-conversation`
+    }
+
+  
+
   // Rendu React du composant
   render() {
     return (
       <>
       <div id="myHeader">
-        <HeaderLogout />
+        <HeaderLogout user={this.state.user_id}/>
       </div>
         <div className='flex-aside'>
           <div className='side-bar'>
@@ -102,7 +122,7 @@ class UserHomePage extends React.Component {
                 );
               })}
               <div id='create-contact-container'>
-                <a href='http://localhost:3000/create-contact'>
+                <a id="cr-cont" href="">
                   <img
                     id='create-contact'
                     src='/addcontact.png'
@@ -116,11 +136,11 @@ class UserHomePage extends React.Component {
             <div>Conversations :</div>
             {this.state.conversations.map((conv, i) => {
               return (
-                <ConversationsDisplay key={i} id={conv.id} name={conv.name} />
+                <ConversationsDisplay key={i} id={conv.id} name={conv.name} user_id={this.state.user_id} />
               );
             })}
             <div id='create-conv-container'>
-              <a href='http://localhost:3000/create-conversation'>
+              <a id="cr-conv" href="">
                 <img
                   id='create-conv'
                   src='/convers-icon.png'

@@ -47,6 +47,12 @@ class CreateConversation extends React.Component {
     this.getContacts()
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      this.setHref()
+  }
+}
+
   createConversation(ev) {
     ev.preventDefault();
 
@@ -59,7 +65,7 @@ class CreateConversation extends React.Component {
     }
     data.append("name", this.name.value);
 
-    fetch("http://localhost:5000/create_conversation", {
+    fetch("http://localhost:5000/" + this.props.match.params.user_id + "/create_conversation", {
       method: "POST",
       body: data,
     })
@@ -71,8 +77,9 @@ class CreateConversation extends React.Component {
         console.log(created_conv);
         console.log(typeof created_conv);
         if (created_conv.includes("conversation_id")) {
-          this.props.history.push("/conversation-list");
-        } else {
+          this.props.history.push(`/${this.props.match.params.user_id}/conversation-list`)
+        } 
+        else {
           alert('Adresse(s) email non reconnues')
         }
         // window.location.reload(false);
@@ -80,7 +87,7 @@ class CreateConversation extends React.Component {
   }
 
   getContacts = () => {
-    fetch('http://localhost:5000/conversation-list')
+    fetch('http://localhost:5000/'+ this.props.match.params.user_id+ '/conversation-list')
     .then(response => {
       return(
         response.json()
@@ -90,7 +97,7 @@ class CreateConversation extends React.Component {
       // Sauvegarde de l'état du composant avec le résultat de la réponse parsée de la DB
       this.setState({
         contacts : convers_list.contacts
-      });
+      })
           }, (error) => {
             this.setState({
               error
@@ -99,11 +106,15 @@ class CreateConversation extends React.Component {
       )
   };
 
+  setHref = () => {
+    document.getElementById('cr-cont').href = `/${this.props.match.params.user_id}/create-contact`
+    }
+
 
   render() {
     return (
       <>    
-        <HeaderLogout />
+        <HeaderLogout user={this.props.match.params.user_id}/>
         <div id="div-aside">
           <div className="side-bar-not-fixed">
             <section>
@@ -114,7 +125,7 @@ class CreateConversation extends React.Component {
                   )
                 })}
               <div id="create-contact-container">
-                <a href='http://localhost:3000/create-contact'><img id="create-contact" src="/creer_un_contact.png"/></a>
+                <a id="cr-cont" href=""><img id="create-contact" src="/creer_un_contact.png"/></a>
               </div> 
             </section>                         
           </div> 
