@@ -54,6 +54,8 @@ class InstantChat extends React.Component {
       console.log('newMessages', newMessages)
       this.setState({messages: newMessages})
       this.props.refresh()
+       let input_clear = document.getElementById('message-input')
+       input_clear.value = ''
     
     socket.on( 'my response', function( msg ) {
       // envoyer un message à toutes les sessions actives
@@ -82,7 +84,7 @@ class InstantChat extends React.Component {
           <form onSubmit={this.handleRegister}>
             <div className="box" id={this.props.id}>
               <label for="">Message: </label>
-              <input ref={(ref) => { this.message = ref; }} type="text"name="" id="" cols="30" rows="10" required/>
+              <input ref={(ref) => { this.message = ref; }} type="text"name="" id="message-input" cols="30" rows="10" required/>
               <button className="button">Envoyer</button>
             </div>
           </form>

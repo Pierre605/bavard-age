@@ -84,7 +84,7 @@ def init_db():
             (
               id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE
             , content TEXT NOT NULL
-            , sent_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            , sent_date TIMESTAMP DATE DEFAULT (datetime('now','localtime'))
             , user_id INTEGER NOT NULL
             , conversation_id INTEGER NOT NULL
             , CONSTRAINT fk_message_user
