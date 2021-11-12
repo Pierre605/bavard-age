@@ -93,7 +93,12 @@ class Login extends React.Component {
             </FormControl>
 
             <Button
-              sx={{ mt: 1.2, fontWeight: "700" }}
+              sx={{
+                mt: 1.2,
+                fontWeight: "700",
+                lineHeight: 3.5,
+                fontSize: "1.1rem",
+              }}
               fullWidth
               color='secondary'
               size='large'

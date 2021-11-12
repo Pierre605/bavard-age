@@ -62,6 +62,7 @@ export default function RegisterModal() {
           Pas encore inscrit ?
         </Typography>
         <Button
+          sx={{ lineHeight: 3.5, fontSize: "1.1rem" }}
           fullWidth
           size='large'
           type='button'
