@@ -43,23 +43,14 @@ export default function RegisterModal() {
   };
 
   return (
-<<<<<<< HEAD
     <>
       <div
-=======
-    <Box>
-      <Typography variant='h4' component='h2' color='primary'>
-        Pas encore inscrit ?
-      </Typography>
-      {/* <div
->>>>>>> 6dd0aebe513f21653d3ee0f4c7e212056b42907a
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           margin: 10,
           padding: 20,
-<<<<<<< HEAD
           // border: 2,
           // border: "solid",
         }}>
@@ -79,18 +70,6 @@ export default function RegisterModal() {
           S'inscrire
         </Button>
       </div>
-=======
-        }}> */}
-      <Button
-        fullWidth
-        type='button'
-        color='primary'
-        variant='contained'
-        onClick={handleOpen}>
-        Enregistrez-vous
-      </Button>
-      {/* </div> */}
->>>>>>> 6dd0aebe513f21653d3ee0f4c7e212056b42907a
       <Modal
         open={open}
         onClose={handleClose}
