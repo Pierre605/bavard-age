@@ -29,7 +29,6 @@ class Logout extends React.Component {
         } else {
           alert("Disconnection failed");
         }
-        // window.location.reload(false);
       });
   }
 

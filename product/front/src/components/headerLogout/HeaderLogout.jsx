@@ -13,6 +13,7 @@ export default function HeaderLogout(props) {
   //     a
   //   )
   // }
+  
 
   let a = `/${props.user}/conversation-list`
  
@@ -26,7 +27,7 @@ export default function HeaderLogout(props) {
           </a>
         </div>
         <div id='logout-button'>
-          <Logout user={props.user}/>
+          <Logout user={props.user} />
         </div>
       </div>
     </>
