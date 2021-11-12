@@ -198,7 +198,7 @@ def register():
                         , email \
                         , hashlib \
                         .sha256(password.encode()).hexdigest()))
-                session['user'] = new_user_id
+                session['user'].append(new_user_id)
                 session['username'] = username
                 # login_user(new_user_id)
                 print("session_user", session['user'])
@@ -206,12 +206,12 @@ def register():
                     """INSERT INTO gdpr 
                     (has_consent, user_id) 
                     values (?, ?);"""
-                    , [gdpr_consent, session['user']])
+                    , [gdpr_consent, new_user_id])
                 print("gdpr_res", gdpr_res)
                 if session['user']:    
                     result = dict(registered = True)
             # renvoyer (json)
-    return jsonify(result, session['user'])
+    return jsonify(result, new_user_id)
 
 
 # Route de liste des conversations
