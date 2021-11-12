@@ -17,7 +17,14 @@ class InConversation extends React.Component {
   }
   componentDidMount() {
     this.getConversation();
-    this.setRefesh();
+    this.refresh = setInterval(() => {
+      this.getConversation();
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    console.log("Get Conversations", "componentWillUnmount");
+    clearInterval(this.refresh);
   }
 
   getConversation = () => {
@@ -43,7 +50,7 @@ class InConversation extends React.Component {
       });
   };
 
-  setRefesh = () => {
+  setRefresh = () => {
     setInterval(this.getConversation, 1000);
     }
    
@@ -53,7 +60,7 @@ class InConversation extends React.Component {
     return (
       <>
         <div id="myHeader">
-          <HeaderLogout user={this.state.user_id}/>
+          <HeaderLogout user={this.state.user_id} />
           <DeleteMessage 
           conversation={this.state.conv_id} 
           refresh={this.getConversation} 
