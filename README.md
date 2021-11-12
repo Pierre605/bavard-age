@@ -136,9 +136,13 @@ __________
 -   Se positionner dans ```product/front/``` (chaque fois)
 ### ```cd ../front/```
 -   Installer npm
-`npm install`
--   Installer React Router,:
-`npm install react-router-dom`
+```
+npm install
+```
+-   Installer React Router
+```
+npm install react-router-dom
+```
 -   Installer SocketIO client:
 ```
 npm uninstall socket.io-client
@@ -170,8 +174,11 @@ __________
 
 ## Freezer les requirements (première fois)
 `pip freeze > requirements.txt` ou avec pip3 pour Mac :
-```pip3 freeze > requirements.txt```
-__________
+```
+pip3 freeze > requirements.txt
+```
+____
+
 ## Gérer le git
 ### .gitignore
 Dans certains répertoires sous `product/` le fichier `.gitignore` permet d'ignorer la liste des fichiers à ne pas ajouter dans le Git :
