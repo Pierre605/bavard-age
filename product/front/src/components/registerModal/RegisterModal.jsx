@@ -1,8 +1,9 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Modal, Typography, Button, Box } from "@mui/material";
+import { Modal, Typography, Button } from "@mui/material";
 import "./RegisterModal.css";
 import Register from "../register/Register";
+// import { red } from "@mui/material/colors";
 
 function getModalStyle() {
   const top = 50;
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     width: 400,
     borderRadius: 25,
+    // backgroundColor: `#000`,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -41,34 +43,43 @@ export default function RegisterModal() {
   };
 
   return (
-    <Box>
-      <Typography variant='h4' component='h2' color='primary'>
-        Pas encore inscrit ?
-      </Typography>
+    <>
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
-          margin: 20,
+          margin: 10,
           padding: 20,
+          // border: 2,
+          // border: "solid",
         }}>
+        <Typography
+          sx={{ letterSpacing: 1.2, mb: 1.8 }}
+          variant='h4'
+          component='h2'
+          color='primary'>
+          Pas encore inscrit ?
+        </Typography>
         <Button
           fullWidth
+          size='large'
           type='button'
           variant='contained'
           onClick={handleOpen}>
-          Enregistrez-vous
+          S'inscrire
         </Button>
       </div>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'>
+        // aria-labelledby='simple-modal-title'
+        // aria-describedby='simple-modal-description'
+      >
         <div style={modalStyle} className={classes.paper}>
           <Register close={handleClose} />
         </div>
       </Modal>
-    </Box>
+    </>
   );
 }

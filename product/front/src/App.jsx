@@ -17,16 +17,6 @@ class App extends React.Component {
   render() {
     return (
       <>
-        {/* <AppBar position='static'>
-          <Toolbar>
-            <Typography variant='title'>
-              <a href='/'>
-                <img src='/logo2.png' width='100px' alt='logo-provisoire' />
-              </a>
-            </Typography>
-            <NavBar />
-          </Toolbar>
-        </AppBar> */}
         <Router>
           <Route path='/' exact>
             <HomePage />
@@ -40,11 +30,7 @@ class App extends React.Component {
           <Route path='/create-contact' exact>
             <CreateContact />
           </Route>
-          <Route
-            path='/conversation/:id'
-            exact
-            component={InConversation}
-          />
+          <Route path='/conversation/:id' exact component={InConversation} />
         </Router>
       </>
     );
