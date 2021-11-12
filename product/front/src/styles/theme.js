@@ -29,34 +29,38 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      light: "#a0929b",
+      // light: "#a0929b",
       // light: "rgba(79, 54, 70, 0.54)",
+      light: "#C4C4C4",
       main: "#4f3646",
       dark: "#372631",
-      contrastText: "#98Ac37",
+      // contrastText: "#98Ac37",
+      contrastText: "#fff",
     },
     secondary: {
       main: "#98Ac37",
       light: green[300],
       dark: "#7a8a2c",
-      contrastText: "#4f3646",
+      // contrastText: "#4f3646",
+      contrastText: "#fff",
     },
     text: {
       primary: "#2f202a",
+      secondary: "#4f3646",
     },
   },
-  overrides: {
-    MuiInputLabel: {
-      root: {
-        color: green[300],
-        fontSize: 32,
-      },
-    },
+  // overrides: {
+  //   MuiInputLabel: {
+  //     root: {
+  //       color: green[300],
+  //       fontSize: 32,
+  //     },
+  //   },
 
-    // background: {
-    //   paper: `url(${Image})`,
-    // },
-  },
+  // background: {
+  //   paper: `url(${Image})`,
+  // },
+  // },
   // components: {
   //   MuiCssBaseline: {
   //     styleOverrides: `

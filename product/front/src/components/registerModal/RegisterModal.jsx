@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Modal, Typography, Button } from "@mui/material";
-import "./RegisterModal.css";
+import { Container, Modal, Typography, Button } from "@mui/material";
 import Register from "../register/Register";
 // import { red } from "@mui/material/colors";
 
@@ -44,39 +43,40 @@ export default function RegisterModal() {
 
   return (
     <>
-      <div
-        style={{
+      <Container
+        sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          margin: 10,
-          padding: 20,
-          // border: 2,
-          // border: "solid",
+          my: "3rem",
         }}>
         <Typography
-          sx={{ letterSpacing: 1.2, mb: 1.8 }}
+          sx={{ letterSpacing: 1.2, mb: "1.8rem", fontWeight: "700" }}
           variant='h4'
           component='h2'
           color='primary'>
           Pas encore inscrit ?
         </Typography>
         <Button
-          sx={{ lineHeight: 3.5, fontSize: "1.1rem" }}
-          fullWidth
-          size='large'
+          sx={{
+            lineHeight: 3,
+            fontSize: "1.6rem",
+            width: "24rem",
+            alignSelf: "center",
+            // mb: "2rem",
+          }}
           type='button'
+          size='large'
           variant='contained'
           onClick={handleOpen}>
           S'inscrire
         </Button>
-      </div>
+      </Container>
       <Modal
         open={open}
         onClose={handleClose}
-        // aria-labelledby='simple-modal-title'
-        // aria-describedby='simple-modal-description'
-      >
+        aria-labelledby='simple-modal-title'
+        aria-describedby='simple-modal-description'>
         <div style={modalStyle} className={classes.paper}>
           <Register close={handleClose} />
         </div>
