@@ -50,23 +50,26 @@ class CreateContact extends React.Component {
     return (
       <>     
         <HeaderLogout />
-        <form onSubmit={this.createContact}>
+        <form className = "conteneur" onSubmit={this.createContact}>
           <div className='flex'>
             <div className='input-style'>
-              <label htmlFor=''>Email du contact: </label>
+              {/* <label className = "labelEmail" htmlFor=''>Email du contact: </label> */}
+             
               <input
                 id='email'
                 className='input'
                 type='text'
+                placeholder = "Email du contact"
                 ref={(ref) => {
                   this.email = ref;
                 }}
                 required
               />
+               <hr className = "separateur"/>
             </div>
           </div>
           <div className="create-contact-button">
-            <button>Créer contact</button>
+            <button className = "boutonCréationContact">Créer</button>
           </div>
         </form>
       </>

@@ -5,7 +5,6 @@ import ConversationsDisplay from "../../components/conversationsDisplay/Conversa
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import ContactsDisplay from "../../components/contactsDisplay/ContactsDisplay";
 
-
 class UserHomePage extends React.Component {
   constructor(props) {
     super(props);

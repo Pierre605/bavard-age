@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Luciole";
   src: url("./styles/fonts/Luciole-Regular.ttf");
+<<<<<<< HEAD
   /* font-family: "Atkinson";
   src: url("./font/Atkinson-Hyperlegible-Regular-102.ttf");
   src: url("./font/Atkinson-Hyperlegible-Regular-102.woff") format("woff"),
@@ -15,4 +16,6 @@ body {
   /* font-size: 24px; */
   /* -webkit-font-smoothing: antialiased; */
   /* -moz-osx-font-smoothing: grayscale; */
+=======
+>>>>>>> 6dd0aebe513f21653d3ee0f4c7e212056b42907a
 }
