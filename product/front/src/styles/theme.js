@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import Luciole from "./fonts/Luciole-Regular.ttf";
+// import Luciole from "./fonts/Luciole-Regular.ttf";
 import { green } from "@mui/material/colors";
 // import Image from "../styles/assets/famille.jpg";
 // /* Le caractère typographique Luciole a été conçu spécifiquement pour les personnes malvoyantes. Ce projet est le résultat de plus de deux années de collaboration entre le Centre Technique Régional pour la Déficience Visuelle et le studio typographies.fr. Le projet a bénéficié d'une bourse de la Fondation suisse Ceres et de l'appui du laboratoire DIPHE de l'Université Lumière Lyon 2. luciole-vision.com */
@@ -31,7 +31,7 @@ const theme = createTheme({
     primary: {
       // light: "#a0929b",
       // light: "rgba(79, 54, 70, 0.54)",
-      light: "#C4C4C4",
+      light: "rgba(79, 54, 70, 0.54)",
       main: "#4f3646",
       dark: "#372631",
       // contrastText: "#98Ac37",

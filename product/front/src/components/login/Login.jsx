@@ -1,15 +1,12 @@
 import React from "react";
-import "./Login.css";
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  Button,
-  Typography,
-  Container,
-  Box,
-} from "@mui/material";
 import { withRouter } from "react-router-dom";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Input from "@mui/material/Input";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 
 class Login extends React.Component {
   constructor(props) {
@@ -37,7 +34,7 @@ class Login extends React.Component {
       })
       .then((data) => {
         let login = JSON.parse(data);
-        console.log("login",login);
+        console.log("login", login);
         console.log(typeof login);
         if (login[0].includes("true")) {
           this.props.history.push(`/${login[1]}/conversation-list`);
@@ -65,10 +62,12 @@ class Login extends React.Component {
               fontSize: "2.4rem",
               fontWeight: "700",
               mb: "1.2rem",
+              color: "rgba(79, 54, 70, 0.88)",
             }}
             variant='h3'
             component='h2'
-            color='primary'>
+            // color='primary'
+          >
             Avec Bavard'Âge, restez en contact avec vos proches
           </Typography>
           <Container
