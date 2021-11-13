@@ -6,9 +6,10 @@ import {
   Input,
   Button,
   Typography,
+  Container,
+  Box,
 } from "@mui/material";
 import { withRouter } from "react-router-dom";
-import { Box } from "@mui/system";
 
 class Login extends React.Component {
   constructor(props) {
@@ -50,50 +51,83 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <Typography variant='h3' component='h1' color='primary'>
-          Page de connexion
-        </Typography>
-        <Box>
-          <Typography variant='h4' component='h2' color='primary'>
-            Connectez-vous
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            my: "3rem",
+            // py: "3rem",
+          }}>
+          <Typography
+            sx={{
+              letterSpacing: 1.6,
+              fontSize: "2.4rem",
+              fontWeight: "700",
+              mb: "1.2rem",
+            }}
+            variant='h3'
+            component='h2'
+            color='primary'>
+            Avec Bavard'Âge, restez en contact avec vos proches
           </Typography>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              margin: 20,
-              padding: 20,
+          <Container
+            maxWidth='md'
+            sx={{
+              backgroundColor: "rgba(196,196,196, 0.5)",
+              borderRadius: 1.5,
+              pb: 4,
+              mt: 2,
             }}>
             <form onSubmit={this.handleLogin}>
-              <FormControl margin='normal' fullWidth required>
-                <InputLabel htmlFor='username'>Nom</InputLabel>
-                <Input
-                  id='username'
-                  placeholder='Votre nom'
-                  type='text'
-                  inputRef={(ref) => {
-                    this.username = ref;
-                  }}
-                  // required
-                />
-              </FormControl>
-              <FormControl margin='normal' fullWidth required>
-                <InputLabel htmlFor='userpwd'>Mot de passe</InputLabel>
-                <Input
-                  id='userpwd'
-                  type='text'
-                  inputRef={(ref) => {
-                    this.password = ref;
-                  }}
-                />
-              </FormControl>
-
-              <Button size='small' fullWidth variant='contained' type='submit'>
-                Envoyer
+              <Box sx={{ pb: 2 }}>
+                <FormControl margin='normal' fullWidth required>
+                  <InputLabel sx={{ fontSize: "1.5rem" }} htmlFor='username'>
+                    Entrez votre nom
+                  </InputLabel>
+                  <Input
+                    sx={{ fontSize: "2rem" }}
+                    id='username'
+                    placeholder='Votre nom'
+                    type='text'
+                    inputRef={(ref) => {
+                      this.username = ref;
+                    }}
+                    // required
+                  />
+                </FormControl>
+                <FormControl margin='normal' fullWidth required>
+                  <InputLabel sx={{ fontSize: "1.5rem" }} htmlFor='userpwd'>
+                    Mot de passe
+                  </InputLabel>
+                  <Input
+                    sx={{ fontSize: "2rem" }}
+                    id='userpwd'
+                    placeholder='Votre mot de passe'
+                    type='text'
+                    inputRef={(ref) => {
+                      this.password = ref;
+                    }}
+                  />
+                </FormControl>
+              </Box>
+              <Button
+                sx={{
+                  mt: 1.2,
+                  fontWeight: "700",
+                  lineHeight: 3,
+                  fontSize: "1.6rem",
+                }}
+                fullWidth
+                color='secondary'
+                size='large'
+                variant='contained'
+                type='submit'>
+                Se connecter
               </Button>
             </form>
-          </div>
-        </Box>
+          </Container>
+        </Container>
       </>
     );
   }

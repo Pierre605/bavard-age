@@ -10,6 +10,10 @@ import UserHomePage from "./pages/userHomePage/UserHomePage";
 import InConversation from "./pages/InConversation/InConversation";
 import CreateConversation from "./pages/createConversation/CreateConversation";
 import CreateContact from "./pages/createContact/CreateContact";
+// import AppBar from "@mui/material/AppBar";
+// import Toolbar from "@mui/material/Toolbar";
+import Footer from "./components/footer/Footer";
+// import Typography from "@mui/material/Typography";
 
 // Composant de classe App, principal de l'App React BLAblaPp
 class App extends React.Component {
@@ -17,16 +21,6 @@ class App extends React.Component {
   render() {
     return (
       <>
-        {/* <AppBar position='static'>
-          <Toolbar>
-            <Typography variant='title'>
-              <a href='/'>
-                <img src='/logo2.png' width='100px' alt='logo-provisoire' />
-              </a>
-            </Typography>
-            <NavBar />
-          </Toolbar>
-        </AppBar> */}
         <Router>
           <Route path='/' exact>
             <HomePage />
