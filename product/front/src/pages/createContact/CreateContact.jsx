@@ -66,7 +66,7 @@ class CreateContact extends React.Component {
             </div>
           </div>
           <div className="create-contact-button">
-            <button>Créer contact</button>
+            <button className = "boutonCreationContact">Créer un contact</button>
           </div>
         </form>
       </>

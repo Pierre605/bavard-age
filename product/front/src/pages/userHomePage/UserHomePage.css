@@ -1,3 +1,14 @@
+/* Conteneur de la page */
+.flexAsideList{
+  display: flex; 
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%; 
+  height: 100%;
+  margin-top: 5%;
+  font-size:20px;
+}
 
 #create-conv {
   width: 90px;
@@ -30,4 +41,133 @@
   width: 60%;
   margin-left: 28%;
   margin-top: 6em;
+}
+
+#create-conv {
+  width: 90px;
+}
+
+/* Partie Contact / Side-bar */
+
+.sideBarList{
+  width: 30%;
+  background-color: #98ac39;
+  padding-bottom: 40%;
+  color: whitesmoke;
+}
+
+.titreContact{
+  text-align: center;
+  border-bottom-style: solid;
+  border-bottom-width: 0.7rem;
+  border-color: white;
+  border-width: 100%;
+  font-weight: bold;
+  letter-spacing: .2rem;
+
+}
+
+/* Partie pour les conversations */
+.conversation-list {
+  width: 70%;
+  background-color: #C4C4C4;
+  padding-bottom: 40.3%;
+}
+
+.titreConversation{
+  color: black; opacity:1;
+  border-bottom-style: solid;
+  border-bottom-width: 0.7rem;
+  border-color: white;
+  border-width: 100%;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: .2rem;
+}
+
+/* Tablette en mode portrait */
+
+@media all and (min-width : 20px) and (max-width : 1000px) and (orientation: landscape) {
+  /* Conteneur de la page */
+  .flexAsideList{
+    width: 100%; 
+    height: 100%;
+    margin-top: 10%;
+   
+  }
+
+  /* Partie Contact / Side-bar */
+
+  .titreContact{
+    padding-left: 15%;
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    font-size: 20px;
+
+  }
+  .sideBarList{
+    width: 45%;
+    background-color: #98ac39;
+    padding-bottom: 70%;
+    color: whitesmoke;
+  }
+
+  /* Partie pour les conversations */
+  .conversation-list {
+    width: 55%;
+    background-color: #C4C4C4;
+    padding-bottom: 70%;
+    font-size: 20px;
+  }
+
+  .titreConversation{
+    color: black;
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    font-size: 20px;
+  }
+}
+  
+  /* Tablette en mode paysage */
+  
+@media all and (min-width : 20px) and (max-width : 1000px) and (orientation : portrait) {
+  /* Conteneur de la page */
+  .flexAsideList{
+    width: 100%; 
+    height: 100%;
+    margin-top: 10%;
+  }
+  
+  /* Partie Contact / Side-bar */
+  
+  .titreContact{
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    font-size: 20px;
+  }
+  .sideBarList{
+    width: 45%;
+    background-color: #98ac39;
+    padding-bottom: 70%;
+    color: whitesmoke;
+  }
+  
+  /* Partie pour les conversations */
+  .conversation-list {
+    width: 55%;
+    background-color: #C4C4C4;
+    padding-bottom: 70%;
+    font-size: 20px;
+  }
+  
+  .titreConversation{
+    color: black;
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    font-size: 20px;
+  }
 }
