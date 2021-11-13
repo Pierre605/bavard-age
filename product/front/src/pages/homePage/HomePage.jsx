@@ -1,5 +1,6 @@
 import * as React from "react";
-import { AppBar, Box } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
 // Composants enfants
 import Login from "../../components/login/Login";
 import RegisterModal from "../../components/registerModal/RegisterModal";
@@ -16,20 +17,20 @@ class HomePage extends React.Component {
   // Rendu React du composant
   render() {
     return (
-      <div className='homepage'>
+      <>
         <AppBar
           position='static'
           sx={{
             backgroundColor: "#fff",
           }}>
-          <a href='/'>
-            <img
-              src='/logotxt.png'
-              width='310'
-              alt='logo BavardAge'
-              style={{ marginLeft: "2.4rem" }}
-            />
-          </a>
+          {/* <a href='/'> */}
+          <img
+            src='/logotxt.png'
+            width='310'
+            alt='logo BavardAge'
+            style={{ marginLeft: "2.4rem" }}
+          />
+          {/* </a> */}
         </AppBar>
         <Box
           maxWidth='xl'
@@ -40,7 +41,7 @@ class HomePage extends React.Component {
           <Login />
           <RegisterModal />
         </Box>
-      </div>
+      </>
     );
   }
 }

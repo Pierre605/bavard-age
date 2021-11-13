@@ -1,7 +1,10 @@
 import React from "react";
-import { makeStyles } from "@mui/styles";
-import { Container, Modal, Typography, Button } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import Container from "@mui/material/Container";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 import Register from "../register/Register";
+import "./RegisterModal.css";
 // import { red } from "@mui/material/colors";
 
 function getModalStyle() {
@@ -19,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
     width: 400,
+    maxHeight: "90%",
     borderRadius: 25,
     // backgroundColor: `#000`,
     backgroundColor: theme.palette.background.paper,
@@ -50,13 +54,13 @@ export default function RegisterModal() {
           justifyContent: "center",
           my: "3rem",
         }}>
-        <Typography
+        {/* <Typography
           sx={{ letterSpacing: 1.2, mb: "1.8rem", fontWeight: "700" }}
           variant='h4'
           component='h2'
           color='primary'>
           Pas encore inscrit ?
-        </Typography>
+        </Typography> */}
         <Button
           sx={{
             lineHeight: 3,
@@ -69,18 +73,18 @@ export default function RegisterModal() {
           size='large'
           variant='contained'
           onClick={handleOpen}>
-          S'inscrire
+          Créer un compte
         </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='simple-modal-title'
+          aria-describedby='simple-modal-description'>
+          <div style={modalStyle} className={classes.paper}>
+            <Register close={handleClose} />
+          </div>
+        </Modal>
       </Container>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'>
-        <div style={modalStyle} className={classes.paper}>
-          <Register close={handleClose} />
-        </div>
-      </Modal>
     </>
   );
 }

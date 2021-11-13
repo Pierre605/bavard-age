@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+// import CancelIcon from "@mui/icons-material/Cancel";
 import "./Register.css";
 
 class Register extends React.Component {
@@ -49,12 +50,14 @@ class Register extends React.Component {
     return (
       <>
         <div id='img'>
-          <a href=""><img
-            src='/red-cross.png'
-            className='red-cross'
-            onClick={this.props.close}
-            alt='Pour fermer fenêtre'
-          /></a>
+          <a href='/'>
+            <img
+              src='/red-cross.png'
+              className='red-cross'
+              onClick={this.props.close}
+              alt='Pour fermer fenêtre'
+            />
+          </a>
         </div>
         <h1 id='simple-modal-title'>INSCRIVEZ-VOUS</h1>
         <form onSubmit={this.handleRegister}>
