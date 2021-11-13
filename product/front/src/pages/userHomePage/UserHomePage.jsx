@@ -23,7 +23,21 @@ class UserHomePage extends React.Component {
     this.getConversations();
     this.createConvMouseOver();
     this.createContactMouseOver();
+    window.onbeforeunload = this.handleLogout
   }
+
+  
+    handleLogout(ev) {
+      ev.preventDefault()
+      fetch("http://localhost:5000/"+ this.state.user_id + "/logout")
+        .then((response) => {
+          return response.text();
+        })
+        .then((data) => {
+          let logout = data;
+          console.log(logout);
+        });
+    }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.user_id !== this.state.user_id) {
