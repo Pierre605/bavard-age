@@ -8,3 +8,19 @@
   font-size: medium;
   margin-top: -0.5em;
 }
+
+@media all and (min-width : 480px) and (max-width : 1000px) and (orientation : landscape) {
+
+  .members{
+    margin: none;
+    font-size: 24px;
+  }
+}
+
+@media all and (min-width : 480px) and (max-width : 1000px) and (orientation : portrait) {
+
+  .members{
+    margin: none;
+    font-size: 24px;
+  }
+}
