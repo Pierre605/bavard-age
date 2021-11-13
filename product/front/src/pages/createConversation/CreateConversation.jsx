@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./CreateConversation.css";
 import ContactsSelect from "../../components/contactsSelect/ContactsSelect";
-import NavBar from "../../components/navBar/NavBar.js";
 
 class CreateConversation extends React.Component {
   constructor(props) {
@@ -37,7 +36,6 @@ class CreateConversation extends React.Component {
   };
 
   addAdressSpace = () => {
-    let L = [];
     let input = this.state.selected_contacts;
     let string = new String(input);
     let formed_string = string.split(",").join(", ");
