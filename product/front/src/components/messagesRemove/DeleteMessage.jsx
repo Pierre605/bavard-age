@@ -77,6 +77,7 @@ export default class DeleteMessage extends React.Component  {
         })
         .then(() => {
             this.props.refresh()
+            this.openSelect()
         })
 
     }
