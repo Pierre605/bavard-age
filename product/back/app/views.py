@@ -211,7 +211,9 @@ def register():
                 if session['user']:    
                     result = dict(registered = True)
             # renvoyer (json)
-    return jsonify(result, new_user_id)
+                return jsonify(result, new_user_id)
+            else:
+                return "registration impossible"
 
 
 # Route de liste des conversations
@@ -264,6 +266,14 @@ def chatroom_select(user_id):
             conversation.name"""
             , [user])
 
+        user_name = query_db(""" 
+                    SELECT username 
+                    FROM user 
+                    WHERE user.id = (?)"""
+                    , [user])
+        print("username: ", user_name[0][0])
+        username = user_name[0][0]
+
         print('conversations: ', conversations)
         contacts = query_db(""" 
                     SELECT u.id, u.username, u.email
@@ -276,10 +286,10 @@ def chatroom_select(user_id):
         if conversations:
             return jsonify({'conversations': [dict(row) for row in conversations]
                 , 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts],
-                'user_id': user})
+                'user_id': user, 'username': username})
         else:
             return (jsonify({'conversations': [], 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts],
-                'user_id': user}))
+                'user_id': user, 'username': username}))
     else:
         return jsonify("user not connected")
 

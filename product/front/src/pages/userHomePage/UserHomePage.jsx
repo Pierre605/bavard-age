@@ -14,6 +14,7 @@ class UserHomePage extends React.Component {
       conversations: [],
       contacts: [],
       user_id: [],
+      username: [],
     };
     this.getConversations = this.getConversations.bind(this);
   }
@@ -23,21 +24,7 @@ class UserHomePage extends React.Component {
     this.getConversations();
     this.createConvMouseOver();
     this.createContactMouseOver();
-    window.onbeforeunload = this.handleLogout
   }
-
-  
-    handleLogout(ev) {
-      ev.preventDefault()
-      fetch("http://localhost:5000/"+ this.state.user_id + "/logout")
-        .then((response) => {
-          return response.text();
-        })
-        .then((data) => {
-          let logout = data;
-          console.log(logout);
-        });
-    }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.user_id !== this.state.user_id) {
@@ -59,6 +46,7 @@ class UserHomePage extends React.Component {
               conversations: convers_list.conversations,
               contacts: convers_list.contacts,
               user_id: convers_list.user_id,
+              username: convers_list.username,
              })
           }
           else {
@@ -122,6 +110,7 @@ class UserHomePage extends React.Component {
       <div id="myHeader">
         <HeaderLogout user={this.state.user_id}/>
       </div>
+      <div className="welcome">Bienvenue <b>{this.state.username}</b> !</div>
         <div className='flex-aside'>
           <div className='side-bar'>
               <div>Contacts :</div>
