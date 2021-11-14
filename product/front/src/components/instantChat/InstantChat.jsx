@@ -29,8 +29,6 @@ class InstantChat extends React.Component {
   handleRegister(ev) {
 
       ev.preventDefault();
-
-      let user = this.state.user_id
       socket.emit( 'message sent', {
         user: this.state.user_id,
         message : this.message.value,

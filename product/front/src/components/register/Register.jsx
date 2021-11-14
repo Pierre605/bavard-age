@@ -40,8 +40,8 @@ class Register extends React.Component {
           return response.json();
         })
         .then((data) => {
-          console.log(data[0]);
-          if (data[1]) {
+          console.log(data[0], data[1]);
+          if (data[0]['registered'] === true) {
             this.props.history.push(`/${data[1]}/conversation-list`);
           } else {
             alert("Registration failed");

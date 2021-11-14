@@ -195,10 +195,10 @@ def register():
             print('postdata_password', password)
             print('postdata_gdpr_consent', gdpr_consent)
             user_create_blocker = query_db("""
-                    SELECT count(id) 
-                    FROM user 
-                    WHERE (username = (?)
-                    OR email = (?));"""
+                        SELECT count(id) 
+                        FROM user 
+                        WHERE (username = (?)
+                        OR email = (?));"""
                     , (username, email), one=True)[0]
             if user_create_blocker == 0 and (gdpr_consent == "True" or gdpr_consent == 'true'):
                 # sinon : enregistrer le nouvel utilisateur
@@ -212,6 +212,7 @@ def register():
                         , email \
                         , hashlib \
                         .sha256(password.encode()).hexdigest()))
+                print("new_user_id", new_user_id)
                 session['user'].append(new_user_id)
                 session['username'] = username
                 # login_user(new_user_id)
@@ -225,7 +226,8 @@ def register():
                 if session['user']:    
                     result = dict(registered = True)
             # renvoyer (json)
-    return jsonify(result, new_user_id)
+    print("result, session['user']", result, None)
+    return jsonify(result, session['user'])
 
 
 # Route de liste des conversations
@@ -268,14 +270,18 @@ def chatroom_select(user_id):
             SELECT
             conversation.id
             FROM
-            user, conversation, user_conversation
-            WHERE
-            user.id = user_conversation.user_id
-            AND
+            user
+            LEFT JOIN
+            user_conversation
+            ON
+            user_conversation.user_id = user.id
+            LEFT JOIN
+            conversation
+            ON
             conversation.id = user_conversation.conversation_id
-            AND user_id = (?))
+            WHERE user_id = (?))
             GROUP BY
-            conversation.name"""
+            conversation.id"""
             , [user])
 
         print('conversations: ', conversations)
