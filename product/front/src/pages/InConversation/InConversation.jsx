@@ -22,7 +22,6 @@ class InConversation extends React.Component {
   }
 
   componentWillUnmount() {
-    console.log("Get Conversations", "componentWillUnmount");
     clearInterval(this.refresh);
   }
 
@@ -33,8 +32,7 @@ class InConversation extends React.Component {
       })
       .then((data) => {
         const messages = JSON.parse(data);
-        console.log("ici messages", messages);
-        if (messages.includes("user not in this")) {
+         if (messages.includes("user not in this")) {
           alert("You are not part of this conversation");
         } else {
           this.setState({
@@ -44,7 +42,6 @@ class InConversation extends React.Component {
             user_id: messages[3],
             conv_id: this.props.match.params.id,
           });
-          console.log("user_id: ", this.state.user_id)
         }
       });
   };

@@ -29,11 +29,8 @@ class InstantChat extends React.Component {
   handleRegister(ev) {
 
       ev.preventDefault();
-      console.log('Chat-handleRegister')
-      let user = this.state.user_id
-      console.log("user_id instantChat: ", user)
 
-      console.log('chatroom - message à envoyer et envoyé socket front', this.state.chatroom, this.message.value, this.state.user_id, this.state.username);
+      let user = this.state.user_id
       socket.emit( 'message sent', {
         user: this.state.user_id,
         message : this.message.value,
@@ -42,15 +39,13 @@ class InstantChat extends React.Component {
       // $( 'input.message' ).val( '' )
     let newMessages = [...this.state.messages]
       newMessages.push(this.message.value)
-      console.log('newMessages', newMessages)
       this.setState({messages: newMessages})
       this.props.refresh()
        let input_clear = document.getElementById('message-input')
        input_clear.value = ''
     
     socket.on( 'my response', function( msg ) {
-      // envoyer un message à toutes les sessions actives
-      console.log( msg )
+
 
   })
 }

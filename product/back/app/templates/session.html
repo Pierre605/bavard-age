@@ -29,8 +29,9 @@
           data: 'User Connected'} ) // renvoie la connexion d'un utilisateur
           var form = $( 'form' ).on( 'submit', function( e ) { // empêcher l'envoi du formulaire afin de récupérer la valeur des champs
               e.preventDefault()   
-              let message = $( 'input.message' ).val()      
-              let username = $( 'input.username' ).val()
+              let message = $( 'input.message' ).val()
+              $( 'input.username' ).val('{{ username }}')
+              let username = '{{ username }}'
               if (message != ''){
                 console.log("message != ''", message)
                 console.log('username', username) 

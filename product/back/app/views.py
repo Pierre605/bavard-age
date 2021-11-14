@@ -108,6 +108,20 @@ def hello():
     return ("hello world!")
 
 
+@app.route('/chat')
+def sessions():
+    print('routesessionhtml', session['username'], session['user'], session['chatroom'])
+    username = session['username']
+    # on vérifie que user fait bien partie de conversation
+    if session['user'] and session['chatroom']:
+        user = session['user']
+        chatroom = session['chatroom']
+        return render_template('session.html', user=user, chatroom=chatroom, username=username)
+    else:
+        print("user not in this conversation")
+        return jsonify("user not in this conversation")
+
+
 # Route de connexion (login -> Login.jsx)
 @app.route("/login", methods=['POST'])
 def login():
@@ -375,6 +389,7 @@ def conversation(user_id, conversation_id):
                     , [user, conversation_id]
                     , one=True)[0]
                 if user_ok != None:
+                    session['chatroom']=[conversation_id]
                     res_messages = query_db("""
                         SELECT message.id, username, content, sent_date 
                         FROM message, user, conversation
@@ -410,10 +425,8 @@ def conversation(user_id, conversation_id):
                     liste_participants = (participants).split(',')
 
                     session['room'] = conversation_id
-                    print(list_convers_messages)
                     return jsonify(list_convers_messages, str(username), liste_participants, str(user))
                 else:
-                    print("user not in this conversation")
                     return jsonify("user not in this conversation")
             else:
                 return ("no user logged so no conversation id")
@@ -519,8 +532,8 @@ def messageReceived(methods=['GET', 'POST']):
 def message_sent(jsonresponse):
     result = dict(sent_message = False)
     print('jsonresponse', jsonresponse)
-    # session['chatroom']=jsonresponse['chatroom'];
-    # print('session-room', session['chatroom'])
+    session['chatroom']=jsonresponse['chatroom'];
+    print('session-room', session['chatroom'])
     if jsonresponse['user'] and jsonresponse['chatroom']:
         # if 'message' in jsonresponse.keys() and jsonresponse['message'] != "" and jsonresponse['chatroom'] and jsonresponse['chatroom'] == session.get('room'):
         db = getattr(g, '_database', None)
