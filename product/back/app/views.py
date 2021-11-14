@@ -143,13 +143,13 @@ def login():
                 print("login/session_user", session['user'])
                 print('login/session_username', session['username'])
                 # user = User(existing_user[0])
-                # print("User.id: ", user.id)
+                print("session['user'][-1]", session['user'][-1])
                 # login_user(user)     
                 result = dict(logged_in = True)
             else:
                 print("login/existing_user[0]", existing_user[0])
                 result = dict(logged_in = True)
-        return jsonify(result, session['user'])
+        return jsonify(result, session['user'][-1])
 
 
 # Route de déconnexion (logout -> Logout.jsx)
