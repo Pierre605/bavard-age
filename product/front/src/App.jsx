@@ -8,7 +8,7 @@ import CreateConversation from "./pages/createConversation/CreateConversation";
 import CreateContact from "./pages/createContact/CreateContact";
 // import AppBar from "@mui/material/AppBar";
 // import Toolbar from "@mui/material/Toolbar";
-// import Footer from "./components/footer/Footer";
+import Footer from "./components/footer/Footer";
 // import Typography from "@mui/material/Typography";
 
 // Composant de classe App, principal de l'App React BLAblaPp
@@ -46,6 +46,7 @@ class App extends React.Component {
             render={(props) => <InConversation {...props} />}
           />
         </Router>
+        <Footer />
       </>
     );
   }
