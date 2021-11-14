@@ -5,7 +5,6 @@ import ConversationsDisplay from "../../components/conversationsDisplay/Conversa
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import ContactsDisplay from "../../components/contactsDisplay/ContactsDisplay";
 
-
 class UserHomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +18,7 @@ class UserHomePage extends React.Component {
   }
 
   componentDidMount() {
-    console.log("params: ", this.props.match.params.user_id)
+    console.log("params: ", this.props.match.params.user_id);
     this.getConversations();
     this.createConvMouseOver();
     this.createContactMouseOver();
@@ -27,28 +26,34 @@ class UserHomePage extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.user_id !== this.state.user_id) {
-      this.setHref()
+      this.setHref();
+    }
   }
-}
 
   getConversations = () => {
-    fetch("http://localhost:5000/" + this.props.match.params.user_id + "/conversation-list")
+    fetch(
+      "http://localhost:5000/" +
+        this.props.match.params.user_id +
+        "/conversation-list"
+    )
       .then((response) => {
         return response.json();
       })
       .then(
         (convers_list) => {
           console.log("UserHome/getConversations/convers_list", convers_list);
-          console.log("UserHome/getConversations/convers_list", typeof convers_list);
-          if (convers_list['contacts']) {
+          console.log(
+            "UserHome/getConversations/convers_list",
+            typeof convers_list
+          );
+          if (convers_list["contacts"]) {
             this.setState({
               conversations: convers_list.conversations,
               contacts: convers_list.contacts,
               user_id: convers_list.user_id,
-             })
-          }
-          else {
-            alert("User not connected")
+            });
+          } else {
+            alert("User not connected");
           }
         },
         (error) => {
@@ -94,53 +99,60 @@ class UserHomePage extends React.Component {
     );
   }
 
-    setHref = () => {
-    document.getElementById('cr-cont').href = `/${this.state.user_id}/create-contact`
-    document.getElementById('cr-conv').href = `/${this.state.user_id}/create-conversation`
-    }
-
-  
+  setHref = () => {
+    document.getElementById(
+      "cr-cont"
+    ).href = `/${this.state.user_id}/create-contact`;
+    document.getElementById(
+      "cr-conv"
+    ).href = `/${this.state.user_id}/create-conversation`;
+  };
 
   // Rendu React du composant
   render() {
     return (
       <>
-      <div id="myHeader">
-        <HeaderLogout user={this.state.user_id}/>
-      </div>
+        <div id='myHeader'>
+          <HeaderLogout user={this.state.user_id} />
+        </div>
         <div className='flex-aside'>
           <div className='side-bar'>
-              <div>Contacts :</div>
-              {this.state.contacts.map((member, i) => {
-                return (
-                  <ContactsDisplay
-                    key={i}
-                    id={member.contact_id}
-                    username={member.username}
-                    email={member.email}
-                  />
-                );
-              })}
-              <div id='create-contact-container'>
-                <a id="cr-cont" href="">
-                  <img
-                    id='create-contact'
-                    src='/addcontact.png'
-                    alt='Cliquer pour créer un contact'
-                  />
-                </a>
-                <div id='create-contact-msg'></div>
-              </div>
+            <div>Contacts :</div>
+            {this.state.contacts.map((member, i) => {
+              return (
+                <ContactsDisplay
+                  key={i}
+                  id={member.contact_id}
+                  username={member.username}
+                  email={member.email}
+                />
+              );
+            })}
+            <div id='create-contact-container'>
+              <a id='cr-cont' href=''>
+                <img
+                  id='create-contact'
+                  src='/addcontact.png'
+                  alt='Cliquer pour créer un contact'
+                />
+              </a>
+              <div id='create-contact-msg'></div>
+            </div>
           </div>
-          <div className="conversation-list">
+          <div className='conversation-list'>
             <div>Conversations :</div>
             {this.state.conversations.map((conv, i) => {
               return (
-                <ConversationsDisplay key={i} id={conv.id} name={conv.name} user_id={this.state.user_id} />
+                <ConversationsDisplay
+                  key={i}
+                  id={conv.id}
+                  name={conv.name}
+                  user_id={this.state.user_id}
+                />
               );
             })}
             <div id='create-conv-container'>
-              <a id="cr-conv" href="">
+              <a id='cr-conv' href=''>
                 <img
                   id='create-conv'
                   src='/convers-icon.png'

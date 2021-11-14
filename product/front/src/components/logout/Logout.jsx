@@ -1,7 +1,7 @@
 import React from "react";
 // import './Logout.css';
 import { withRouter } from "react-router-dom";
-import './Logout.css'
+import "./Logout.css";
 
 class Logout extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Logout extends React.Component {
   handleLogout(ev) {
     ev.preventDefault();
 
-    fetch("http://localhost:5000/"+ this.props.user + "/logout")
+    fetch("http://localhost:5000/" + this.props.user + "/logout")
       .then((response) => {
         return response.text();
       })
@@ -32,11 +32,17 @@ class Logout extends React.Component {
       });
   }
 
-
   render() {
     return (
       <>
-        <a href=""><img className="deconnection-pic" src="/se_deconnecter.png" onClick={this.handleLogout}/></a>
+        <a href=''>
+          <img
+            className='deconnection-pic'
+            src='/se_deconnecter.png'
+            onClick={this.handleLogout}
+            alt='Se déconnecter'
+          />
+        </a>
       </>
     );
   }

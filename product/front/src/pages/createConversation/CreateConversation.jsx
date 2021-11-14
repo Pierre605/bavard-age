@@ -141,7 +141,11 @@ class CreateConversation extends React.Component {
               })}
               <div id='create-contact-container'>
                 <a id='cr-cont' href=''>
-                  <img id='create-contact' src='/creer_un_contact.png' />
+                  <img
+                    id='create-contact'
+                    src='/creer_un_contact.png'
+                    alt='Créer un contact'
+                  />
                 </a>
               </div>
             </section>

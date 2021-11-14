@@ -36,7 +36,8 @@ class HomePage extends React.Component {
           maxWidth='xl'
           sx={{
             backgroundSize: "cover",
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1),rgba(255, 255, 255, 0.4)), url(${Image})`,
+            // backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1),rgba(255, 255, 255, 0.4)), url(${Image})`,
+            backgroundImage: `url(${Image})`,
           }}>
           <Login />
           <RegisterModal />

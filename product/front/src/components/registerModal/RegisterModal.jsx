@@ -4,7 +4,6 @@ import Container from "@mui/material/Container";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Register from "../register/Register";
-import "./RegisterModal.css";
 // import { red } from "@mui/material/colors";
 
 function getModalStyle() {
@@ -22,12 +21,13 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
     width: 400,
-    maxHeight: "90%",
+    height: "90%",
     borderRadius: 25,
-    // backgroundColor: `#000`,
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: `#4f3646`,
+    // backgroundColor: theme.palette.background.paper,
+    backgroundColor: `rgba(79, 54, 70, 1.5)`,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(1, 2, 1),
   },
 }));
 
@@ -36,6 +36,7 @@ export default function RegisterModal() {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,6 +44,11 @@ export default function RegisterModal() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const onChange = (e) => {
+    // e.preventDefault();
+    // console.log(e.target.checked);
+    setChecked(e.target.checked);
   };
 
   return (
@@ -54,6 +60,13 @@ export default function RegisterModal() {
           justifyContent: "center",
           my: "3rem",
         }}>
+        {/* <Typography
+          sx={{ letterSpacing: 1.2, mb: "1.8rem", fontWeight: "700" }}
+          variant='h4'
+          component='h2'
+          color='primary'>
+          Pas encore inscrit ?
+        </Typography> */}
         <Button
           sx={{
             lineHeight: 3,
@@ -74,7 +87,11 @@ export default function RegisterModal() {
           aria-labelledby='simple-modal-title'
           aria-describedby='simple-modal-description'>
           <div style={modalStyle} className={classes.paper}>
-            <Register close={handleClose} />
+            <Register
+              close={handleClose}
+              checked={checked}
+              onChange={onChange}
+            />
           </div>
         </Modal>
       </Container>
