@@ -36,7 +36,7 @@ class Login extends React.Component {
         let login = JSON.parse(data);
         console.log("login", login);
         console.log(typeof login);
-        if (login[0].includes("true")) {
+        if (login[0]['logged_in'] === true) {
           this.props.history.push(`/${login[1]}/conversation-list`);
         } else {
           alert("Connection failed");

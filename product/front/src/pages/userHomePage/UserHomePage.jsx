@@ -13,6 +13,7 @@ class UserHomePage extends React.Component {
       conversations: [],
       contacts: [],
       user_id: [],
+      username: [],
     };
     this.getConversations = this.getConversations.bind(this);
   }
@@ -51,9 +52,11 @@ class UserHomePage extends React.Component {
               conversations: convers_list.conversations,
               contacts: convers_list.contacts,
               user_id: convers_list.user_id,
-            });
-          } else {
-            alert("User not connected");
+              username: convers_list.username,
+             })
+          }
+          else {
+            alert("User not connected")
           }
         },
         (error) => {

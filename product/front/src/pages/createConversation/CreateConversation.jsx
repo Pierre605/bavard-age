@@ -1,126 +1,120 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import HeaderLogout from "../../components/headerLogout/HeaderLogout";
-import "./CreateConversation.css";
-import ContactsSelect from "../../components/contactsSelect/ContactsSelect";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import HeaderLogout from '../../components/headerLogout/HeaderLogout';
+import './CreateConversation.css'
+import ContactsSelect from '../../components/contactsSelect/ContactsSelect';
 
 class CreateConversation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       contacts: [],
+      username: [],
       selected_contacts: [],
-      selected_contacts_string: "",
-    };
-
+      selected_contacts_string: '',
+      selected_usernames : [],
+      selected_usernames_string: '',
+    }
     this.createConversation = this.createConversation.bind(this);
   }
 
-  handleAddContact = (childData) => {
-    let L = this.state.selected_contacts;
-    L.push(childData);
-    this.setState({ selected_contacts: L });
-    let string = this.addAdressSpace();
-    this.setState({ selected_contacts_string: string });
-  };
+  handleAddContact = (childData, childData2) =>{
+    let L = this.state.selected_contacts
+    L.push(childData)
+    let L2 = this.state.selected_usernames
+    L2.push(childData2)
+    
+    this.setState({selected_contacts: L, 
+      selected_contacts_string: String(L).split(',').join(', '),
+      selected_usernames: L2,
+      selected_usernames_string: String(L2).split(',').join(', ')
+      })
+}
 
-  handleRemoveContact = (childData) => {
-    let L = this.state.selected_contacts;
-    if (L.includes(childData)) {
-      let filter = L.filter((email) => email !== childData);
-      this.setState({
-        selected_contacts: filter,
-        selected_contacts_string: String(filter).split(",").join(", "),
-      });
+  handleRemoveContact = (childData1, childData2) =>{
+    let L = this.state.selected_contacts
+    let L2 = this.state.selected_usernames
+    if (L.includes(childData1)) {
+      let filter = L.filter(email => email !== childData1)
+      this.setState({selected_contacts: filter, selected_contacts_string: String(filter).split(',').join(', ')})
     }
-  };
-
-  addAdressSpace = () => {
-    let input = this.state.selected_contacts;
-    let string = new String(input);
-    let formed_string = string.split(",").join(", ");
-    console.log(formed_string);
-    return formed_string;
-  };
+    if (L2.includes(childData2)) {
+      let filter2 = L2.filter(user_name => user_name !== childData2)
+      this.setState({selected_usernames: filter2, selected_usernames_string: String(filter2).split(',').join(', ')})
+    }
+  }
 
   componentDidMount() {
     this.getContacts();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.contacts !== this.state.contacts) {
-      this.setHref();
-    }
-  }
-
   createConversation(ev) {
     ev.preventDefault();
-
     const data = new FormData();
-    if (this.emails.value && this.emailsmano.value === "") {
-      data.append("email", this.emails.value);
-    } else if (this.emailsmano.value && this.emails.value === "") {
-      data.append("email", this.emailsmano.value);
+    if (this.emails.value && this.emailsmano.value == '') {
+      data.append('email', this.emails.value);
     }
-    data.append("name", this.name.value);
+    else if (this.emailsmano.value && this.emails.value == '') {
+      data.append('email', this.emailsmano.value);
+    }
 
-    fetch(
-      "http://localhost:5000/" +
-        this.props.match.params.user_id +
-        "/create_conversation",
-      {
-        method: "POST",
-        body: data,
-      }
-    )
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        let created_conv = data;
-        console.log(created_conv);
-        console.log(typeof created_conv);
-        if (created_conv.includes("conversation_id")) {
-          this.props.history.push(
-            `/${this.props.match.params.user_id}/conversation-list`
-          );
-        } else {
-          alert("Adresse(s) email non reconnues");
-        }
-        // window.location.reload(false);
-      });
+    data.append('name', this.name.value)
+
+
+    fetch('http://localhost:5000/' + this.props.match.params.user_id + '/create_conversation', {
+    method: 'POST',
+    body: data,
+  })
+  .then((response) => {
+    return response.text();
+  })
+  .then((data) => {
+    let created_conv = data
+    console.log(created_conv)
+    console.log(typeof created_conv)
+    if (created_conv.includes('conversation_id')) {
+      this.props.history.push('/' + this.props.match.params.user_id +  '/conversation-list')
+    }
+    else {
+      alert('Adresse(s) email non reconnues')
+    }
+  });
   }
 
   getContacts = () => {
-    fetch(
-      "http://localhost:5000/" +
-        this.props.match.params.user_id +
-        "/conversation-list"
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then(
-        (convers_list) => {
-          console.log("UserHome/getConversations/convers_list", convers_list);
-          // Sauvegarde de l'état du composant avec le résultat de la réponse parsée de la DB
-          this.setState({
-            contacts: convers_list.contacts,
-          });
-        },
-        (error) => {
-          this.setState({
-            error,
-          });
-        }
-      );
+    fetch('http://localhost:5000/' + this.props.match.params.user_id + '/conversation-list')
+    .then(response => {
+      return(
+        response.json()
+    )})
+    .then(convers_list => {
+      console.log('UserHome/getConversations/convers_list', convers_list)
+      this.setState({
+        contacts : convers_list.contacts,
+        username: convers_list.username,
+      });
+          }, (error) => {
+            this.setState({
+              error
+            });
+          }
+      )
   };
 
-  setHref = () => {
-    document.getElementById(
-      "cr-cont"
-    ).href = `/${this.props.match.params.user_id}/create-contact`;
-  };
+  setNameValue = (ev) => {
+    ev.preventDefault()
+    console.log('name-input', this.name)
+    // let name_input = document.getElementById('name-input')
+    // if (name_input.value !== this.state.username + ', ' + this.state.selected_usernames_string) {
+    // if (name_input.value !== this.state.username + ', ' + this.state.selected_usernames_string) {      
+    this.name.value = this.state.username + ', ' + this.state.selected_usernames_string
+    // }
+    // else {
+    //   name_input.value = ''
+    // }
+  }
+
+
 
   render() {
     return (
@@ -129,7 +123,7 @@ class CreateConversation extends React.Component {
         <div id='div-aside'>
           <div className='side-bar-not-fixed'>
             <section>
-              <div>Contacts:</div>
+              <div>CONTACTS</div>
               {this.state.contacts.map((member) => {
                 return (
                   <ContactsSelect
@@ -140,13 +134,14 @@ class CreateConversation extends React.Component {
                 );
               })}
               <div id='create-contact-container'>
-                <a id='cr-cont' href=''>
+                <a id='cr-cont' ref='http://localhost:3000/create-contact'>
                   <img
                     id='create-contact'
                     src='/creer_un_contact.png'
-                    alt='Créer un contact'
+                    alt='AJOUTER UN CONTACT'
                   />
                 </a>
+                <div id="create-contact-msg"></div>
               </div>
             </section>
           </div>
@@ -154,8 +149,8 @@ class CreateConversation extends React.Component {
             <div className='flex2'>
               <div className='input-style-2'>
                 <label for=''>
-                  Selectionnez parmi vos contacts un ou plusieurs participant(s)
-                  :{" "}
+                  Sélectionnez parmi vos contacts
+                  {" "}
                 </label>
                 <input
                   id='emails'
@@ -167,8 +162,7 @@ class CreateConversation extends React.Component {
                   value={this.state.selected_contacts_string}
                 />
                 <label for=''>
-                  Ou bien saisissez une ou plusieurs adresses emails de
-                  participant(s) :{" "}
+                  ou Saisissez une ou plusieurs adresses emails{" "}
                 </label>
                 <input
                   id='emails-mano'
@@ -179,13 +173,12 @@ class CreateConversation extends React.Component {
                   }}
                 />
                 <div id='emails-syntaxe-requirement'>
-                  Si plusieurs adresses, n'oubliez pas de les séparer par une
-                  virgule et un espace (entre chaque email saisi) :
-                  julien@blabla.fr, laura@blabla.fr, ...
+                  Si plusieurs adresses, séparez les par une virgule ET un espace: julien@blabla.fr, laura@blabla.fr, ...
                 </div>
               </div>
               <div className='input-style-2'>
-                <label for=''>Nom de la conversation : </label>
+                <label for=''>Nom de la conversation</label>
+                <button onClick={this.setNameValue}>Nom par défaut</button>
                 <input
                   type='text'
                   className='input2'
@@ -194,12 +187,12 @@ class CreateConversation extends React.Component {
                   }}
                   required></input>
               </div>
-              <button className='button-form'>Créer une conversation</button>
+              <button className='button-form'>Créer</button>
             </div>
           </form>
         </div>
       </>
-    );
+      );
   }
 }
 

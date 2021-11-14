@@ -15,14 +15,18 @@ export default class ContactsSelect extends React.Component {
 
     onTrigger = (event) => {
         let check = document.getElementById(`${this.state.contact.email}`)
-        console.log(check)
+        console.log("check: ", check)
         if (check.checked === true) {
-        this.props.parentCallbackAdd(event.target.value);
-        console.log("Add !")
+          let username = document.getElementById(`${this.state.contact.username}`).textContent
+          console.log("username: ", username)
+          this.props.parentCallbackAdd(event.target.value, username);
+          console.log("Add !")
+  
         }
 
         else {
-            this.props.parentCallbackRemove(event.target.value);
+            let username = document.getElementById(`${this.state.contact.username}`).textContent
+            this.props.parentCallbackRemove(event.target.value, username);
             console.log("Remove !")
         }
     }
@@ -35,7 +39,7 @@ export default class ContactsSelect extends React.Component {
     return (
         <>
           <div className="members-select">
-            <div className="label">{this.state.contact.username}</div>
+            <div id={this.state.contact.username} className="label">{this.state.contact.username}</div>
             <div className="check">
             <input type="checkbox" id={this.state.contact.email} value={this.state.contact.email} onChange={this.onTrigger}/>
             </div>

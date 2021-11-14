@@ -10,13 +10,14 @@ class Logout extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  // componentDidMount() {
-  //   window.addEventListener("beforeunload", this.handleLogout(), false);
-  // }
+
+// componentDidMount() {
+//   window.onbeforeunload = this.handleLogout()
+// }
+
 
   handleLogout(ev) {
-    ev.preventDefault();
-
+    ev.preventDefault()
     fetch("http://localhost:5000/" + this.props.user + "/logout")
       .then((response) => {
         return response.text();

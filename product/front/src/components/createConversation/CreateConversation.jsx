@@ -36,7 +36,6 @@ class CreateConversation extends React.Component {
   };
 
   addAdressSpace = () => {
-    let L = [];
     let input = this.state.selected_contacts;
     let string = new String(input);
     let formed_string = string.split(",").join(", ");
@@ -59,7 +58,12 @@ class CreateConversation extends React.Component {
       data.append("email", this.emailsmano.value);
     }
     data.append("name", this.name.value);
-
+    // if (!this.name-input.value){
+    //   data.append("name", this.name-input.value);
+    // }
+    // else {
+    //   data.append("name", this.state.username + ', ' + this.state.selected_usernames_string);
+    // }
     fetch("http://localhost:5000/create_conversation", {
       method: "POST",
       body: data,
@@ -108,7 +112,7 @@ class CreateConversation extends React.Component {
         <div id='div-aside'>
           <div className='side-bar'>
             <section>
-              <div>Contacts:</div>
+              <div>CONTACTS</div>
               {this.state.contacts.map((member) => {
                 return (
                   <ContactsSelect
@@ -129,7 +133,7 @@ class CreateConversation extends React.Component {
           <form onSubmit={this.createConversation}>
             <div className='flex'>
               <div className='input-style'>
-                <label for=''>Selectionnez parmi vos contacts: </label>
+                <label for=''>Selectionnez parmi vos contacts</label>
                 <input
                   id='emails'
                   class='input'
@@ -140,7 +144,7 @@ class CreateConversation extends React.Component {
                   value={this.state.selected_contacts_string}
                 />
                 <label for=''>
-                  Ou bien saisissez une ou des adresses emails:{" "}
+                  Saisissez une ou des adresses E-mails{" "}
                 </label>
                 <input
                   id='emails-mano'
@@ -156,8 +160,10 @@ class CreateConversation extends React.Component {
                 </div>
               </div>
               <div className='input-style'>
-                <label for=''>Nom de la conversation: </label>
+                <label for=''>Nom de la conversation</label>
                 <input
+                  id='name-input'
+                  class='input'
                   type='text'
                   ref={(ref) => {
                     this.name = ref;
@@ -166,7 +172,7 @@ class CreateConversation extends React.Component {
               </div>
             </div>
             <div>
-              <button>Créer conversation</button>
+              <button>Créer</button>
             </div>
           </form>
         </div>

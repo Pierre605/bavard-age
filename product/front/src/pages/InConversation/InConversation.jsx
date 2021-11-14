@@ -45,10 +45,6 @@ class InConversation extends React.Component {
         }
       });
   };
-
-  setRefresh = () => {
-    setInterval(this.getConversation, 1000);
-    }
    
 
   // Rendu React du composant

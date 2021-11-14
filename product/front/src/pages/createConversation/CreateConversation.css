@@ -37,6 +37,7 @@ button {
 .form {
     background-color: #C4C4C4;
     text-align: -webkit-center;
+    width: 100%;
 }
 
 .flex2 {
@@ -47,9 +48,27 @@ button {
     color: white;
     border-radius: 15px;
     width: 70%;
+    height: 75%;
     text-align: center;
 }
 
 .input2 {
+    text-align: center;
+    height: 50px;
     width: 90%;
+    background-color: #4F3646;
+    border : none;
+    color : whitesmoke;
+    font-size: 24px;
+    border-bottom-style: solid;
+    border-bottom-width: 0.4rem;
+    border-color: white;
+    border-width: 100%;
+    margin-bottom: 5%;
 }
+
+.requir {
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+    

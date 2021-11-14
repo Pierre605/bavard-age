@@ -125,6 +125,7 @@ def sessions():
 # Route de connexion (login -> Login.jsx)
 @app.route("/login", methods=['POST'])
 def login():
+    result = dict(logged_in = False)
     postdata = request.form
     if postdata.get('username') and postdata['password']:
         username = postdata.get('username')
@@ -144,11 +145,11 @@ def login():
                 # user = User(existing_user[0])
                 # print("User.id: ", user.id)
                 # login_user(user)     
-                return jsonify("{logged_in : true}", existing_user[0])
+                result = dict(logged_in = True)
             else:
-                return jsonify("{logged_in : true}", existing_user[0])
-        else:
-            return "{logged_in : false}"
+                print("login/existing_user[0]", existing_user[0])
+                result = dict(logged_in = True)
+        return jsonify(result, session['user'])
 
 
 # Route de déconnexion (logout -> Logout.jsx)
@@ -284,6 +285,14 @@ def chatroom_select(user_id):
             conversation.id"""
             , [user])
 
+        user_name = query_db(""" 
+                    SELECT username 
+                    FROM user 
+                    WHERE user.id = (?)"""
+                    , [user])
+        print("username: ", user_name[0][0])
+        username = user_name[0][0]
+
         print('conversations: ', conversations)
         contacts = query_db(""" 
                     SELECT u.id, u.username, u.email
@@ -296,10 +305,10 @@ def chatroom_select(user_id):
         if conversations:
             return jsonify({'conversations': [dict(row) for row in conversations]
                 , 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts],
-                'user_id': user})
+                'user_id': user, 'username': username})
         else:
             return (jsonify({'conversations': [], 'contacts': [dict(contact_id = row[0], username = row[1], email = row[2]) for row in contacts],
-                'user_id': user}))
+                'user_id': user, 'username': username}))
     else:
         return jsonify("user not connected")
 
