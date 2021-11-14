@@ -44,6 +44,9 @@ const theme = createTheme({
       // contrastText: "#4f3646",
       contrastText: "#fff",
     },
+    grey: {
+      300: "rgba(196,196,196, 0.5)",
+    },
     text: {
       primary: "#2f202a",
       secondary: "#4f3646",
