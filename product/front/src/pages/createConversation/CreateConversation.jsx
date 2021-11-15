@@ -104,15 +104,15 @@ class CreateConversation extends React.Component {
   setNameValue = (ev) => {
     ev.preventDefault()
     console.log('name-input', this.name)
-    // let name_input = document.getElementById('name-input')
-    // if (name_input.value !== this.state.username + ', ' + this.state.selected_usernames_string) {
-    // if (name_input.value !== this.state.username + ', ' + this.state.selected_usernames_string) {      
-    this.name.value = this.state.username + ', ' + this.state.selected_usernames_string
-    // }
-    // else {
-    //   name_input.value = ''
-    // }
+    let name_input = document.getElementById('name-input')
+    if (name_input.value !== this.state.username + ', ' + this.state.selected_usernames_string) {
+      name_input.value = this.state.username + ', ' + this.state.selected_usernames_string
+    }
+    else {
+      name_input.value = ''
+    }
   }
+  
 
 
 
@@ -161,9 +161,9 @@ class CreateConversation extends React.Component {
                   }}
                   value={this.state.selected_contacts_string}
                 />
-                <label for=''>
-                  ou Saisissez une ou plusieurs adresses emails{" "}
-                </label>
+                <div>
+                  Ou Saisissez une ou plusieurs adresses emails:
+                </div>
                 <input
                   id='emails-mano'
                   className='input2'
@@ -180,7 +180,8 @@ class CreateConversation extends React.Component {
                 <label for=''>Nom de la conversation</label>
                 <button onClick={this.setNameValue}>Nom par défaut</button>
                 <input
-                  type='text'
+                  type='text' 
+                  id="name-input"
                   className='input2'
                   ref={(ref) => {
                     this.name = ref;

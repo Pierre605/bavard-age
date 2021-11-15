@@ -118,6 +118,7 @@ class UserHomePage extends React.Component {
         <div id='myHeader'>
           <HeaderLogout user={this.state.user_id} />
         </div>
+        <div className="welcome">Bienvenue <b>{this.state.username}</b> !</div>
         <div className='flex-aside'>
           <div className='side-bar'>
             <div>Contacts :</div>
