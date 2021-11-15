@@ -14,6 +14,10 @@ class CreateContact extends React.Component {
     this.createContact = this.createContact.bind(this);
   }
 
+  componentDidMount() {
+    this.setLogoWithText();
+  }
+
   createContact(ev) {
     ev.preventDefault();
 
@@ -45,13 +49,19 @@ class CreateContact extends React.Component {
       });
   }
 
+  setLogoWithText = () => {
+    let logo = document.getElementById('home')
+    logo.firstChild.src = '/retourner_a_laccueil.png';
+    logo.firstChild.style = 'width: 150px';
+  }
+
   render() {
     return (
       <>     
         <HeaderLogout user={this.props.match.params.user_id}/>
-        <form onSubmit={this.createContact}>
+        <form className="conteneur" onSubmit={this.createContact}>
           <div className='flex'>
-            <div className='input-style'>
+            <div className='input'>
               <label htmlFor=''>Email du contact: </label>
               <input
                 id='email'

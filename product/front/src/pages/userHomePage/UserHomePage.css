@@ -14,6 +14,7 @@
 
 .title {
   color: white;
+  padding: 5px;;
 }
 
 
@@ -98,7 +99,7 @@
 .conversation-list {
   width: 70%;
   background: linear-gradient(0.25turn, #4F3646, white);
-  margin-top: 5.97em;
+  margin-top: 7.5em;
 }
 
 .titreConversation{

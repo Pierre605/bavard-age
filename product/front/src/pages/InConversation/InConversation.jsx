@@ -15,6 +15,7 @@ class InConversation extends React.Component {
     // this.handleRegister = this.handleRegister.bind(this)
   }
   componentDidMount() {
+    this.setLogoWithText();
     this.getConversation();
     this.refresh = setInterval(() => {
       this.getConversation();
@@ -45,6 +46,12 @@ class InConversation extends React.Component {
         }
       });
   };
+
+  setLogoWithText = () => {
+    let logo = document.getElementById('home')
+    logo.firstChild.src = '/retourner_a_laccueil.png';
+    logo.firstChild.style = 'width: 150px';
+  }
    
 
   // Rendu React du composant

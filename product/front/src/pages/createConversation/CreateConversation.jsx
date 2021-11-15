@@ -47,6 +47,7 @@ class CreateConversation extends React.Component {
   componentDidMount() {
     this.getContacts();
     this.setHref();
+    this.setLogoWithText();
   }
 
   createConversation(ev) {
@@ -120,7 +121,11 @@ class CreateConversation extends React.Component {
     ).href = `/${this.props.match.params.user_id}/create-contact`;
   };
   
-
+  setLogoWithText = () => {
+    let logo = document.getElementById('home')
+    logo.firstChild.src = '/retourner_a_laccueil.png';
+    logo.firstChild.style = 'width: 150px';
+  }
 
 
   render() {
