@@ -140,16 +140,17 @@ def login():
                 session['user'].append(existing_user[0])
                 session['username'] = username
                 # indexof.append(session['user'].index(existing_user[0]))
-                print("login/session_user", session['user'])
-                print('login/session_username', session['username'])
-                # user = User(existing_user[0])
-                print("session['user'][-1]", session['user'][-1])
+                # print("login/session_user", session['user'])
+                # print('login/session_username', session['username'])
+                # # user = User(existing_user[0])
+                # print("session['user'][-1]", session['user'][-1])
                 # login_user(user)     
                 result = dict(logged_in = True)
             else:
-                print("login/existing_user[0]", existing_user[0])
+                # print("login/existing_user[0]", existing_user[0])
                 result = dict(logged_in = True)
-        return jsonify(result, existing_user[0])
+            return jsonify(result, existing_user[0])
+        return jsonify(result, None)
 
 
 # Route de déconnexion (logout -> Logout.jsx)
