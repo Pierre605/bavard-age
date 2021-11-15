@@ -149,7 +149,7 @@ def login():
             else:
                 print("login/existing_user[0]", existing_user[0])
                 result = dict(logged_in = True)
-        return jsonify(result, session['user'][-1])
+        return jsonify(result, existing_user[0])
 
 
 # Route de déconnexion (logout -> Logout.jsx)
@@ -228,7 +228,7 @@ def register():
                     result = dict(registered = True)
             # renvoyer (json)
     print("result, session['user']", result, None)
-    return jsonify(result, session['user'])
+    return jsonify(result, new_user_id)
 
 
 # Route de liste des conversations
