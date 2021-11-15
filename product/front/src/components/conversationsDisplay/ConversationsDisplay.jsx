@@ -11,7 +11,7 @@ export default function ConversationsDisplay(props) {
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Divider />
-      <nav>
+      <nav className = "bgColor">
         <List>
           <a className='list-conv' href={`/${props.user_id}/conversation/${props.id}`}>
             <ListItem disablePadding>

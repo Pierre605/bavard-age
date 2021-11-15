@@ -12,7 +12,8 @@
   width: 100%; 
   height: 100%;
   margin-top: 5%;
-  font-size:20px;
+  /*font-size:20px;*/
+  font-size:24px;
 }
 
 #create-conv {
@@ -72,6 +73,20 @@
 
 }
 
+/* Partie Contact / Side-bar */
+
+/*.sideBarList{
+  width: 30%;
+  background-color: #98ac39;
+  padding-bottom: 40%;
+  color: whitesmoke;
+}
+
+.titreContact{
+  text-align: center;
+
+}*/
+
 /* Partie pour les conversations */
 .conversation-list {
   width: 70%;
@@ -98,7 +113,10 @@
     width: 100%; 
     height: 100%;
     margin-top: 10%;
-   
+    border-bottom-style: solid;
+    border-color: white;
+    border-width: 100%;
+    font-size: 20px;
   }
 
   /* Partie Contact / Side-bar */
@@ -119,6 +137,7 @@
   }
 
   /* Partie pour les conversations */
+
   .conversation-list {
     width: 55%;
     background-color: #C4C4C4;
@@ -161,6 +180,7 @@
   }
   
   /* Partie pour les conversations */
+  
   .conversation-list {
     width: 55%;
     background-color: #C4C4C4;
