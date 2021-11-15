@@ -46,6 +46,7 @@ class CreateConversation extends React.Component {
 
   componentDidMount() {
     this.getContacts();
+    this.setHref();
   }
 
   createConversation(ev) {
@@ -112,6 +113,12 @@ class CreateConversation extends React.Component {
       name_input.value = ''
     }
   }
+
+  setHref = () => {
+    document.getElementById(
+      "cr-cont"
+    ).href = `/${this.props.match.params.user_id}/create-contact`;
+  };
   
 
 
@@ -134,7 +141,7 @@ class CreateConversation extends React.Component {
                 );
               })}
               <div id='create-contact-container'>
-                <a id='cr-cont' ref='http://localhost:3000/create-contact'>
+                <a id='cr-cont' href=''>
                   <img
                     id='create-contact'
                     src='/creer_un_contact.png'

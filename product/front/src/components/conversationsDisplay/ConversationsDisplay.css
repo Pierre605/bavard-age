@@ -4,7 +4,7 @@
 
 .bgColor{
   /*background-color: #a0929b;*/
-  background-color: #C4C4C4;
+  background: linear-gradient(0.25turn, #C4C4C4, white)
 }
 
 @media all and (min-width : 480px) and (max-width : 1000px) and (orientation : landscape){

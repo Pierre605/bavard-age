@@ -12,6 +12,7 @@
 #emails-syntaxe-requirement {
     color: grey;
     font-size: 0.8em;
+    margin-top: -15px;
 }
 
 button {
@@ -48,7 +49,7 @@ button {
     color: white;
     border-radius: 15px;
     width: 70%;
-    height: 75%;
+    height: 80%;
     text-align: center;
 }
 

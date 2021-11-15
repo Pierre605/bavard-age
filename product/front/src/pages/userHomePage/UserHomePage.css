@@ -1,7 +1,21 @@
 .welcome {
   position: fixed;
-    top: 6em;
+    top: 5em;
 }
+
+.side-bar-home {
+    font-size: x-large;
+    width: 28%;
+    height: 100vh;
+    background-color: #98AC37;
+    color: white;
+    margin-top: 5em;
+}
+
+.title {
+  color: white;
+}
+
 
 /* Conteneur de la page */
 .flexAsideList{
@@ -22,7 +36,6 @@
 
 #create-conv-container {
   text-align: right;
-  margin-right: 3em;
   position: fixed;
   right: 3em;
   bottom: 2em;
@@ -41,12 +54,6 @@
   position: fixed;
   left: 3em;
   bottom: 2em;
-}
-
-.conversation-list {
-  width: 60%;
-  margin-left: 28%;
-  margin-top: 6em;
 }
 
 #create-conv {
@@ -90,8 +97,8 @@
 /* Partie pour les conversations */
 .conversation-list {
   width: 70%;
-  background-color: #C4C4C4;
-  padding-bottom: 40.3%;
+  background: linear-gradient(0.25turn, #4F3646, white);
+  margin-top: 5.97em;
 }
 
 .titreConversation{
@@ -140,7 +147,7 @@
 
   .conversation-list {
     width: 55%;
-    background-color: #C4C4C4;
+    /* background-color: #C4C4C4; */
     padding-bottom: 70%;
     font-size: 20px;
   }

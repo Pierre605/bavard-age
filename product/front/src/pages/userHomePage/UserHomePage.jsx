@@ -117,10 +117,10 @@ class UserHomePage extends React.Component {
       <>
         <div id='myHeader'>
           <HeaderLogout user={this.state.user_id} />
+          <div className="welcome">Bienvenue <b>{this.state.username}</b> !</div>
         </div>
-        <div className="welcome">Bienvenue <b>{this.state.username}</b> !</div>
         <div className='flex-aside'>
-          <div className='side-bar'>
+          <div className='side-bar-home'>
             <div>Contacts :</div>
             {this.state.contacts.map((member, i) => {
               return (
@@ -136,7 +136,7 @@ class UserHomePage extends React.Component {
               <a id='cr-cont' href=''>
                 <img
                   id='create-contact'
-                  src='/addcontact.png'
+                  src='/creer_un_contact_1.png'
                   alt='Cliquer pour créer un contact'
                 />
               </a>
@@ -144,7 +144,7 @@ class UserHomePage extends React.Component {
             </div>
           </div>
           <div className='conversation-list'>
-            <div>Conversations :</div>
+            <div className="title">Conversations :</div>
             {this.state.conversations.map((conv, i) => {
               return (
                 <ConversationsDisplay
@@ -159,7 +159,7 @@ class UserHomePage extends React.Component {
               <a id='cr-conv' href=''>
                 <img
                   id='create-conv'
-                  src='/convers-icon.png'
+                  src='/creer_une_conversation-2.png'
                   alt='Cliquer pour créer une conversation'
                 />
               </a>
