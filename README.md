@@ -10,7 +10,7 @@ Notre équipe de 5 forces pluri-disciplinaires et talentueuses :
 #### Pierre Luciani
 
 ----------------------------
-# Bavard'Àge 
+# Bavard'Âge 
 Notre product est une Web App en version MVP (Minimum Valuable Product).
 Le Back-end tourne avec Flask, Python, Socket.io, SQLite3, SQL.
 Le Front-end tourne avec React.js, Material UI...
