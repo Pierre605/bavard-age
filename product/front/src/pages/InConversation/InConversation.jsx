@@ -6,6 +6,7 @@ import "../../components/participantsDisplay/ParticipantsDisplay.css";
 import ParticipantsDisplay from "../../components/participantsDisplay/ParticipantsDisplay";
 import InstantChat from "../../components/instantChat/InstantChat";
 import DeleteMessage from "../../components/messagesRemove/DeleteMessage";
+import '../createConversation/CreateConversation.css'
 
 
 class InConversation extends React.Component {
@@ -66,13 +67,15 @@ class InConversation extends React.Component {
           user={this.state.user_id}/>
         </div>
         <div className='flex-aside'>
-          <div className='side-bar-in-conv'>
-            <span>Participants:</span>
+          <div class="column-fix">
+            <div className="tab-head-3">PARTICIPANTS</div>
+            <div className='side-bar-in-conv'>
             {this.state.participants.map((member) => {
               return (
                 <ParticipantsDisplay name={member} username={this.state.username} />
               );
             })}
+            </div>
           </div>
           <div id='background'>
             {this.state.messages.map((message, i) => {

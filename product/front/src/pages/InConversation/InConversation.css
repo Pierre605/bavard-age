@@ -1,9 +1,29 @@
 .side-bar-in-conv {
   font-size: x-large;
-  width: 28%;
   height: 100vh;
   background-color: #98AC37;
   color: white;
-  position: fixed;
   top: 5.4em;
+  margin-top: 5px;
+}
+
+.column-fix {
+  display: flex;
+  flex-direction: column;
+  width: 28%;
+  position: fixed;
+  margin-top: -16px;
+}
+
+.tab-head-3 {
+  font-size: x-large;
+  width: 100%;
+  height: 50px;
+  background-color: #98AC37;
+  color: White;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5.35em;
 }
