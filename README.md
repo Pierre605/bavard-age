@@ -1,7 +1,7 @@
 # BLAbl'@pp 
 Notre projet Web Full-stack réalisé en équipe de 5 personnes durant 5 semaines.
 
-## BeWhoMen
+## Équipe 3 (TF1) "BioWoMen"
 Notre équipe de 5 forces pluri-disciplinaires et talentueuses :
 #### Amine Houmad
 #### Vanessa Combet 
