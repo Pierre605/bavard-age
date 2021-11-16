@@ -47,7 +47,7 @@ class InstantChat extends React.Component {
     return (
       <>
         <h1 id='simple-modal-title'>CHATROOM</h1>
-        <div style={{ height: "100vh" }}>
+        <div style={{ height: "33vh" }}>
           <form onSubmit={this.handleRegister}>
             <div className='box' id={this.props.id}>
               <label for=''>Message: </label>
