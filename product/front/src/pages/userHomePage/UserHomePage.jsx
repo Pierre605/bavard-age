@@ -1,6 +1,12 @@
 import "./UserHomePage.css";
 import "../../components/participantsDisplay/ParticipantsDisplay.css";
 import React from "react";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
+import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
+import BackToTop from "../../components/backToTop/BackToTop";
 import ConversationsDisplay from "../../components/conversationsDisplay/ConversationsDisplay";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import ContactsDisplay from "../../components/contactsDisplay/ContactsDisplay";
@@ -115,15 +121,47 @@ class UserHomePage extends React.Component {
   render() {
     return (
       <>
-        <div id='myHeader'>
-          <HeaderLogout user={this.state.user_id} />
-          <div className="welcome">Bienvenue <b>{this.state.username}</b> !</div>
-        </div>
-        <div className='flex-aside'>
-          <div class="column">
-            <div className="tab-head">CONTACTS</div>
-            <div className='side-bar-home'>
-            
+        <HeaderLogout
+          userName={this.state.username}
+          user={this.state.user_id}
+        />
+        <BackToTop>
+          <Fab color='secondary' size='large' aria-label='Haut de page'>
+            <KeyboardArrowUp />
+          </Fab>
+        </BackToTop>
+        <Box
+          id='back-to-top-anchor'
+          component='main'
+          sx={{
+            display: "flex",
+            fontSize: "1.6rem",
+            minHeight: "100vh",
+          }}>
+          <Box
+            sx={{ pt: "1.5rem" }}
+            color='common.white'
+            bgcolor='secondary.main'>
+            <Typography
+              variant='h4'
+              component='h2'
+              fontWeight='700'
+              letterSpacing='0.2rem'
+              color='common.white'
+              textAlign='center'>
+              CONTACTS
+              <Divider
+                sx={{
+                  bgcolor: (theme) => theme.palette.common.white,
+                  mt: 3,
+                }}
+                style={{
+                  borderBottomWidth: 5,
+                  // borderRadius: 2,
+                  height: 2,
+                }}
+              />
+            </Typography>
             {this.state.contacts.map((member, i) => {
               return (
                 <ContactsDisplay
@@ -134,21 +172,53 @@ class UserHomePage extends React.Component {
                 />
               );
             })}
-            </div>
-            </div>
-            <div id='create-contact-container'>
-              <a id='cr-cont' href=''>
+            <Box
+              sx={{
+                position: "fixed",
+                bottom: "2.5rem",
+                left: "6rem",
+              }}>
+              <a id='cr-cont' href={`/${this.state.user_id}/create-contact`}>
                 <img
                   id='create-contact'
                   src='/creer_un_contact_1.png'
                   alt='Cliquer pour créer un contact'
                 />
               </a>
-              <div id='create-contact-msg'></div>
-            </div>
-          
-          <div className='conversation-list'>
-            <div className="title">Conversations :</div>
+              <div style={{ color: "#000" }} id='create-contact-msg'></div>
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              pt: "1.5rem",
+              // pl: "1.5rem",
+              alignSelf: "stretch",
+              flexGrow: 1,
+              bgcolor: "#C4C4C4",
+            }}
+            color='common.white'
+            textAlign='center'>
+            <Typography
+              variant='h4'
+              component='h2'
+              fontWeight='700'
+              letterSpacing='0.2rem'
+              ml='1rem'
+              color='primary.main'>
+              CONVERSATIONS
+            </Typography>
+            <Divider
+              sx={{
+                bgcolor: (theme) => theme.palette.common.white,
+                mt: 3,
+              }}
+              style={{
+                borderBottomWidth: 5,
+                height: 2,
+              }}
+            />
+
             {this.state.conversations.map((conv, i) => {
               return (
                 <ConversationsDisplay
@@ -167,10 +237,10 @@ class UserHomePage extends React.Component {
                   alt='Cliquer pour créer une conversation'
                 />
               </a>
-              <div id='create-mssg'></div>
+              <div style={{ color: "#000" }} id='create-mssg'></div>
             </div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </>
     );
   }

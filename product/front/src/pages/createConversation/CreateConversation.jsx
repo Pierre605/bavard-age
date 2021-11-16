@@ -137,9 +137,10 @@ class CreateConversation extends React.Component {
           <div class="column">
             <div className="tab-head-2">CONTACTS</div>
             <div className='side-bar-home'>
-              {this.state.contacts.map((member) => {
+              {this.state.contacts.map((member, i) => {
                 return (
                   <ContactsSelect
+                    key={i}
                     contacts={member}
                     parentCallbackAdd={this.handleAddContact}
                     parentCallbackRemove={this.handleRemoveContact}
@@ -149,7 +150,9 @@ class CreateConversation extends React.Component {
               </div>
             </div>
               <div id='create-contact-container'>
-                <a id='cr-cont' href=''>
+                <a
+                  id='cr-cont'
+                  href={`/${this.props.match.params.user_id}/create-contact`}>
                   <img
                     id='create-contact'
                     src='/creer_un_contact.png'
@@ -175,7 +178,7 @@ class CreateConversation extends React.Component {
                   value={this.state.selected_contacts_string}
                 />
                 <div>
-                  Ou Saisissez une ou plusieurs adresses emails:
+                  Ou saisissez une ou plusieurs adresses emails:
                 </div>
                 <input
                   id='emails-mano'
@@ -186,7 +189,7 @@ class CreateConversation extends React.Component {
                   }}
                 />
                 <div id='emails-syntaxe-requirement'>
-                  Si plusieurs adresses, séparez les par une virgule ET un espace: julien@blabla.fr, laura@blabla.fr, ...
+                  Si nécessaire, séparez les adresses par une virgule ET un espace: julien@blabla.fr, laura@blabla.fr, ...
                 </div>
               </div>
               <div className='input-style-2'>

@@ -10,7 +10,8 @@ input[type=checkbox]
 }
 
 .members-select {
-    margin: 20px;
-    display: flex;
-    column-gap: 30px;;
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 30px;
 }

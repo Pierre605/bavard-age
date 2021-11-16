@@ -1,35 +1,37 @@
-// import "./HeaderLogout.css";
 import Logout from "../logout/Logout";
-import './HeaderLogout.css'
+import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 
 export default function HeaderLogout(props) {
-
-  // const getHref = () => {
-  //   let a = `/${props.user}/conversation-list`
-  //   // let x = document.getElementById('home')
-  //   // x.setAttribute('href', a)
-  //   // console.log(x)
-  //   return (
-  //     a
-  //   )
-  // }
-  
-
-  let a = `/${props.user}/conversation-list`
- 
+  let a = `/${props.user}/conversation-list`;
 
   return (
-    <>
-      <div className='inline-blocks'>
-        <div>
-          <a id="home" href={a}>
-            <img src='/logoblanc.png' width='100px' alt='logo-provisoire' />
-          </a>
-        </div>
-        <div id='logout-button'>
-          <Logout user={props.user} />
-        </div>
-      </div>
-    </>
+    <Box
+      component='header'
+      position='sticky'
+      fullwidth
+      sx={{
+        mt: "0.2rem",
+        backgroundColor: (theme) => theme.palette.common.white,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        mx: "1.6rem",
+      }}>
+      <Box>
+        <a id='home' href={a}>
+          <img
+            src='/logoblanc.png'
+            edge='start'
+            width='100px'
+            alt='Retour à votre page'
+          />
+        </a>
+      </Box>
+      <Typography variant='h4' sx={{ textAlign: "center" }}>
+        {props.userName ? "Bienvenue " + props.userName + " !" : ""}
+      </Typography>
+      <Logout user={props.user} />
+    </Box>
   );
 }

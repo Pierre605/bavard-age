@@ -21,10 +21,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
     width: 400,
-    height: "90%",
+    height: "auto",
     borderRadius: 25,
-    // backgroundColor: `#4f3646`,
-    // backgroundColor: theme.palette.background.paper,
     backgroundColor: `rgba(79, 54, 70, 1.5)`,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(1, 2, 1),
@@ -59,14 +57,8 @@ export default function RegisterModal() {
           flexDirection: "column",
           justifyContent: "center",
           my: "3rem",
+          position: "relative",
         }}>
-        {/* <Typography
-          sx={{ letterSpacing: 1.2, mb: "1.8rem", fontWeight: "700" }}
-          variant='h4'
-          component='h2'
-          color='primary'>
-          Pas encore inscrit ?
-        </Typography> */}
         <Button
           sx={{
             lineHeight: 3,
@@ -84,13 +76,11 @@ export default function RegisterModal() {
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'>
+          aria-labelledby='Fenêtre pour créer un compte'
+          aria-describedby='Modal de création de compte'>
           <div style={modalStyle} className={classes.paper}>
             <Register
               close={handleClose}
-              checked={checked}
-              onChange={onChange}
             />
           </div>
         </Modal>

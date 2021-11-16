@@ -17,7 +17,7 @@ class Logout extends React.Component {
 
 
   handleLogout(ev) {
-    ev.preventDefault()
+    ev.preventDefault();
     fetch("http://localhost:5000/" + this.props.user + "/logout")
       .then((response) => {
         return response.text();
@@ -36,7 +36,7 @@ class Logout extends React.Component {
   render() {
     return (
       <>
-        <a href=''>
+        <a href='/'>
           <img
             className='deconnection-pic'
             src='/se_deconnecter.png'

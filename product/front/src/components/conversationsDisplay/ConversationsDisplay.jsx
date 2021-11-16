@@ -16,7 +16,10 @@ export default function ConversationsDisplay(props) {
           <a className='list-conv' href={`/${props.user_id}/conversation/${props.id}`}>
             <ListItem disablePadding>
               <ListItemButton>
-                <Typography variant='h5' gutterBottom component='div'>
+                <Typography
+                  variant='h5'
+                  color='primary.dark'
+                  component='div'>
                   {props.name}
                 </Typography>
               </ListItemButton>

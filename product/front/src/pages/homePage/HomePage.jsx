@@ -1,7 +1,8 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 // Composants enfants
+import HeaderHomePage from "../../components/headerHomePage/HeaderHomePage";
 import Login from "../../components/login/Login";
 import RegisterModal from "../../components/registerModal/RegisterModal";
 import Image from "../../assets/famille.jpg";
@@ -17,32 +18,18 @@ class HomePage extends React.Component {
   // Rendu React du composant
   render() {
     return (
-      <>
-        <AppBar
-          position='static'
-          sx={{
-            backgroundColor: "#fff",
-          }}>
-          {/* <a href='/'> */}
-          <img
-            src='/logotxt.png'
-            width='310'
-            alt='logo BavardAge'
-            style={{ marginLeft: "2.4rem" }}
-          />
-          {/* </a> */}
-        </AppBar>
+      <Container minWidth='sm' maxWidth='xl'>
+        <HeaderHomePage />
         <Box
-          // maxWidth='xl'
+          component='main'
           sx={{
             backgroundSize: "cover",
-            // backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1),rgba(255, 255, 255, 0.4)), url(${Image})`,
             backgroundImage: `url(${Image})`,
           }}>
           <Login />
           <RegisterModal />
         </Box>
-      </>
+      </Container>
     );
   }
 }

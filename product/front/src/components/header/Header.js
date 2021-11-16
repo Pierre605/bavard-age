@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Typography, Toolbar } from "@mui/material";
 // Composants enfants
-import NavBar from "../navBar/NavBar";
+// import NavBar from "../navBar/NavBar";
 
 export default function Header() {
   return (
@@ -9,7 +9,7 @@ export default function Header() {
       <Toolbar>
         <Typography variant='title'>
           <a href='/'>
-            <img src='/logo2.png' width='5%' alt='logo-provisoire' />
+            <img src='/logo2.png' alt='Logo BavardAge' />
           </a>
         </Typography>
       </Toolbar>

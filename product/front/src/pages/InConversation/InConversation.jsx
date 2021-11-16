@@ -2,7 +2,7 @@ import React from "react";
 import MessagesDisplay from "../../components/messagesDisplay/MessagesDisplay";
 import HeaderLogout from "../../components/headerLogout/HeaderLogout";
 import "./InConversation.css";
-import "../../components/participantsDisplay/ParticipantsDisplay.css"
+import "../../components/participantsDisplay/ParticipantsDisplay.css";
 import ParticipantsDisplay from "../../components/participantsDisplay/ParticipantsDisplay";
 import InstantChat from "../../components/instantChat/InstantChat";
 import DeleteMessage from "../../components/messagesRemove/DeleteMessage";
