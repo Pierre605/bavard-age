@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import HeaderLogout from '../../components/headerLogout/HeaderLogout';
 import './CreateConversation.css'
 import ContactsSelect from '../../components/contactsSelect/ContactsSelect';
+import '../userHomePage/UserHomePage.css'
 
 class CreateConversation extends React.Component {
   constructor(props) {
@@ -133,9 +134,9 @@ class CreateConversation extends React.Component {
       <>
         <HeaderLogout user={this.props.match.params.user_id} />
         <div id='div-aside'>
-          <div className='side-bar-not-fixed'>
-            <section>
-              <div>CONTACTS</div>
+          <div class="column">
+            <div className="tab-head-2">CONTACTS</div>
+            <div className='side-bar-home'>
               {this.state.contacts.map((member) => {
                 return (
                   <ContactsSelect
@@ -145,6 +146,8 @@ class CreateConversation extends React.Component {
                   />
                 );
               })}
+              </div>
+            </div>
               <div id='create-contact-container'>
                 <a id='cr-cont' href=''>
                   <img
@@ -155,8 +158,6 @@ class CreateConversation extends React.Component {
                 </a>
                 <div id="create-contact-msg"></div>
               </div>
-            </section>
-          </div>
           <form className='form' onSubmit={this.createConversation}>
             <div className='flex2'>
               <div className='input-style-2'>
