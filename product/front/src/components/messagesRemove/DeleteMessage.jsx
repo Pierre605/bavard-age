@@ -1,26 +1,29 @@
 import React from 'react';
 import './DeleteMessage.css'
+import { useState, useEffect } from 'react';
 
 
-export default class DeleteMessage extends React.Component  {
-    constructor(props) {
-        super(props);
-        this.state = {
-            expanded: false,
-            conv_id: "",
-            user_id: [],
-        }
-        this.handleDelete = this.handleDelete.bind(this)
-    }
+export default function DeleteMessage(props)  {
+
+    const [expanded, setExpanded] = useState(false)
+    const [conv_id, setConv] = useState([])
+    const [user_id, setUser] = useState([])
+    const [count, setCount] = useState(10)
+    // this.handleDelete = this.handleDelete.bind(this)
     
-    
+    useEffect(() => {
+        setCount(count * 0.5)
+      }, []
+      );
+      useEffect(() => {
+        setConv(props.conversation);
+        setUser(props.user);
+      })
 
-    openSelect = () => {
-        this.setState({conv_id: this.props.conversation,
-                        user_id: this.props.user})
+    const openSelect = () => {
         // let my_messages = document.getElementsByClassName("user-messages")
         // console.log(my_messages)
-        let expanded = this.state.expanded
+        console.log("user_id: ", {user_id})
 
         let my_messages2 = document.getElementsByClassName("checkbox")
         console.log(my_messages2)
@@ -37,7 +40,7 @@ export default class DeleteMessage extends React.Component  {
         let del_button = document.getElementById("delete")
         del_button.style.display = "block"
         document.getElementById('open').textContent = "Annuler"
-        this.setState({expanded: true})
+        setExpanded(true)
         }
 
         else {
@@ -53,11 +56,11 @@ export default class DeleteMessage extends React.Component  {
         let del_button = document.getElementById("delete")
         del_button.style.display = "none"
         document.getElementById('open').textContent = "Supprimer un message"
-        this.setState({expanded: false})
+        setExpanded(false)
         }
     }
 
-    handleDelete = () => {
+    const handleDelete = () => {
         let form = document.querySelectorAll('input')
         console.log(form)
         let data = new FormData()
@@ -67,8 +70,7 @@ export default class DeleteMessage extends React.Component  {
             }
         }
         console.log(data)
-        console.log(this.state.conv_id)
-        fetch("http://localhost:5000/" + this.state.user_id + "/conversation/" + this.state.conv_id, {
+        fetch(`http://localhost:5000/${user_id}/conversation/${conv_id}`, {
         method : 'PUT',
         body: data,
     })
@@ -76,24 +78,22 @@ export default class DeleteMessage extends React.Component  {
           return response.json();
         })
         .then(() => {
-            this.props.refresh()
-            this.openSelect()
+            props.refresh()
+            openSelect()
         })
 
     }
 
-    scrollBottom = (event) => {
+    const scrollBottom = (event) => {
         window.scrollTo(0,document.getElementById("background").scrollHeight)
       }
-    
-    render() {
 
 
     return (
         <div className="rm-button">
-            <button onClick={this.scrollBottom}>⬇️</button>
-            <button onClick={this.handleDelete} id="delete">Supprimer</button>
-            <button id="open" onClick={this.openSelect}>Supprimer un message</button>
+            <button onClick={() => scrollBottom()}>⬇️</button>
+            <button onClick={() => handleDelete()} id="delete">Supprimer</button>
+            <button id="open" onClick={() => openSelect()}>Supprimer un message</button>
         </div>
     )
-}}
+}
