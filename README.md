@@ -3,11 +3,11 @@ Notre projet Web Full-stack réalisé en équipe de 5 personnes durant 5 semaine
 
 ## Équipe 3 (TF1) "BioWoMen"
 Notre équipe de 5 forces pluri-disciplinaires et talentueuses :
-#### Amine Houmad
-#### Vanessa Combet 
-#### Thomas Kiener
-#### Aude Leegenhoek
 #### Pierre Luciani
+#### Thomas Kiener
+#### Vanessa Combet
+#### Aude Leegenhoek
+#### Amine Houmad
 
 ----------------------------
 # Bavard'Âge 
